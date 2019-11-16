@@ -12,11 +12,23 @@ let Movies = [
     name: 'V for Vendetta',
     genre: 'thriller',
     description: 'Natalie Portman shaves her head',
-    imageurl: 'put the image url here',
+    imageUrl: 'put the image url here',
     director: {
       name: 'Ron Howard',
-      bio: 'Rob Howard was a child actor',
+      bio: 'Ron Howard was a child actor',
       birthyear: '1956',
+      deathyear: ' '
+    }
+  },
+  {
+    name: 'Girl, Interrupted',
+    genre: 'drama',
+    description: 'Angelina Jolie has bad bangs',
+    imageUrl:'put image url here',
+    director:{
+      name: 'James Mangold',
+      bio: 'James Mangold has curly hair',
+      birthyear: '1978',
       deathyear: ' '
     }
   }
@@ -26,7 +38,8 @@ let Users = [
   {
     username: 'steph',
     password: 'pass',
-    email: 'sfd@gmail.com'
+    email: 'sfd@gmail.com',
+    favorites: ' '
   }
 ];
 
@@ -42,10 +55,17 @@ app.get("/movies", (req, res) => {
 });
 
 //This endpoint gets all data for a movie by the movie name
-app.get("/movies/:name", (req, res) => {
+app.get("/movie/:name", (req, res) => {
   res.json(Movies.find((movie) =>
     {return movie.name === req.params.name}));
 });
+
+//This endpoint gets all data for a movie by the genre
+app.get('/movies/:genre', (req, res) => {
+  res.json(Movies.find((movie) =>
+  { return movie.genre === req.params.genre}));
+});
+
 
 //   ---USER ENDPOINTS---
 
@@ -63,17 +83,42 @@ app.post("/users", (req, res) => {
   }
 });
 
-app.delete("/users/:username", (req,res) => {
-  let user = Users.find((user) => {
-    return user.username === req.params.username});
+//This endpoint allows a user to update their info
+//Finish this
+app.put("/update-users/:username/", (req, res) => {
 
-    if (user) {
-    Users = Users.filter(function(obj) { return obj.username !== req.params.username; });
-    res.status(201).send('User ' + user.username + ' with name ' + req.params.username + ' was deleted.')
-  } else {
-    res.status(500).send('Error!');
-  }  
 });
+
+//This endpoint deletes a user by name
+app.delete("/delete-users/:username", (req,res) => {
+  let user = Users.find(item => item.username === req.params.username);
+
+  let deleteUser = req.params.username
+
+  if (user) {
+    Users.filter(function(obj){
+      return obj.username !== deleteUser
+    });
+  res.status(201).send('User ' + deleteUser + ' was deleted.');
+  }
+});
+
+
+//  ---FAVORITES ENDPOINTS---
+
+//This endpoint adds favorites to a users profile
+app.post("/users/favorites", (req,res) => {
+  let newFavorite = req.body;
+
+  if(!newFavorite.favorites){
+    res.status(400).send('Missing favorite movie in request body')
+  } else if(newFavorite === Users.favorites){
+    res.send('This movie has already been added')
+  } else {
+    res.status(201).send(newFavorite + 'has been added to your favorites')
+  }
+});
+
 
 //Error Message
 app.use(function(err,req,res,next){
