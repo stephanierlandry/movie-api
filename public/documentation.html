@@ -3,12 +3,202 @@
   <head>
     <title>Design and a Movie!</title>
     <meta charset="utf-8">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/foundation-sites@6.5.3/dist/css/foundation.min.css" crossorigin="anonymous">
+    <link rel="stylesheet" href="styles.css">
   </head>
   <body>
     <header>
       <h1>Design and a Movie!</h1>
+      <p>Shows drawings of movies created by designer Grant Hulburt. Will also give additional information about the movie, director, and actors within the film</p>
     </header>
-    <p>Shows drawings of movies created by designer Grant Hulburt. Will also give additional information about the movie, director, and actors within the film</p>
-    <!-- <script src="server.js"></script> -->
+
+    <div class="table-scroll">
+      <table>
+        <tr class="sticky">
+          <th class="title-width">TITLE</th>
+          <th>DESCRIPTION</th>
+          <th>URL</th>
+          <th>METHOD</th>
+          <th>URL PARAMETER</th>
+          <th>DATA PARAMETER</th>
+          <th>RESPONSE</th>
+        </tr>
+
+        <tr>
+          <td><b>Get List of All Movies</b></td>
+          <td>This endpoint gets a list of all the movies</td>
+          <td>/movies</td>
+          <td>GET</td>
+          <td></td>
+          <td></td>
+          <td><pre> Example:
+  [
+    {
+      "name": "V for Vendetta",
+      "genre": "thriller",
+      "description": "Natalie Portman shaves her head",
+      "imageurl": "put the image url here",
+      "director": {
+          "name": "Ron Howard",
+          "bio": "Rob Howard was a child actor",
+          "birthyear": "1956",
+          "deathyear": " "
+      }
+    }
+  ]
+         </pre></td>
+        </tr>
+
+        <tr>
+          <td><b>Get Movie by Title</b></td>
+          <td>This endpoint gets a movie by title</td>
+          <td>"/get-movies/title/:title"</td>
+          <td>GET</td>
+          <td>title = [string-string]</br></br> Example: "/get-movies/genre/girl-interrupted"</td>
+          <td></td>
+          <td><pre> Example:
+  [
+    {
+        "title": "Girl-Interrupted",
+        "genre": "drama",
+        "description": "Angelina Jolie has bad bangs",
+        "imageUrl": "put image url here",
+        "directorname": "James-Mangold",
+        "directorBio": "James Mangold is an American film and television director, screenwriter and producer. He is best known for directing the films Logan, Cop Land, Girl, Interrupted, Kate & Leopold, Walk the Line, and 3:10 to Yuma",
+        "directorBirthyear": "1963",
+        "directorDeathyear": " "
+    }
+  ]
+         </pre></td>
+        </tr>
+
+        <tr>
+          <td><b>Get Movie by Genre</b></td>
+          <td>This endpoint gets a movie by genre</td>
+          <td>"/get-movies/genre/:genre"</td>
+          <td>GET</td>
+          <td>genre = [string]</br></br> Example: "/get-movies/genre/thriller"</td>
+          <td></td>
+          <td><pre> Example:
+  [
+    {
+        "title": "V-for-Vendetta",
+        "genre": "thriller",
+        "description": "Natalie Portman shaves her head",
+        "imageUrl": "put the image url here",
+        "director": {
+            "name": "James McTeigue",
+            "bio": "James McTeigue is an Australian film director. He has been an assistant director on many films, including Dark City (1998), the Matrix trilogy (1999–2003) and Star Wars: Episode II – Attack of the Clones (2002), and made his directorial debut with the 2005 film V for Vendetta to critical acclaim. Since Vendetta he has collaborated with the Wachowskis an additional three times as director on The Invasion (albeit uncredited), Ninja Assassin and Sense8.",
+            "birthyear": "1967",
+            "deathyear": " "
+        }
+    }
+  ]
+         </pre></td>
+        </tr>
+
+        <tr>
+          <td><b>Get Movie by Director</b></td>
+          <td>This endpoint gets a movie by director</td>
+          <td>"/get-movies/director/:director"</td>
+          <td>GET</td>
+          <td>director = [string]-[string]</br></br> Example: "/get-movies/director/james-mangold"</td>
+          <td></td>
+          <td><pre> Example:
+  [
+    {
+        "title": "Girl-Interrupted",
+        "genre": "drama",
+        "description": "Angelina Jolie has bad bangs",
+        "imageUrl": "put image url here",
+        "directorname": "James-Mangold",
+        "directorBio": "James Mangold is an American film and television director, screenwriter and producer. He is best known for directing the films Logan, Cop Land, Girl, Interrupted, Kate & Leopold, Walk the Line, and 3:10 to Yuma",
+        "directorBirthyear": "1963",
+        "directorDeathyear": " "
+    }
+  ]
+         </pre></td>
+        </tr>
+
+        <tr>
+          <td><b>Add a New User</b></td>
+          <td>This endpoint creates a new user</td>
+          <td>"/update-users/newuser"</td>
+          <td>POST</td>
+          <td></td>
+          <td><pre>
+      {
+	"name":"John",
+	"username": "JohnUser",
+	"password": "pass",
+	"email": "John@gmail.com"
+      }
+          </pre></td>
+          <td><pre> Example:
+{
+  "name": "John",
+  "username": "sdfa",
+  "password": "sadf",
+  "email": "sdfas@gmail.com",
+  "id": "ae42b63a-18a5-4cbf-b8ae-9fb8dbeddefc"
+} </br>
+Response Code: 201
+         </pre></td>
+        </tr>
+
+        <tr>
+          <td><b>Update User Info</b></td>
+          <td>This endpoint allows a user to update their info</td>
+          <td>"/update-users/:username/:password/:email"</td>
+          <td>PUT</td>
+          <td></td>
+          <td><pre>
+      {
+      	"username" : "Jon",
+      	"password" : "pass1",
+      	"email" : "hello@gmail.com",
+      	"favorites" : "Girl, Interrupted"
+      }
+          </pre></td>
+          <td>Example: John has updated their info </br> Response Code: 201</td>
+        </tr>
+
+        <tr>
+          <td><b>Delete a User</b></td>
+          <td>This endpoint allows a user to delete their info</td>
+          <td>"/delete-users/:username"</td>
+          <td>DELETE</td>
+          <td></td>
+          <td><pre>
+          </pre></td>
+          <td>Example: User steph was deleted. </br> Response Code: 202</td>
+        </tr>
+
+        <tr>
+          <td><b>Add a User Favorite</b></td>
+          <td>This endpoint allows a user to add a favorite movie to their account</td>
+          <td>"/update-users/:username/favorites/:userfavorite"</td>
+          <td>POST</td>
+          <td> username = [string]<br> userfavorite = [string]-[string]</td>
+          <td><pre>
+      {
+      	"username" : "steph",
+      	"favorites" : "V for Vendetta"
+      }
+          </pre></td>
+          <td>Example: steph, V for Vendetta has been added to your favorites </br> Response Code: 201</td>
+        </tr>
+
+        <tr>
+          <td><b>Delete a User Favorite</b></td>
+          <td>This endpoint allows a user to delete a user favorite from their account</td>
+          <td>"/update-users/:username/delete-favorites/:userfavorite"</td>
+          <td>DELETE</td>
+          <td> username = [string]<br> userfavorite = [string]-[string]</td>
+          <td></td>
+          <td>Example: girl-interrupted has been deleted from your favorites. </br> Response Code: 202</td>
+        </tr>
+      </table>
+    </div>
   </body>
 </html>

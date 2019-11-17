@@ -1,0 +1,21 @@
+body {
+  font-size: 12px;
+  margin: 1em;
+}
+
+th {
+  text-align: left;
+  min-width: 132px;
+}
+
+td {
+  min-width: 130px;
+}
+
+table {
+  border-collapse: separate;
+}
+
+.sticky {
+  width: 100%;
+}
