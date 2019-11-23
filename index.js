@@ -1,3 +1,11 @@
+const mongoose = require('mongoose');
+const Models = require('./models.js');
+const Movies = Models.Movie;
+const Users = Models.User;
+
+mongoose.connect('mongodb://localhost:27017/test', {useNewUrlParser: true, useCreateIndex: true, useUnifiedTopology: true, useFindAndModify: false});
+
+
 const express = require('express');
 const morgan = require('morgan');
 const bodyParser = require('body-parser');
@@ -9,121 +17,8 @@ app.use(bodyParser.json());
 
 app.use(express.static('public'))
 
-let Movies = [
-  {
-    title: 'V-for-Vendetta',
-    genre: 'thriller',
-    description: 'Natalie Portman shaves her head',
-    imageUrl: 'put the image url here',
-    directorName: 'James-McTeigue',
-    directorBio: 'James McTeigue is an Australian film director. He has been an assistant director on many films, including Dark City (1998), the Matrix trilogy (1999–2003) and Star Wars: Episode II – Attack of the Clones (2002), and made his directorial debut with the 2005 film V for Vendetta to critical acclaim. Since Vendetta he has collaborated with the Wachowskis an additional three times as director on The Invasion (albeit uncredited), Ninja Assassin and Sense8.',
-    directorBirthyear: '1967',
-    directorDeathyear: ' '
-  },
-  {
-    title: 'Girl-Interrupted',
-    genre: 'drama',
-    description: 'Angelina Jolie has bad bangs',
-    imageUrl:'put image url here',
-    directorname: 'James-Mangold',
-    directorBio: 'James Mangold is an American film and television director, screenwriter and producer. He is best known for directing the films Logan, Cop Land, Girl, Interrupted, Kate & Leopold, Walk the Line, and 3:10 to Yuma',
-    directorBirthyear: '1963',
-    directorDeathyear: ' '
-  },
-  {
-    title: 'The-Mummy',
-    genre: 'action',
-    description: 'Brenden Fraiser is lame',
-    imageUrl:'put image url here',
-    directorName: 'Stephen-Sommers',
-    directorBio: 'Stephen Sommers is an American film director and screenwriter, best known for big-budget movies, such as The Mummy, its sequel, The Mummy Returns, Van Helsing, and G.I. Joe: The Rise of Cobra.',
-    directorBirthyear: '1962',
-    directorDeathyear: ' '
-  },
-  {
-    title: 'Fight-Club',
-    genre: 'psychological',
-    description: 'Brad Pitt has abs',
-    imageUrl:'put image url here',
-    directorName: 'David-Fincher',
-    directorBio: 'David Andrew Leo Fincher is an American film director, film producer, television director, television producer, and music video director. He was nominated for the Academy Award for Best Director for The Curious Case of Benjamin Button and The Social Network.',
-    directorBirthyear: '1962',
-    directorDeathyear: ' '
-  },
-  {
-    title: 'The-Matrix',
-    genre: 'action',
-    description: 'Sunglasses are everywhere',
-    imageUrl:'put image url here',
-    directorName: 'The-Wachowskis',
-    directorBio: 'There are two',
-    directorBirthyear: '1963',
-    directorDeathyear: ' '
-  },
-  {
-    title: 'The-Talented-Mr-Ripley',
-    genre: 'thriller',
-    description: 'Matt Damon is a creep',
-    imageUrl:'put image url here',
-    directorName: 'Anthony-Minghella',
-    directorBio: 'Anthony Minghella, CBE was a British film director, playwright and screenwriter. He was chairman of the board of Governors at the British Film Institute between 2003 and 2007. He won the Academy Award for Best Director for The English Patient.',
-    directorBirthyear: '1954',
-    directorDeathyear: '2008'
-  },
-  {
-    title: 'Any-Given-Sunday',
-    genre: 'drama',
-    description: 'Sports',
-    imageUrl:'put image url here',
-    directorName: 'Oliver-Stone',
-    directorBio: 'William Oliver Stone is an American filmmaker, director, writer and conspiracy theorist. He won an Academy Award for Best Adapted Screenplay as writer of Midnight Express, and wrote the acclaimed gangster movie Scarface.',
-    directorBirthyear: '1946',
-    directorDeathyear: ' '
-  },
-  {
-    title: 'Anywhere-But-Here',
-    genre: 'comedy',
-    description: 'Natalie Portman is smart',
-    imageUrl:'put image url here',
-    directorName: 'Wayne-Wang',
-    directorBio: 'Wayne Wang is a Hong Kong-American director, producer, and screenwriter. Considered a pioneer of Asian-American cinema, he was one of the first Chinese-American filmmakers to gain a major foothold in Hollywood.',
-    directorBirthyear: '1949',
-    directorDeathyear: ' '
-  },
-  {
-    title: 'Deep-Blue-Sea',
-    genre: 'horror',
-    description: 'Sharks are scary',
-    imageUrl:'put image url here',
-    directorName: 'Renny-Harlin',
-    directorBio: "Renny Harlin is a Finnish film director, producer and screenwriter. His films include A Nightmare on Elm Street 4: The Dream Master, Die Hard 2, Cliffhanger, The Long Kiss Goodnight, Deep Blue Sea and Devil's Pass",
-    directorBirthyear: '1959',
-    directorDeathyear: ' '
-  },
-  {
-    title: 'Dogma',
-    genre: 'drama',
-    description: 'Jay and Silent Bob are here',
-    imageUrl:'put image url here',
-    directorName: 'Kevin-Smith',
-    directorBio: 'Kevin Patrick Smith is an American filmmaker, actor, comedian, public speaker, comic book writer, author, and podcaster. He came to prominence with the low-budget comedy film Clerks, which he wrote, directed, co-produced, and acted in as the character Silent Bob of stoner duo Jay and Silent Bob.',
-    directorBirthyear: '1970',
-    directorDeathyear: ' '
-  },
-];
-
-let Users = [
-  {
-    username: 'steph',
-    password: 'pass',
-    email: 'sfd@gmail.com',
-    favorites: ' '
-  }
-];
-
 app.use(morgan('common'));
 
-app.use(express.static('public'));
 
 //    ---MOVIE ENDPOINTS---
 
@@ -156,8 +51,8 @@ app.get("/get-movies/genre/:genre", (req, res) => {
 
 //This endpoint gets all data for a movie by the director
 app.get("/get-movies/director/:director", (req,res) => {
-  console.log(Movies[0].directorName);
-  let movieDirector = Movies.filter(item => item.directorName === req.params.directorName);
+  console.log(Movies[0].Director.Name);
+  let movieDirector = Movies.filter(item => item.Director.Name === req.params.directorName);
 
   if(movieDirector){
     res.json(movieDirector);
@@ -169,36 +64,64 @@ app.get("/get-movies/director/:director", (req,res) => {
 
 //   ---USER ENDPOINTS---
 
+//This endpoint shows a user by Username
+app.get('/get-users/:Username', function(req, res) {
+  Users.findOne({ Username : req.params.Username })
+  .then(function(user) {
+    res.json(user)
+  })
+  .catch(function(err) {
+    console.error(err);
+    res.status(500).send("Error: " + err);
+  });
+});
+
 //This endpoint adds new users to the API by name
 app.post("/update-users/newuser", (req, res) => {
-  let newUser = req.body;
-
-  if (!newUser.name) {
-    const message = 'Missing name in request body';
-    res.status(400).send(message);
-  } else {
-    newUser.id = uuid.v4();
-    Users.push(newUser);
-    res.status(201).send(newUser);
-  }
+  Users.findOne({ Username : req.body.Username})
+  .then(function(user){
+    if(user) {
+      return res.status(400).send(req.body.Username + ' already exists');
+    } else {
+      Users.create({
+        Username: req.body.Username,
+        Password: req.body.Password,
+        Email: req.body.Email,
+        Birthday: req.body.Birthday
+      })
+      .then(function(user){
+        res.status(201).json(user)
+      })
+      .catch(function(error){
+        console.error(error);
+        res.status(500).send('Error: ' + error);
+      })
+    }
+  }).catch(function(error){
+    console.error(error);
+    res.status(500).send('Error: ' + error);
+  });
 });
 
 //This endpoint allows a user to update their info
-app.put("/update-users/:username/:password/:email", (req, res) => {
-  let user = Users.find(item => item.username === req.params.username);
-
-  let newUsername = req.body.username;
-  let newPassword = req.body.password;
-  let newEmail = req.body.email
-
-  if(user){
-    user.username = newUsername;
-    user.password = newPassword;
-    user.email = newEmail;
-    res.status(201).send( newUsername + ' has updated their info')
-  } else {
-    res.status(400).send('User ' + req.params.username + ' was not updated.')
-  }
+app.put('/update-users/:username', (req, res) => {
+  Users.findOneAndUpdate({ Username : req.params.Username }, { $set :
+  {
+    Username : req.body.Username,
+    Password : req.body.Password,
+    Email : req.body.Email,
+    Birthday : req.body.Birthday
+  }},
+  { new : true },
+  function(err, updatedUser) {
+    if(err) {
+      console.error(err);
+      res.status(500).send("Error: " +err);
+    } else {
+      console.log(req.params.Username);
+      res.json('You updated your info: ' + updatedUser)
+    }
+  })
 });
 
 //This endpoint deletes a user by username
@@ -224,12 +147,12 @@ app.post("/update-users/:username/favorites/:userfavorite", (req,res) => {
 
   let newFavorite = req.body;
 
-  if(!newFavorite.favorites){
+  if(!newFavorite.FavoriteMovie){
     res.status(400).send('Missing favorite movie in request body')
-  } else if(newFavorite === Users.favorites){
+  } else if(newFavorite === Users.FavoriteMovie){
     res.send('This movie has already been added')
   } else {
-    res.status(201).send(req.params.username + ', ' + newFavorite.favorites + ' has been added to your favorites')
+    res.status(201).send(req.params.username + ', ' + newFavorite.FavoriteMovie + ' has been added to your favorites')
   }
 });
 
@@ -241,7 +164,7 @@ app.delete("/update-users/:username/delete-favorites/:userfavorite", (req,res) =
 
   if(deleteFavorite) {
     Users.filter(function(obj){
-      return obj.favorites !== deleteFavorite
+      return obj.FavoriteMovie !== deleteFavorite
     });
   res.status(202).send(deleteFavorite + ' has been deleted from your favorites.');
   }
