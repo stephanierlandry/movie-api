@@ -32,20 +32,26 @@
           <td></td>
           <td></td>
           <td><pre> Example:
-  [
-    {
-      "name": "V for Vendetta",
-      "genre": "thriller",
-      "description": "Natalie Portman shaves her head",
-      "imageurl": "put the image url here",
-      "director": {
-          "name": "Ron Howard",
-          "bio": "Rob Howard was a child actor",
-          "birthyear": "1956",
-          "deathyear": " "
-      }
-    }
-  ]
+{
+ "_id":ObjectId("5dd6b69603b642d590c84023"),
+ "Title":"Fight Club",
+ "Description":"A depressed man suffering from insomnia meets a strange soap salesman named Tyler Durden and soon finds himself living in his squalid house after his perfect apartment is destroyed. The two bored men form an underground club with strict rules and fight other men who are fed up with their mundane lives. Their perfect partnership frays when Marla, a fellow support group crasher, attracts Tyler's attention.",
+ "Genre":{
+    "Name":"Psychological Thriller",
+    "Description":"Psychological thriller is a thriller narrative which emphasizes the unstable or delusional psychological states of its characters. ... Psychological thrillers often incorporate elements of mystery, drama, action, and paranoia."
+ },
+ "Director":{
+    "Name":"David Fincher",
+    "Bio":"David Andrew Leo Fincher is an American film director, film producer, television director, television producer, and music video director. He was nominated for the Academy Award for Best Director for The Curious Case of Benjamin Button and The Social Network.",
+    "Birth":"1962"
+ },
+ "ImagePath":"Insert Image URL here",
+ "Featured":false,
+ "Actors":[
+    "Brad Pitt",
+    "Edward Norton"
+ ]
+}
          </pre></td>
         </tr>
 
@@ -54,46 +60,54 @@
           <td>This endpoint gets a movie by title</td>
           <td>"/get-movies/title/:title"</td>
           <td>GET</td>
-          <td>title = [string-string]</br></br> Example: "/get-movies/genre/girl-interrupted"</td>
+          <td>title = [string]</br></br> Example: "/get-movies/title/Jaws"</br></br></br>title = [string]%20[string]</br></br>"/get-movies/title/Girl%20Interrupted"</td>
           <td></td>
           <td><pre> Example:
-  [
-    {
-        "title": "Girl-Interrupted",
-        "genre": "drama",
-        "description": "Angelina Jolie has bad bangs",
-        "imageUrl": "put image url here",
-        "directorname": "James-Mangold",
-        "directorBio": "James Mangold is an American film and television director, screenwriter and producer. He is best known for directing the films Logan, Cop Land, Girl, Interrupted, Kate & Leopold, Walk the Line, and 3:10 to Yuma",
-        "directorBirthyear": "1963",
-        "directorDeathyear": " "
-    }
-  ]
+{
+   "_id":ObjectId("5dd6b5e903b642d590c84022"),
+   "Title":"Jaws",
+   "Description":"When a young woman is killed by a shark while skinny-dipping near the New England tourist town of Amity Island, police chief Martin Brody wants to close the beaches, but mayor Larry Vaughn overrules him, fearing that the loss of tourist revenue will cripple the town. Ichthyologist Matt Hooper and grizzled ship captain Quint offer to help Brody capture the killer beast, and the trio engage in an epic battle of man vs. nature..",
+   "Genre":{
+      "Name":"Thriller",
+      "Description":"Thriller is a genre that revolves around anticipation and suspense. The aim for Thrillers is to keep the audience alert and on the edge of their seats. The protagonist in these films is set against a problem – an escape, a mission, or a mystery."
+   },
+   "Director":{
+      "Name":"Steven Spielberg",
+      "Bio":"Spielberg loves sharks and aliens!",
+      "Birth":"1946"
+   },
+   "ImagePath":"Insert Image URL here",
+   "Featured":false,
+   "Actors":"Robert Shaw"
+}
          </pre></td>
         </tr>
 
         <tr>
           <td><b>Get Movie by Genre</b></td>
-          <td>This endpoint gets a movie by genre</td>
+          <td>This endpoint gets movies by genre</td>
           <td>"/get-movies/genre/:genre"</td>
           <td>GET</td>
-          <td>genre = [string]</br></br> Example: "/get-movies/genre/thriller"</td>
+          <td>genre = [string]</br></br> Example: "/get-movies/genre/Thriller"</td>
           <td></td>
           <td><pre> Example:
-  [
-    {
-        "title": "V-for-Vendetta",
-        "genre": "thriller",
-        "description": "Natalie Portman shaves her head",
-        "imageUrl": "put the image url here",
-        "director": {
-            "name": "James McTeigue",
-            "bio": "James McTeigue is an Australian film director. He has been an assistant director on many films, including Dark City (1998), the Matrix trilogy (1999–2003) and Star Wars: Episode II – Attack of the Clones (2002), and made his directorial debut with the 2005 film V for Vendetta to critical acclaim. Since Vendetta he has collaborated with the Wachowskis an additional three times as director on The Invasion (albeit uncredited), Ninja Assassin and Sense8.",
-            "birthyear": "1967",
-            "deathyear": " "
-        }
-    }
-  ]
+{
+   "_id":ObjectId("5dd6b06e03b642d590c8401a"),
+   "Title":"V for Vendetta",
+   "Description":"Following world war, London is a police state occupied by a fascist government, and a vigilante known only as V uses terrorist tactics to fight the oppressors of the world in which he now lives. When V saves a young woman named Evey from the secret police, he discovers an ally in his fight against England's oppressors.",
+   "Genre":{
+      "Name":"Thriller",
+      "Description":"Thriller is a genre that revolves around anticipation and suspense. The aim for Thrillers is to keep the audience alert and on the edge of their seats. The protagonist in these films is set against a problem – an escape, a mission, or a mystery."
+   },
+   "Director":{
+      "Name":"James McTeigue",
+      "Bio":"James McTeigue is an Australian film director. He has been an assistant director on many films, including Dark City, the Matrix trilogy and Star Wars: Episode II – Attack of the Clones, and made his directorial debut with the film V for Vendetta to critical acclaim. Since Vendetta he has collaborated with the Wachowskis an additional three times as director on The Invasion, Ninja Assassin and Sense8.",
+      "Birth":"1967"
+   },
+   "ImagePath":"Insert Image URL here",
+   "Featured":true,
+   "Actors":"Natalie Portman"
+}
          </pre></td>
         </tr>
 
@@ -102,21 +116,26 @@
           <td>This endpoint gets a movie by director</td>
           <td>"/get-movies/director/:director"</td>
           <td>GET</td>
-          <td>director = [string]-[string]</br></br> Example: "/get-movies/director/james-mangold"</td>
+          <td>director = [string]%20[string]</br></br> Example: "/get-movies/director/James%20Mangold"</td>
           <td></td>
           <td><pre> Example:
-  [
-    {
-        "title": "Girl-Interrupted",
-        "genre": "drama",
-        "description": "Angelina Jolie has bad bangs",
-        "imageUrl": "put image url here",
-        "directorname": "James-Mangold",
-        "directorBio": "James Mangold is an American film and television director, screenwriter and producer. He is best known for directing the films Logan, Cop Land, Girl, Interrupted, Kate & Leopold, Walk the Line, and 3:10 to Yuma",
-        "directorBirthyear": "1963",
-        "directorDeathyear": " "
-    }
-  ]
+{
+ "_id":ObjectId("5dd6b0ec03b642d590c8401b"),
+ "Title":"Girl, Interrupted",
+ "Description":"Set in the changing world of the late 1960s, ‘Girl, Interrupted’ is the searing true story of Susanna Kaysen, a young woman who finds herself at a renowned mental institution for troubled young women, where she must choose between the world of people who belong on the inside -- like the seductive and dangerous Lisa -- or the often difficult world of reality on the outside.",
+ "Genre":{
+    "Name":"Drama",
+    "Description":"Drama Films are serious presentations or stories with settings or life situations that portray realistic characters in conflict with either themselves, others, or forces of nature. A dramatic film shows us human beings at their best, their worst, and everything in-between. Each of the types of subject-matter themes have various kinds of dramatic plots. Dramatic films are probably the largest film genre because they include a broad spectrum of films."
+ },
+ "Director":{
+    "Name":"James Mangold",
+    "Bio":"James Mangold is an American film and television director, screenwriter and producer. He is best known for directing the films Logan, Cop Land, Girl, Interrupted, Kate & Leopold, Walk the Line, and 3:10 to Yuma.",
+    "Birth":"1963"
+ },
+ "ImagePath":"Insert Image URL here",
+ "Featured":false,
+ "Actors":"Angelina Jolie"
+}
          </pre></td>
         </tr>
 
@@ -127,20 +146,22 @@
           <td>POST</td>
           <td></td>
           <td><pre>
-      {
-	"name":"John",
-	"username": "JohnUser",
-	"password": "pass",
-	"email": "John@gmail.com"
-      }
+{
+  "Username" : "String",
+  "Password" : "String",
+  "Email" : "String",
+  "Birthday" : "Date [format: MM/DD/YYYY]"
+}
           </pre></td>
           <td><pre> Example:
 {
-  "name": "John",
-  "username": "sdfa",
-  "password": "sadf",
-  "email": "sdfas@gmail.com",
-  "id": "ae42b63a-18a5-4cbf-b8ae-9fb8dbeddefc"
+  "Favorites": [],
+  "_id": "5ddae83c89a8b70c418b914d",
+  "Username": "Brittany",
+  "Password": "Pass1234",
+  "Email": "Brittany@gmail.com",
+  "Birthday": "1988-08-06T05:00:00.000Z",
+
 } </br>
 Response Code: 201
          </pre></td>
@@ -149,18 +170,26 @@ Response Code: 201
         <tr>
           <td><b>Update User Info</b></td>
           <td>This endpoint allows a user to update their info</td>
-          <td>"/update-users/:username/:password/:email"</td>
+          <td>"/update-users/:username"</td>
           <td>PUT</td>
           <td></td>
           <td><pre>
-      {
-      	"username" : "Jon",
-      	"password" : "pass1",
-      	"email" : "hello@gmail.com",
-      	"favorites" : "Girl, Interrupted"
-      }
+{
+  "Username" : "String",
+  "Password" : "String",
+  "Email" : "String",
+  "Birthday" : "Date [format: MM/DD/YYYY]"
+}
           </pre></td>
-          <td>Example: John has updated their info </br> Response Code: 201</td>
+          <td><pre>Example:
+{
+  "Favorites": [],
+  "_id": "5dd97fa5f3253955226c3e04",
+  "Username": "Rashedah",
+  "Password": "pass",
+  "Email": "rashedah@gmail.com",
+  "Birthday": "1988-09-13T05:00:00.000Z"
+} </br> Response Code: 201</pre></td>
         </tr>
 
         <tr>
@@ -171,32 +200,45 @@ Response Code: 201
           <td></td>
           <td><pre>
           </pre></td>
-          <td>Example: User steph was deleted. </br> Response Code: 202</td>
+          <td>Example: Brittany was deleted. </br> Response Code: 200</td>
         </tr>
 
         <tr>
           <td><b>Add a User Favorite</b></td>
           <td>This endpoint allows a user to add a favorite movie to their account</td>
-          <td>"/update-users/:username/favorites/:userfavorite"</td>
+          <td>"/update-users/:username/favorites/:movieID"</td>
           <td>POST</td>
-          <td> username = [string]<br> userfavorite = [string]-[string]</td>
-          <td><pre>
-      {
-      	"username" : "steph",
-      	"favorites" : "V for Vendetta"
-      }
-          </pre></td>
-          <td>Example: steph, V for Vendetta has been added to your favorites </br> Response Code: 201</td>
+          <td> username = [string]<br> movieID = [string]<br><br>Example: "/update-users/Rashedah/movies/5dd6b69603b642d590c84023"</td>
+          <td></td>
+          <td><pre>Example:
+{
+  "Favorites": [
+  "5dd6b69603b642d590c84023",
+  ],
+  "_id": "5dd97fa5f3253955226c3e04",
+  "Username": "Rashedah",
+  "Password": "pass",
+  "Email": "rashedah@gmail.com",
+  "Birthday": "1988-09-13T05:00:00.000Z"
+} </br> Response Code: 201</pre></td>
         </tr>
 
         <tr>
           <td><b>Delete a User Favorite</b></td>
           <td>This endpoint allows a user to delete a user favorite from their account</td>
-          <td>"/update-users/:username/delete-favorites/:userfavorite"</td>
+          <td>"/update-users/:username/favorites/:movieID"</td>
           <td>DELETE</td>
-          <td> username = [string]<br> userfavorite = [string]-[string]</td>
+          <td> username = [string]<br> movieID = [string]<br><br>Example: "/update-users/Rashedah/favorites/5dd6b69603b642d590c84023"</td>
           <td></td>
-          <td>Example: girl-interrupted has been deleted from your favorites. </br> Response Code: 202</td>
+          <td><pre>Example:
+{
+  "Favorites": [],
+  "_id": "5dd97fa5f3253955226c3e04",
+  "Username": "Rashedah",
+  "Password": "pass",
+  "Email": "rashedah@gmail.com",
+  "Birthday": "1988-09-13T05:00:00.000Z"
+} </br> Response Code: 200</pre></td>
         </tr>
       </table>
     </div>

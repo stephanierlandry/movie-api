@@ -24,41 +24,52 @@ app.use(morgan('common'));
 
 //This endpoint gets all of the movies + data in the API
 app.get("/movies", (req, res) => {
-  res.json(Movies);
+  Movies.find()
+  .then(function(movie) {
+    res.json(movie)
+  })
+  .catch(function(err) {
+    console.error(err);
+    res.status(500).send("Error: " + err);
+  });
 });
 
 //This endpoint gets all data for a movie by the movie name
 app.get("/get-movies/title/:title", (req, res) => {
-  let movieTitle = Movies.filter(word => word.title.toLowerCase() === req.params.title.toLowerCase());
-
-    if(movieTitle){
-      res.json(movieTitle);
-    } else {
-      res.status(400).send('Movie is not featured');
-    }
+  Movies.findOne({ Title : req.params.title })
+  .then(function(movie) {
+    res.json(movie)
+  })
+  .catch(function(err) {
+    console.error(err);
+    res.status(500).send("Error: " + err);
+  });
 });
 
 //This endpoint gets all data for a movie by the genre
 app.get("/get-movies/genre/:genre", (req, res) => {
-  let movieGenre = Movies.filter(movie => movie.genre === req.params.genre.toLowerCase());
-
-    if(movieGenre){
-      res.json(movieGenre);
-    } else {
-      res.status(400).send('Movie is not featured');
-    }
+  Movies.find({ 'Genre.Name' : req.params.genre})
+  .then(function(movie) {
+    console.log(movie);
+    res.json(movie)
+  })
+  .catch(function(err) {
+    console.error(err);
+    res.status(500).send("Error: " + err);
+  });
 });
 
 //This endpoint gets all data for a movie by the director
 app.get("/get-movies/director/:director", (req,res) => {
-  console.log(Movies[0].Director.Name);
-  let movieDirector = Movies.filter(item => item.Director.Name === req.params.directorName);
-
-  if(movieDirector){
-    res.json(movieDirector);
-  } else {
-    res.status(400).send('Director is not featured');
-  }
+  Movies.findOne({ 'Director.Name' : req.params.director })
+  .then(function(movie) {
+    console.log(req.params.director);
+    res.json(movie)
+  })
+  .catch(function(err) {
+    console.error(err);
+    res.status(500).send("Error: " + err);
+  });
 });
 
 
@@ -104,70 +115,72 @@ app.post("/update-users/newuser", (req, res) => {
 });
 
 //This endpoint allows a user to update their info
-app.put('/update-users/:username', (req, res) => {
-  Users.findOneAndUpdate({ Username : req.params.Username }, { $set :
-  {
-    Username : req.body.Username,
-    Password : req.body.Password,
-    Email : req.body.Email,
-    Birthday : req.body.Birthday
-  }},
-  { new : true },
-  function(err, updatedUser) {
-    if(err) {
-      console.error(err);
-      res.status(500).send("Error: " +err);
-    } else {
-      console.log(req.params.Username);
-      res.json('You updated your info: ' + updatedUser)
-    }
-  })
-});
+  app.put('/update-users/:Username', (req, res) => {
+    Users.findOneAndUpdate({ Username : req.params.Username }, { $set :
+    {
+      Username : req.body.Username,
+      Password : req.body.Password,
+      Email : req.body.Email,
+      Birthday : req.body.Birthday
+    }},
+    { new : true })
+    .then(function(updateUsers){
+      res.json(updateUsers)
+    })
+    .catch(function(error){
+      console.error(error);
+      res.status(500).send('Error: ' + error);
+    });
+  });
 
 //This endpoint deletes a user by username
-app.delete("/delete-users/:username", (req,res) => {
-  let user = Users.find(item => item.username === req.params.username);
-
-  let deleteUser = req.params.username
-
-  if (user) {
-    Users.filter(function(obj){
-      return obj.username !== deleteUser
-    });
-  res.status(202).send('User ' + deleteUser + ' was deleted.');
-  }
+app.delete('/delete-users/:Username', (req, res) => {
+  Users.findOneAndRemove({ Username: req.params.Username })
+  .then(function(user) {
+    if (!user) {
+      res.status(400).send(req.params.Username + " was not found");
+    } else {
+      res.status(200).send(req.params.Username + " was deleted.");
+    }
+  })
+  .catch(function(error) {
+    console.error(error);
+    res.status(500).send('Error: ' + error);
+  });
 });
 
 
 //  ---FAVORITES ENDPOINTS---
 
 //This endpoint adds favorites to a users profile
-app.post("/update-users/:username/favorites/:userfavorite", (req,res) => {
-  let user = Users.find(item => item.username === req.params.username);
-
-  let newFavorite = req.body;
-
-  if(!newFavorite.FavoriteMovie){
-    res.status(400).send('Missing favorite movie in request body')
-  } else if(newFavorite === Users.FavoriteMovie){
-    res.send('This movie has already been added')
-  } else {
-    res.status(201).send(req.params.username + ', ' + newFavorite.FavoriteMovie + ' has been added to your favorites')
-  }
+//Update this to only add a movie once
+app.post('/update-users/:username/movies/:movieID', function(req, res) {
+  Users.findOneAndUpdate({ Username : req.params.username }, {
+    $push : { Favorites : req.params.movieID }
+  },
+  { new : true },
+  function(err, updatedUser) {
+    if (err) {
+      console.error(error);
+      res.status(500).send('Error: ' + error);
+    } else {
+      res.json(updatedUser)
+    }
+  })
 });
 
 //This endpoint deletes a favorite from a users profile
-app.delete("/update-users/:username/delete-favorites/:userfavorite", (req,res) => {
-  let user = Users.find(item => item.username === req.params.username);
-
-  let deleteFavorite = req.params.userfavorite;
-
-  if(deleteFavorite) {
-    Users.filter(function(obj){
-      return obj.FavoriteMovie !== deleteFavorite
-    });
-  res.status(202).send(deleteFavorite + ' has been deleted from your favorites.');
-  }
+app.delete("/update-users/:username/favorites/:movieID", (req,res) => {
+  Users.findOneAndUpdate({ Username : req.params.username}, {
+    $unset : { Favorites : req.params.movieID}
+  },
+  {new : true})
+  .then(function(user){
+    res.json(user)
+  })
+  .catch(function(error){
+    res.status(500).send('Error: ' + error)
+  })
 });
 
 
