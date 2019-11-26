@@ -1,9 +1,12 @@
+
+
 const mongoose = require('mongoose');
 const Models = require('./models.js');
 const Movies = Models.Movie;
 const Users = Models.User;
 
 mongoose.connect('mongodb://localhost:27017/test', {useNewUrlParser: true, useCreateIndex: true, useUnifiedTopology: true, useFindAndModify: false});
+
 
 
 const express = require('express');
@@ -19,11 +22,16 @@ app.use(express.static('public'))
 
 app.use(morgan('common'));
 
+let auth = require('./auth')(app);
+const passport = require('passport');
+require('./passport');
+
+
 
 //    ---MOVIE ENDPOINTS---
 
 //This endpoint gets all of the movies + data in the API
-app.get("/movies", (req, res) => {
+app.get("/movies", passport.authenticate('jwt', {session: false}), (req, res) => {
   Movies.find()
   .then(function(movie) {
     res.json(movie)
@@ -35,7 +43,7 @@ app.get("/movies", (req, res) => {
 });
 
 //This endpoint gets all data for a movie by the movie name
-app.get("/get-movies/title/:title", (req, res) => {
+app.get("/get-movies/title/:title", passport.authenticate('jwt', {session: false}), (req, res) => {
   Movies.findOne({ Title : req.params.title })
   .then(function(movie) {
     res.json(movie)
@@ -47,7 +55,7 @@ app.get("/get-movies/title/:title", (req, res) => {
 });
 
 //This endpoint gets all data for a movie by the genre
-app.get("/get-movies/genre/:genre", (req, res) => {
+app.get("/get-movies/genre/:genre", passport.authenticate('jwt', {session: false}), (req, res) => {
   Movies.find({ 'Genre.Name' : req.params.genre})
   .then(function(movie) {
     console.log(movie);
@@ -60,7 +68,7 @@ app.get("/get-movies/genre/:genre", (req, res) => {
 });
 
 //This endpoint gets all data for a movie by the director
-app.get("/get-movies/director/:director", (req,res) => {
+app.get("/get-movies/director/:director", passport.authenticate('jwt', {session: false}), (req,res) => {
   Movies.findOne({ 'Director.Name' : req.params.director })
   .then(function(movie) {
     console.log(req.params.director);
@@ -76,7 +84,7 @@ app.get("/get-movies/director/:director", (req,res) => {
 //   ---USER ENDPOINTS---
 
 //This endpoint shows a user by Username
-app.get('/get-users/:Username', function(req, res) {
+app.get('/get-users/:Username', passport.authenticate('jwt', {session: false}), function(req, res) {
   Users.findOne({ Username : req.params.Username })
   .then(function(user) {
     res.json(user)
@@ -115,7 +123,7 @@ app.post("/update-users/newuser", (req, res) => {
 });
 
 //This endpoint allows a user to update their info
-  app.put('/update-users/:Username', (req, res) => {
+  app.put('/update-users/:Username', passport.authenticate('jwt', {session: false}), (req, res) => {
     Users.findOneAndUpdate({ Username : req.params.Username }, { $set :
     {
       Username : req.body.Username,
@@ -134,7 +142,7 @@ app.post("/update-users/newuser", (req, res) => {
   });
 
 //This endpoint deletes a user by username
-app.delete('/delete-users/:Username', (req, res) => {
+app.delete('/delete-users/:Username', passport.authenticate('jwt', {session: false}), (req, res) => {
   Users.findOneAndRemove({ Username: req.params.Username })
   .then(function(user) {
     if (!user) {
@@ -154,7 +162,7 @@ app.delete('/delete-users/:Username', (req, res) => {
 
 //This endpoint adds favorites to a users profile
 //Update this to only add a movie once
-app.post('/update-users/:username/movies/:movieID', function(req, res) {
+app.post('/update-users/:username/movies/:movieID', passport.authenticate('jwt', {session: false}), function(req, res) {
   Users.findOneAndUpdate({ Username : req.params.username }, {
     $push : { Favorites : req.params.movieID }
   },
@@ -170,13 +178,13 @@ app.post('/update-users/:username/movies/:movieID', function(req, res) {
 });
 
 //This endpoint deletes a favorite from a users profile
-app.delete("/update-users/:username/favorites/:movieID", (req,res) => {
+app.delete("/update-users/:username/favorites/:movieID", passport.authenticate('jwt', {session: false}), (req,res) => {
   Users.findOneAndUpdate({ Username : req.params.username}, {
     $unset : { Favorites : req.params.movieID}
   },
   {new : true})
   .then(function(user){
-    res.json(user)
+    res.json(user).send('Movie was deleted')
   })
   .catch(function(error){
     res.status(500).send('Error: ' + error)
