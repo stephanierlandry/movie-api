@@ -1,4 +1,5 @@
-
+const cors = require('cors');
+app.use(cors());
 
 const mongoose = require('mongoose');
 const Models = require('./models.js');
@@ -6,8 +7,6 @@ const Movies = Models.Movie;
 const Users = Models.User;
 
 mongoose.connect('mongodb://localhost:27017/test', {useNewUrlParser: true, useCreateIndex: true, useUnifiedTopology: true, useFindAndModify: false});
-
-
 
 const express = require('express');
 const morgan = require('morgan');
@@ -25,6 +24,8 @@ app.use(morgan('common'));
 let auth = require('./auth')(app);
 const passport = require('passport');
 require('./passport');
+
+const { check, validationResult } = require('express-validator');
 
 
 
@@ -96,7 +97,15 @@ app.get('/get-users/:Username', passport.authenticate('jwt', {session: false}), 
 });
 
 //This endpoint adds new users to the API by name
-app.post("/update-users/newuser", (req, res) => {
+app.post("/update-users/newuser", [check('Username', 'Username is required').isLength({min: 5}),
+  check('Username', 'Username contains non alphanumeric characters - not allowed.').isAlphanumeric(),
+  check('Password', 'Password is required').not().isEmpty(),
+  check('Email', 'Email does not appear to be valid').isEmail()], (req, res) => {
+    let errors = validationResult(req);
+    if (!errors.isEmpty()) {
+      return res.status(422).json({ errors: errors.array() });
+    }
+  let hashedPassword = Users.hashPassword(req.body.Password);
   Users.findOne({ Username : req.body.Username})
   .then(function(user){
     if(user) {
@@ -104,7 +113,7 @@ app.post("/update-users/newuser", (req, res) => {
     } else {
       Users.create({
         Username: req.body.Username,
-        Password: req.body.Password,
+        Password: hashedPassword,
         Email: req.body.Email,
         Birthday: req.body.Birthday
       })
@@ -123,7 +132,16 @@ app.post("/update-users/newuser", (req, res) => {
 });
 
 //This endpoint allows a user to update their info
-  app.put('/update-users/:Username', passport.authenticate('jwt', {session: false}), (req, res) => {
+  app.put('/update-users/:Username', [check('Username', 'Username is required').isLength({min: 5}),
+    check('Username', 'Username contains non alphanumeric characters - not allowed.').isAlphanumeric(),
+    check('Password', 'Password is required').not().isEmpty(),
+    check('Email', 'Email does not appear to be valid').isEmail()], passport.authenticate('jwt', {session: false}), (req, res) => {
+      let errors = validationResult(req);
+      if (!errors.isEmpty()) {
+        return res.status(422).json({ errors: errors.array() });
+      }
+
+    let hashedPassword = Users.hashPassword(req.body.Password);
     Users.findOneAndUpdate({ Username : req.params.Username }, { $set :
     {
       Username : req.body.Username,
@@ -198,6 +216,7 @@ app.use(function(err,req,res,next){
   res.status(500).send('Something Broke')
 });
 
-app.listen(8080,() =>
-  console.log('Hey')
-);
+let port = process.env.PORT || 3000;
+app.listen(port, "0.0.0.0", function() {
+console.log("Listening on Port 3000");
+});
