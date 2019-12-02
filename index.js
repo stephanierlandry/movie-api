@@ -7,7 +7,7 @@ const Movies = Models.Movie;
 const Users = Models.User;
 
 // mongoose.connect('mongodb://localhost:27017/test', {useNewUrlParser: true, useCreateIndex: true, useUnifiedTopology: true, useFindAndModify: false});
-mongoose.connect('mongodb+srv://DesignMovieDBAdmin:Huckabees549@cluster0-mrrrr.mongodb.net/Cluster0?retryWrites=true&w=majority', {useNewUrlParser: true});
+mongoose.connect('mongodb+srv://DesignMovieDBAdmin:Huckabees549@cluster0-mrrrr.mongodb.net/Design-and-a-Movie?retryWrites=true&w=majority', {useNewUrlParser: true});
 
 const express = require('express');
 const morgan = require('morgan');
