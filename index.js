@@ -103,7 +103,7 @@ app.get("/get-movies/director/:director", passport.authenticate('jwt', {session:
 //   ---USER ENDPOINTS---
 
 //This endpoint shows a user by Username
-app.get('/get-users/:Username', passport.authenticate('jwt', {session: false}), function(req, res) {
+app.get('/get-users/:Username', function(req, res) {
   Users.findOne({ Username : req.params.Username })
   .then(function(user) {
     res.json(user)
