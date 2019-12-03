@@ -43,8 +43,9 @@ app.use(cors({
 const { check, validationResult } = require('express-validator');
 
 //Root Route
-app.get('/', function (req, res) {
+app.get('/', function(req, res){
   res.send('hello world')
+})
 
 //    ---MOVIE ENDPOINTS---
 
