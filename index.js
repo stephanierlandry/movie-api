@@ -45,7 +45,7 @@ const { check, validationResult } = require('express-validator');
 //Root Route
 app.get('/', function(req, res){
   res.send('hello world')
-})
+});
 
 //    ---MOVIE ENDPOINTS---
 
@@ -123,7 +123,7 @@ app.post("/update-users/newuser", [check('Username', 'Username is required').isL
     if (!errors.isEmpty()) {
       return res.status(422).json({ errors: errors.array() });
     }
-  let hashedPassword = Users.hashPassword(req.body.Password);
+  // let hashedPassword = Users.hashPassword(req.body.Password);
   Users.findOne({ Username : req.body.Username})
   .then(function(user){
     if(user) {
