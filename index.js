@@ -123,7 +123,7 @@ app.post("/update-users/newuser", [check('Username', 'Username is required').isL
     if (!errors.isEmpty()) {
       return res.status(422).json({ errors: errors.array() });
     }
-  // let hashedPassword = Users.hashPassword(req.body.Password);
+  let hashedPassword = Users.hashPassword(req.body.Password);
   Users.findOne({ Username : req.body.Username})
   .then(function(user){
     if(user) {
@@ -131,7 +131,7 @@ app.post("/update-users/newuser", [check('Username', 'Username is required').isL
     } else {
       Users.create({
         Username: req.body.Username,
-        Password: req.body.Password,
+        Password: hashedPassword,
         Email: req.body.Email,
         Birthday: req.body.Birthday
       })
