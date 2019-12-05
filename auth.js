@@ -17,7 +17,7 @@ module.exports = (router) => {
      if (error) {
        return res.status(400).json({
          message: 'Something is not right',
-         user: user
+         user
        });
      }
      if (!user) {
@@ -29,10 +29,8 @@ module.exports = (router) => {
        if (error) {
          res.send(error);
        }
-     if(user){
        var token = generateJWTToken(user.toJSON());
        return res.json({ user, token });
-     }
      });
    })(req, res);
  });
