@@ -36,11 +36,11 @@ app.use(cors({
   }
 }));
 
+const { check, validationResult } = require('express-validator');
+
 let auth = require('./auth')(app);
 const passport = require('passport');
 require('./passport');
-
-const { check, validationResult } = require('express-validator');
 
 //Root Route
 app.get('/', function(req, res){
