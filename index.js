@@ -153,7 +153,7 @@ app.post("/update-users/newuser", [check('Username', 'Username is required').isL
   app.put('/update-users/:Username', [check('Username', 'Username is required').isLength({min: 5}),
     check('Username', 'Username contains non alphanumeric characters - not allowed.').isAlphanumeric(),
     check('Password', 'Password is required').not().isEmpty(),
-    check('Email', 'Email does not appear to be valid').isEmail()],  (req, res) => {
+    check('Email', 'Email does not appear to be valid').isEmail()], passport.authenticate('jwt', {session: false}),  (req, res) => {
       let errors = validationResult(req);
       if (!errors.isEmpty()) {
         return res.status(422).json({ errors: errors.array() });
