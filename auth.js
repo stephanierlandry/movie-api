@@ -21,7 +21,7 @@ module.exports = (router) => {
      }
      if (!user) {
        return res.status(400).json({
-         message: 'User is not right',
+         message: 'No User',
          user
        });
      }
