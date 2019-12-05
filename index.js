@@ -25,10 +25,6 @@ app.use(cors());
 
 let allowedOrigins = ['http://localhost:8080', 'http://testsite.com', 'https://design-and-a-movie.herokuapp.com/'];
 
-let auth = require('./auth')(app);
-const passport = require('passport');
-require('./passport');
-
 app.use(cors({
   origin: function(origin, callback){
     if(!origin) return callback(null, true);
@@ -42,6 +38,9 @@ app.use(cors({
 
 const { check, validationResult } = require('express-validator');
 
+let auth = require('./auth')(app);
+const passport = require('passport');
+require('./passport');
 
 //Root Route
 app.get('/', function(req, res){
@@ -160,11 +159,11 @@ app.post("/update-users/newuser", [check('Username', 'Username is required').isL
         return res.status(422).json({ errors: errors.array() });
       }
 
-    // let hashedPassword = Users.hashPassword(req.body.Password);
+    let hashedPassword = Users.hashPassword(req.body.Password);
     Users.findOneAndUpdate({ Username : req.params.Username }, { $set :
     {
       Username : req.body.Username,
-      Password : req.body.Password,
+      Password : hashedPassword,
       Email : req.body.Email,
       Birthday : req.body.Birthday
     }},
@@ -173,7 +172,7 @@ app.post("/update-users/newuser", [check('Username', 'Username is required').isL
       res.json(updateUsers)
     })
     .catch(function(error){
-      console.error(error);
+      console.log(error);
       res.status(500).send('Error: ' + error);
     });
   });
