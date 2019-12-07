@@ -115,13 +115,13 @@ app.get('/get-users/:Username', function(req, res) {
 });
 
 //This endpoint adds new users to the API by name
-app.post("/update-users/newuser", [check('Username', 'Username is required').isLength({min: 5}),
+app.post("/update-users/newuser", [check('Username', 'Username is not long enough').isLength({min: 5}),
   check('Username', 'Username contains non alphanumeric characters - not allowed.').isAlphanumeric(),
   check('Password', 'Password is required').not().isEmpty(),
   check('Email', 'Email does not appear to be valid').isEmail()], (req, res) => {
     let errors = validationResult(req);
     if (!errors.isEmpty()) {
-      return res.status(422).json({ errors: errors.array() });
+      return res.status(422).json({ errors: errors.array()});
     }
   let hashedPassword = Users.hashPassword(req.body.Password);
   Users.findOne({ Username : req.body.Username})
