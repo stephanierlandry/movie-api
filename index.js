@@ -150,7 +150,7 @@ app.post("/update-users/newuser", [check('Username', 'Username is not long enoug
 });
 
 //This endpoint allows a user to update their info
-  app.put('/update-users/:Username', [check('Username', 'Username is required').isLength({min: 5}),
+  app.put('/update-users/:Username', [check('Username', 'Username is not long enough').isLength({min: 5}),
     check('Username', 'Username contains non alphanumeric characters - not allowed.').isAlphanumeric(),
     check('Password', 'Password is required').not().isEmpty(),
     check('Email', 'Email does not appear to be valid').isEmail()], passport.authenticate('jwt', {session: false}),  (req, res) => {
