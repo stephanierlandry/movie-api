@@ -33644,15 +33644,17 @@ function (_React$Component) {
   _createClass(MyFlixApplication, [{
     key: "render",
     value: function render() {
-      return _react.default.createElement(_mainView.MainView, null);
+      return _react.default.createElement("div", {
+        className: "my-flix"
+      }, _react.default.createElement("div", null, "Good morning"));
     }
   }]);
 
   return MyFlixApplication;
-}(_react.default.Component); // Find the root of our app
+}(_react.default.Component); // Finds the root of your app
 
 
-var container = document.getElementsByClassName('app-container')[0]; // Tell React to render our app in the root DOM element
+var container = document.getElementsByClassName('app-container')[0]; // Tells React to render your app in the root DOM element
 
 _reactDom.default.render(_react.default.createElement(MyFlixApplication), container);
 },{"react":"../../node_modules/react/index.js","react-dom":"../../node_modules/react-dom/index.js","./components/main-view/main-view":"components/main-view/main-view.jsx","./index.scss":"index.scss"}],"../../../../../.nvm/versions/node/v10.15.3/lib/node_modules/parcel-bundler/src/builtins/hmr-runtime.js":[function(require,module,exports) {
