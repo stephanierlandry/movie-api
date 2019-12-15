@@ -23,7 +23,7 @@ app.use(morgan('common'));
 const cors = require('cors');
 app.use(cors());
 
-let allowedOrigins = ['http://localhost:8080', 'http://testsite.com', 'https://design-and-a-movie.herokuapp.com/'];
+let allowedOrigins = ['http://localhost:1234', 'http://testsite.com', 'https://design-and-a-movie.herokuapp.com/'];
 
 app.use(cors({
   origin: function(origin, callback){
