@@ -33492,8 +33492,9 @@ function (_React$Component) {
     value: function componentDidMount() {
       var _this = this;
 
-      _axios.default.get('<https://design-and-a-movie.herokuapp.com/movies>').then(function (response) {
-        // Assign the result to the state
+      _axios.default.get('https://design-and-a-movie.herokuapp.com/movies').then(function (response) {
+        console.log('response'); // Assign the result to the state
+
         _this.setState({
           movies: response.data
         });
@@ -33644,9 +33645,7 @@ function (_React$Component) {
   _createClass(MyFlixApplication, [{
     key: "render",
     value: function render() {
-      return _react.default.createElement("div", {
-        className: "my-flix"
-      }, _react.default.createElement("div", null, "Good morning"));
+      return _react.default.createElement(_mainView.MainView, null);
     }
   }]);
 
@@ -33685,7 +33684,7 @@ var parent = module.bundle.parent;
 if ((!parent || !parent.isParcelRequire) && typeof WebSocket !== 'undefined') {
   var hostname = "" || location.hostname;
   var protocol = location.protocol === 'https:' ? 'wss' : 'ws';
-  var ws = new WebSocket(protocol + '://' + hostname + ':' + "59856" + '/');
+  var ws = new WebSocket(protocol + '://' + hostname + ':' + "63559" + '/');
 
   ws.onmessage = function (event) {
     checkedAssets = {};
