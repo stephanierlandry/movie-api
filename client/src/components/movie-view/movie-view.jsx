@@ -2,9 +2,18 @@ import React from 'react';
 
 export class MovieView extends React.Component {
 
-  constructor() {
-    super();
+  constructor(props) {
+    super(props);
     this.state = {};
+  }
+
+  goBack() {
+    // this.setState({
+    //   movie: null,
+    //   selectedMovie: null
+    // });
+    history.back();
+    console.log('back button');
   }
 
   render() {
@@ -32,7 +41,7 @@ export class MovieView extends React.Component {
           <span className="label">Director: </span>
           <span className="value">{movie.Director.Name}</span>
         </div>
-        <button className="back-button">Back</button>
+        <a href="../movie-view/movie-view" onClick={movie =>this.goBack()} className="back-button">Back</a>
        </div>
     );
   }

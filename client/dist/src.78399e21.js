@@ -33538,19 +33538,31 @@ var MovieView =
 function (_React$Component) {
   _inherits(MovieView, _React$Component);
 
-  function MovieView() {
+  function MovieView(props) {
     var _this;
 
     _classCallCheck(this, MovieView);
 
-    _this = _possibleConstructorReturn(this, _getPrototypeOf(MovieView).call(this));
+    _this = _possibleConstructorReturn(this, _getPrototypeOf(MovieView).call(this, props));
     _this.state = {};
     return _this;
   }
 
   _createClass(MovieView, [{
+    key: "goBack",
+    value: function goBack() {
+      // this.setState({
+      //   movie: null,
+      //   selectedMovie: null
+      // });
+      history.back();
+      console.log('back button');
+    }
+  }, {
     key: "render",
     value: function render() {
+      var _this2 = this;
+
       var movie = this.props.movie;
       if (!movie) return null;
       return _react.default.createElement("div", {
@@ -33582,7 +33594,11 @@ function (_React$Component) {
         className: "label"
       }, "Director: "), _react.default.createElement("span", {
         className: "value"
-      }, movie.Director.Name)), _react.default.createElement("button", {
+      }, movie.Director.Name)), _react.default.createElement("a", {
+        href: "../movie-view/movie-view",
+        onClick: function onClick(movie) {
+          return _this2.goBack();
+        },
         className: "back-button"
       }, "Back"));
     }
@@ -33653,8 +33669,7 @@ function (_React$Component) {
       var _this2 = this;
 
       _axios.default.get('https://design-and-a-movie.herokuapp.com/movies').then(function (response) {
-        console.log('response'); // Assign the result to the state
-
+        // Assign the result to the state
         _this2.setState({
           movies: response.data
         });
@@ -33678,9 +33693,7 @@ function (_React$Component) {
           movies = _this$state.movies,
           selectedMovie = _this$state.selectedMovie; // Before the movies have been loaded
 
-      if (!movies) return _react.default.createElement("div", {
-        className: "main-view"
-      });
+      if (!movies) return _react.default.createElement("div", null, "loading");
       return _react.default.createElement("div", {
         className: "main-view"
       }, selectedMovie ? _react.default.createElement(_movieView.MovieView, {
