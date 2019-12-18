@@ -8,12 +8,7 @@ export class MovieView extends React.Component {
   }
 
   goBack() {
-    // this.setState({
-    //   movie: null,
-    //   selectedMovie: null
-    // });
     history.back();
-    console.log('back button');
   }
 
   render() {

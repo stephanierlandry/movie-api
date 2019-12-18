@@ -33551,12 +33551,7 @@ function (_React$Component) {
   _createClass(MovieView, [{
     key: "goBack",
     value: function goBack() {
-      // this.setState({
-      //   movie: null,
-      //   selectedMovie: null
-      // });
       history.back();
-      console.log('back button');
     }
   }, {
     key: "render",
