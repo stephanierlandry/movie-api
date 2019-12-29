@@ -36257,15 +36257,15 @@ function (_React$Component) {
       var _this$props = this.props,
           movie = _this$props.movie,
           _onClick = _this$props.onClick;
-      return _react.default.createElement(_Card.default, null, _react.default.createElement(_Card.default.Img, {
-        variant: "top",
-        src: movie.ImagePath
-      }), _react.default.createElement(_Card.default.Body, null, _react.default.createElement(_Card.default.Title, null, movie.Title), _react.default.createElement(_Button.default, {
+      return _react.default.createElement(_Card.default, {
         onClick: function onClick() {
           return _onClick(movie);
         },
         variant: "link"
-      }, "Open")));
+      }, _react.default.createElement(_Card.default.Img, {
+        variant: "top",
+        src: movie.ImagePath
+      }), _react.default.createElement(_Card.default.Title, null, movie.Title));
     }
   }]);
 

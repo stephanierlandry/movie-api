@@ -8,12 +8,9 @@ export class MovieCard extends React.Component {
     const { movie, onClick } = this.props;
 
     return (
-      <Card>
+      <Card onClick={() => onClick(movie)} variant="link">
         <Card.Img variant="top" src={movie.ImagePath} />
-        <Card.Body>
           <Card.Title>{movie.Title}</Card.Title>
-          <Button onClick={() => onClick(movie)} variant="link">Open</Button>
-        </Card.Body>
       </Card>
     );
   }
