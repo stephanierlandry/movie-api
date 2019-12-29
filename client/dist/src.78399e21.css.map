@@ -1,1 +1,1 @@
-{"version":3,"sources":["index.scss"],"names":[],"mappings":"AAEA;EACE,OAHM","file":"src.78399e21.css","sourceRoot":"../src","sourcesContent":["$color: steelblue;\n\n.my-flix {\n  color: $color;\n}\n"]}
+{"version":3,"sources":["components/main-view/main-view.scss","index.scss"],"names":[],"mappings":"AAAA;EACE;;ACCF;EACE,OAHM","file":"src.78399e21.css","sourceRoot":"../src","sourcesContent":[".card {\n  margin-bottom: 1.95em;\n}\n","$color: steelblue;\n\n.my-flix {\n  color: $color;\n}\n"]}

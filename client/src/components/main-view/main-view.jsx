@@ -3,8 +3,14 @@ import axios from 'axios';
 
 
 import { LoginView } from '../login-view/login-view';
+import {RegistrationView} from '../registration-view/registration-view';
 import { MovieCard } from '../movie-card/movie-card';
 import { MovieView } from '../movie-view/movie-view';
+import Container from 'react-bootstrap/Container';
+import Row from 'react-bootstrap/Row';
+import Col from 'react-bootstrap/Col';
+import './main-view.scss';
+
 
 export class MainView extends React.Component {
 
@@ -46,20 +52,36 @@ export class MainView extends React.Component {
   render() {
     const { movies, selectedMovie, user } = this.state;
 
-    if (!user) return <LoginView onLoggedIn={user => this.onLoggedIn(user)} />;
+    // If no user has been logged in this view will be loaded
+    // if (!user) return <LoginView onLoggedIn={user => this.onLoggedIn(user)} />;
 
-    // Before the movies have been loaded
-    if (!movies) return <div>loading</div>;
+    // if (!user) return <RegistrationView onLoggedIn={user => this.onLoggedIn(user)} />;
 
-    return (
-     <div className="main-view">
-      {selectedMovie
-         ? <MovieView movie={selectedMovie}/>
-         : movies.map(movie => (
-           <MovieCard key={movie._id} movie={movie} onClick={movie => this.onMovieClick(movie)}/>
-         ))
-      }
-     </div>
-    );
+
+    return(
+      <div className="main-view">
+        {selectedMovie ?
+          <Container>
+            <Row>
+              <MovieView movie={selectedMovie}/>
+            </Row>
+          </Container>
+          :
+          <Container>
+            <Row>
+            { movies ?
+              movies.map(movie => (
+                <Col md={4}>
+                  <MovieCard key={`${movie._id}-${Math.random()}`} movie={movie} onClick={movie => this.onMovieClick(movie)}/>
+                </Col>
+              ))
+              :
+              <React.Fragment>loading...</React.Fragment>
+            }
+            </Row>
+          </Container>
+        }
+      </div>
+    )
   }
 }
