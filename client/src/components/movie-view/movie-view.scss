@@ -1,0 +1,32 @@
+.main-view{
+  margin: 5em;
+}
+
+.movie-poster{
+  width:75%;
+  height: auto;
+}
+
+.movie-block{
+  position: absolute;
+  color: white;
+  line-height: 1.65em;
+  display: contents;
+}
+
+.movie-title{
+  font-size: 2em;
+  padding-bottom: .5em;
+}
+
+.movie-description{
+  padding-bottom: .85em;
+}
+
+//Buttons
+
+.back-button{
+  height:2.5em;
+  position: relative;
+  left: 90%;
+}

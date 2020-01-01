@@ -1,7 +1,25 @@
 body {
-  background: black;
+  background: #060807;
 }
 
+//Navigation
+
+.design-movie-logo{
+  border: none;
+  position: relative;
+  left: 2.35em;
+}
+
+.search-form{
+  position: absolute;
+  right: 4.2em;
+}
+
+.form-control{
+  width: 1.5em;
+}
+
+//Movie Card
 .card {
   margin-bottom: 1.95em;
   position: relative;
@@ -24,10 +42,29 @@ body {
 .card-title {
   position: absolute;
   color: #8E081F;
-  top: 6.5em;
+  top: 10em;
+  padding: .25em;
   background: rgba(255,255,255, 0.7);
   width: 100%;
   text-align: center;
-  font-size: 2em;
+  font-size: 1.5em;
+}
 
+//Buttons
+
+.btn{
+  background: white;
+  color: black;
+}
+
+.btn:hover {
+  background:#8E081F;
+  border-color: #8E081F;
+}
+
+//loading screen
+
+.loading{
+  color: white;
+  font-size: 3em;
 }
