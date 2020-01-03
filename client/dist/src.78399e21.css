@@ -10305,6 +10305,7 @@ body {
 
 .navbar {
   background-color: #060807;
+  justify-content: center;
 }
 
 .design-movie-logo {
@@ -10320,6 +10321,10 @@ body {
 
 .search {
   width: 1.5em;
+}
+
+.container {
+  padding-top: 3em;
 }
 
 .card {
@@ -10366,6 +10371,15 @@ body {
 .loading {
   color: white;
   font-size: 3em;
+}
+
+.footer-link {
+  color: white;
+  transition: all 0.3s ease;
+}
+
+.footer-link:hover {
+  color: #8E081F;
 }
 .my-flix {
   color: steelblue;

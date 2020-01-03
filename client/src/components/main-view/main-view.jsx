@@ -10,9 +10,12 @@ import Container from 'react-bootstrap/Container';
 import Row from 'react-bootstrap/Row';
 import Col from 'react-bootstrap/Col';
 import Navbar from 'react-bootstrap/Navbar';
+import Nav from 'react-bootstrap/Nav';
 import Form from 'react-bootstrap/Form';
 import Button from 'react-bootstrap/Button';
 import FormControl from 'react-bootstrap/FormControl';
+
+import FeatherIcon from 'feather-icons-react';
 
 import './main-view.scss';
 
@@ -65,7 +68,7 @@ export class MainView extends React.Component {
     return(
       <div>
         <Container>
-          <Navbar expand="md">
+          <Navbar expand="md" fixed="top">
             <Navbar.Brand href="../main-view/main-view">
               <img src="https://scontent-atl3-1.cdninstagram.com/v/t51.2885-19/s320x320/22157915_286342841858633_7255692800950272000_n.jpg?_nc_ht=scontent-atl3-1.cdninstagram.com&amp;_nc_ohc=kIG5qCpFmHYAX97KJQU&amp;oh=9381e9e2f373a66031f4f936fd9f51ff&amp;oe=5EA94421" alt="Design and a Movie Logo" width="120" height="120" className="design-movie-logo"/>
             </Navbar.Brand>
@@ -104,6 +107,20 @@ export class MainView extends React.Component {
             </Container>
           }
         </div>
+
+        <Container>
+          <Navbar expand="md" fixed="bottom">
+            <Nav.Link href="https://www.facebook.com/designandamovie/" className="footer-link">
+              <FeatherIcon icon="facebook" />
+            </Nav.Link>
+            <Nav.Link href="https://www.instagram.com/designandamovie/" className="footer-link">
+              <FeatherIcon icon="instagram" />
+            </Nav.Link>
+            <Nav.Link href="https://granthurlbert.bigcartel.com/" className="footer-link">
+              <FeatherIcon icon="shopping-bag" />
+            </Nav.Link>
+          </Navbar>
+        </Container>
       </div>
     )
   }
