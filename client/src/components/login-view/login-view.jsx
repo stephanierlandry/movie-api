@@ -25,7 +25,7 @@ export function LoginView(props) {
   return (
     <div className="login-body">
       <Container>
-        <Navbar expand="lg">
+        <Navbar expand="md">
           <Navbar.Brand>
             <img src="https://scontent-atl3-1.cdninstagram.com/v/t51.2885-19/s320x320/22157915_286342841858633_7255692800950272000_n.jpg?_nc_ht=scontent-atl3-1.cdninstagram.com&amp;_nc_ohc=kIG5qCpFmHYAX97KJQU&amp;oh=9381e9e2f373a66031f4f936fd9f51ff&amp;oe=5EA94421" alt="Design and a Movie Logo" width="120" height="120" className="design-movie-logo"/>
           </Navbar.Brand>

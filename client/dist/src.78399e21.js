@@ -38143,15 +38143,15 @@ function RegistrationView(props) {
 
   return _react.default.createElement("div", {
     className: "login-body"
-  }, _react.default.createElement(_Navbar.default, {
-    expand: "lg"
+  }, _react.default.createElement(_Container.default, null, _react.default.createElement(_Navbar.default, {
+    expand: "md"
   }, _react.default.createElement(_Navbar.default.Brand, null, _react.default.createElement("img", {
     src: "https://scontent-atl3-1.cdninstagram.com/v/t51.2885-19/s320x320/22157915_286342841858633_7255692800950272000_n.jpg?_nc_ht=scontent-atl3-1.cdninstagram.com&_nc_ohc=kIG5qCpFmHYAX97KJQU&oh=9381e9e2f373a66031f4f936fd9f51ff&oe=5EA94421",
     alt: "Design and a Movie Logo",
     width: "120",
     height: "120",
     className: "design-movie-logo"
-  }))), _react.default.createElement(_Container.default, null, _react.default.createElement(_Row.default, null, _react.default.createElement(_Col.default, null), _react.default.createElement(_Col.default, null, _react.default.createElement(_Form.default, null, _react.default.createElement(_Form.default.Group, {
+  })))), _react.default.createElement(_Container.default, null, _react.default.createElement(_Row.default, null, _react.default.createElement(_Col.default, null), _react.default.createElement(_Col.default, null, _react.default.createElement(_Form.default, null, _react.default.createElement(_Form.default.Group, {
     controlId: "formBasicUsername"
   }, _react.default.createElement(_Form.default.Label, null, "Username"), _react.default.createElement(_Form.default.Control, {
     type: "text",
@@ -38292,7 +38292,7 @@ function LoginView(props) {
   return _react.default.createElement("div", {
     className: "login-body"
   }, _react.default.createElement(_Container.default, null, _react.default.createElement(_Navbar.default, {
-    expand: "lg"
+    expand: "md"
   }, _react.default.createElement(_Navbar.default.Brand, null, _react.default.createElement("img", {
     src: "https://scontent-atl3-1.cdninstagram.com/v/t51.2885-19/s320x320/22157915_286342841858633_7255692800950272000_n.jpg?_nc_ht=scontent-atl3-1.cdninstagram.com&_nc_ohc=kIG5qCpFmHYAX97KJQU&oh=9381e9e2f373a66031f4f936fd9f51ff&oe=5EA94421",
     alt: "Design and a Movie Logo",
@@ -38846,7 +38846,7 @@ function (_React$Component) {
       }); // if (!user) return <RegistrationView onLoggedIn={user => this.onLoggedIn(user)} />;
 
       return _react.default.createElement("div", null, _react.default.createElement(_Container.default, null, _react.default.createElement(_Navbar.default, {
-        expand: "lg"
+        expand: "md"
       }, _react.default.createElement(_Navbar.default.Brand, {
         href: "../main-view/main-view"
       }, _react.default.createElement("img", {
