@@ -1,0 +1,51 @@
+body{
+  display: flex;
+}
+
+.login-body{
+  width:100%;
+}
+
+.login-space{
+  padding-top: 4em;
+}
+
+//Nav
+
+.navbar{
+  padding-bottom: 1em;
+}
+
+.app-container{
+  display: flex;
+  width:100%;
+}
+
+.form-body{
+  display: flex;
+  justify-content: center;
+  width:100%;
+}
+
+.form-label{
+  color: white;
+}
+
+.form{
+  width: 24.5em;
+}
+
+//Buttons
+
+.button-group{
+  display: flex;
+  justify-content: space-between;
+}
+
+.btn-primary{
+  border: none;
+}
+
+.new-registration-button{
+  position: relative;
+}

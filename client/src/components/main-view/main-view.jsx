@@ -57,25 +57,29 @@ export class MainView extends React.Component {
     const { movies, selectedMovie, user } = this.state;
 
     // If no user has been logged in this view will be loaded
-    // if (!user) return <LoginView onLoggedIn={user => this.onLoggedIn(user)} />;
+    if (!user) return <LoginView onLoggedIn={user => this.onLoggedIn(user)} />;
 
     // if (!user) return <RegistrationView onLoggedIn={user => this.onLoggedIn(user)} />;
 
 
     return(
       <div>
-        <Navbar expand="lg">
-          <Navbar.Brand href="../main-view/main-view">
-            <img src="https://scontent-atl3-1.cdninstagram.com/v/t51.2885-19/s320x320/22157915_286342841858633_7255692800950272000_n.jpg?_nc_ht=scontent-atl3-1.cdninstagram.com&amp;_nc_ohc=kIG5qCpFmHYAX97KJQU&amp;oh=9381e9e2f373a66031f4f936fd9f51ff&amp;oe=5EA94421" alt="Design and a Movie Logo" width="120" height="120" className="design-movie-logo"/>
-          </Navbar.Brand>
-          <Navbar.Toggle aria-controls="basic-navbar-nav" />
+        <Container>
+          <Navbar expand="lg">
+            <Navbar.Brand href="../main-view/main-view">
+              <img src="https://scontent-atl3-1.cdninstagram.com/v/t51.2885-19/s320x320/22157915_286342841858633_7255692800950272000_n.jpg?_nc_ht=scontent-atl3-1.cdninstagram.com&amp;_nc_ohc=kIG5qCpFmHYAX97KJQU&amp;oh=9381e9e2f373a66031f4f936fd9f51ff&amp;oe=5EA94421" alt="Design and a Movie Logo" width="120" height="120" className="design-movie-logo"/>
+            </Navbar.Brand>
+
+            <Navbar.Toggle aria-controls="basic-navbar-nav" />
+
             <Navbar.Collapse id="basic-navbar-nav">
               <Form inline className="search-form">
-                <FormControl type="text" placeholder="Search" className="mr-sm-2" />
+                <FormControl type="text" placeholder="Search" className="mr-sm-2 search" />
                 <Button className="btn">Search</Button>
               </Form>
             </Navbar.Collapse>
-        </Navbar>
+          </Navbar>
+        </Container>
 
         <div className="main-view">
           {selectedMovie ?
