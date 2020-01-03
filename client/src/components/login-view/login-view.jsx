@@ -1,4 +1,6 @@
 import React, { useState } from 'react';
+import axios from 'axios';
+
 import {RegistrationView} from '../registration-view/registration-view';
 
 import './login-view.scss';
@@ -15,11 +17,20 @@ export function LoginView(props) {
   const [ password, setPassword ] = useState('');
 
   const handleSubmit = (e) => {
-    e.preventDefault();
-    console.log(username, password);
-    // Send a request to the server for authentication then call props.onLoggedIn(username)
-    props.onLoggedIn(username);
-  };
+  e.preventDefault();
+  /* Send a request to the server for authentication */
+  axios.post('https://design-and-a-movie.herokuapp.com/login', {
+    Username: username,
+    Password: password
+  })
+  .then(response => {
+    const data = response.data;
+    props.onLoggedIn(data);
+  })
+  .catch(e => {
+    console.log('no such user')
+  });
+};
 
 
   return (
