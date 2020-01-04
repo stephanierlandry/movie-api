@@ -59,17 +59,5 @@ export function LoginView(props) {
       </Container>
     </div>
 
-    // <form>
-    //   <label>
-    //     Username:
-    //     <input type="text" value={username} onChange={e => setUsername(e.target.value)} />
-    //   </label>
-    //   <label>
-    //     Password:
-    //     <input type="password" value={password} onChange={e => setPassword(e.target.value)} />
-    //   </label>
-    //   <button type="button" onClick={handleSubmit}>Submit</button>
-    //   <a href="../registration-view/registration-view" onClick={movie =>this.goBack()} className="new-registration-button" type="button"> New User? Register Here!</a>
-    // </form>
   );
 }

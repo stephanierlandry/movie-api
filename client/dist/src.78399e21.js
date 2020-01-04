@@ -38335,19 +38335,7 @@ function LoginView(props) {
       return _this.goBack();
     },
     className: "btn"
-  }, "New User? Register Here")))), _react.default.createElement(_Col.default, null)))) // <form>
-  //   <label>
-  //     Username:
-  //     <input type="text" value={username} onChange={e => setUsername(e.target.value)} />
-  //   </label>
-  //   <label>
-  //     Password:
-  //     <input type="password" value={password} onChange={e => setPassword(e.target.value)} />
-  //   </label>
-  //   <button type="button" onClick={handleSubmit}>Submit</button>
-  //   <a href="../registration-view/registration-view" onClick={movie =>this.goBack()} className="new-registration-button" type="button"> New User? Register Here!</a>
-  // </form>
-  ;
+  }, "New User? Register Here")))), _react.default.createElement(_Col.default, null))));
 }
 },{"react":"../../node_modules/react/index.js","../registration-view/registration-view":"components/registration-view/registration-view.jsx","./login-view.scss":"components/login-view/login-view.scss","react-bootstrap/Form":"../node_modules/react-bootstrap/esm/Form.js","react-bootstrap/Button":"../node_modules/react-bootstrap/esm/Button.js","react-bootstrap/Navbar":"../node_modules/react-bootstrap/esm/Navbar.js","react-bootstrap/Container":"../node_modules/react-bootstrap/esm/Container.js","react-bootstrap/Row":"../node_modules/react-bootstrap/esm/Row.js","react-bootstrap/Col":"../node_modules/react-bootstrap/esm/Col.js"}],"../node_modules/react-bootstrap/esm/divWithClassName.js":[function(require,module,exports) {
 "use strict";
@@ -39973,7 +39961,7 @@ var parent = module.bundle.parent;
 if ((!parent || !parent.isParcelRequire) && typeof WebSocket !== 'undefined') {
   var hostname = "" || location.hostname;
   var protocol = location.protocol === 'https:' ? 'wss' : 'ws';
-  var ws = new WebSocket(protocol + '://' + hostname + ':' + "64667" + '/');
+  var ws = new WebSocket(protocol + '://' + hostname + ':' + "63293" + '/');
 
   ws.onmessage = function (event) {
     checkedAssets = {};
