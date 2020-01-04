@@ -62,18 +62,19 @@ export class MainView extends React.Component {
   }
 
   getMovies(token) {
-    axios.get('https://design-and-a-movie.herokuapp.com/movies', {
-      headers: {Authorixation: `Bearer ${token}`}
-    })
-    .then(response => {
-      this.setState({
-        movies: response.data
-      });
-    })
-    .catch(function(error){
-      console.log(error);
+  axios.get('YOUR_API_URL/movies', {
+    headers: { Authorization: `Bearer ${token}`}
+  })
+  .then(response => {
+    // Assign the result to the state
+    this.setState({
+      movies: response.data
     });
-  }
+  })
+  .catch(function (error) {
+    console.log(error);
+  });
+}
 
   render() {
     const { movies, selectedMovie, user } = this.state;

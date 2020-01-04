@@ -39818,11 +39818,12 @@ function (_React$Component) {
     value: function getMovies(token) {
       var _this3 = this;
 
-      _axios.default.get('https://design-and-a-movie.herokuapp.com/movies', {
+      _axios.default.get('YOUR_API_URL/movies', {
         headers: {
-          Authorixation: "Bearer ".concat(token)
+          Authorization: "Bearer ".concat(token)
         }
       }).then(function (response) {
+        // Assign the result to the state
         _this3.setState({
           movies: response.data
         });
@@ -40004,7 +40005,7 @@ var parent = module.bundle.parent;
 if ((!parent || !parent.isParcelRequire) && typeof WebSocket !== 'undefined') {
   var hostname = "" || location.hostname;
   var protocol = location.protocol === 'https:' ? 'wss' : 'ws';
-  var ws = new WebSocket(protocol + '://' + hostname + ':' + "64667" + '/');
+  var ws = new WebSocket(protocol + '://' + hostname + ':' + "54636" + '/');
 
   ws.onmessage = function (event) {
     checkedAssets = {};

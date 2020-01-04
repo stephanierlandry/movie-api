@@ -51,7 +51,7 @@ app.get('/', function(req, res){
 //    ---MOVIE ENDPOINTS---
 
 //This endpoint gets all of the movies + data in the API
-app.get("/movies",  (req, res) => {
+app.get("/movies", passport.authenticate('jwt', { session: false }), (req, res) => {
   Movies.find()
   .then(function(movie) {
     res.json(movie)
@@ -63,7 +63,7 @@ app.get("/movies",  (req, res) => {
 });
 
 //This endpoint gets all data for a movie by the movie name
-app.get("/get-movies/title/:title", (req, res) => {
+app.get("/get-movies/title/:title", passport.authenticate('jwt', { session: false }), (req, res) => {
   Movies.findOne({ Title : req.params.title })
   .then(function(movie) {
     res.json(movie)
