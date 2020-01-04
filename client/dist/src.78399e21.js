@@ -39804,37 +39804,32 @@ function (_React$Component) {
     }
   }, {
     key: "onLoggedIn",
-    value: function onLoggedIn(authData) {
-      console.log(authData);
+    value: function onLoggedIn(user) {
+      console.log(user);
       this.setState({
-        user: authData.user.Username
-      });
-      localStorage.setItem('token', authData.token);
-      localStorage.setItem('user', authData.user.Username);
-      this.getMovies(authData.token);
-    }
-  }, {
-    key: "getMovies",
-    value: function getMovies(token) {
-      var _this3 = this;
+        user: user
+      }); // localStorage.setItem('token', authData.token);
+      // localStorage.setItem('user', authData.user.Username);
+      // this.getMovies(authData.token);
+    } //   getMovies(token) {
+    //   axios.get('YOUR_API_URL/movies', {
+    //     headers: { Authorization: `Bearer ${token}`}
+    //   })
+    //   .then(response => {
+    //     // Assign the result to the state
+    //     this.setState({
+    //       movies: response.data
+    //     });
+    //   })
+    //   .catch(function (error) {
+    //     console.log(error);
+    //   });
+    // }
 
-      _axios.default.get('YOUR_API_URL/movies', {
-        headers: {
-          Authorization: "Bearer ".concat(token)
-        }
-      }).then(function (response) {
-        // Assign the result to the state
-        _this3.setState({
-          movies: response.data
-        });
-      }).catch(function (error) {
-        console.log(error);
-      });
-    }
   }, {
     key: "render",
     value: function render() {
-      var _this4 = this;
+      var _this3 = this;
 
       var _this$state = this.state,
           movies = _this$state.movies,
@@ -39843,7 +39838,7 @@ function (_React$Component) {
 
       if (!user) return _react.default.createElement(_loginView.LoginView, {
         onLoggedIn: function onLoggedIn(user) {
-          return _this4.onLoggedIn(user);
+          return _this3.onLoggedIn(user);
         }
       }); // if (!user) return <RegistrationView onLoggedIn={user => this.onLoggedIn(user)} />;
 
@@ -39882,7 +39877,7 @@ function (_React$Component) {
           key: "".concat(movie._id, "-").concat(Math.random()),
           movie: movie,
           onClick: function onClick(movie) {
-            return _this4.onMovieClick(movie);
+            return _this3.onMovieClick(movie);
           }
         }));
       }) : _react.default.createElement("div", {
@@ -40005,7 +40000,7 @@ var parent = module.bundle.parent;
 if ((!parent || !parent.isParcelRequire) && typeof WebSocket !== 'undefined') {
   var hostname = "" || location.hostname;
   var protocol = location.protocol === 'https:' ? 'wss' : 'ws';
-  var ws = new WebSocket(protocol + '://' + hostname + ':' + "54636" + '/');
+  var ws = new WebSocket(protocol + '://' + hostname + ':' + "57569" + '/');
 
   ws.onmessage = function (event) {
     checkedAssets = {};

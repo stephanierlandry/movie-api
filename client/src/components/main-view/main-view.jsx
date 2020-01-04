@@ -50,31 +50,31 @@ export class MainView extends React.Component {
     });
   }
 
-  onLoggedIn(authData) {
-    console.log(authData)
+  onLoggedIn(user) {
+    console.log(user);
     this.setState({
-      user: authData.user.Username
+      user
     });
 
-    localStorage.setItem('token', authData.token);
-    localStorage.setItem('user', authData.user.Username);
-    this.getMovies(authData.token);
+    // localStorage.setItem('token', authData.token);
+    // localStorage.setItem('user', authData.user.Username);
+    // this.getMovies(authData.token);
   }
 
-  getMovies(token) {
-  axios.get('YOUR_API_URL/movies', {
-    headers: { Authorization: `Bearer ${token}`}
-  })
-  .then(response => {
-    // Assign the result to the state
-    this.setState({
-      movies: response.data
-    });
-  })
-  .catch(function (error) {
-    console.log(error);
-  });
-}
+//   getMovies(token) {
+//   axios.get('YOUR_API_URL/movies', {
+//     headers: { Authorization: `Bearer ${token}`}
+//   })
+//   .then(response => {
+//     // Assign the result to the state
+//     this.setState({
+//       movies: response.data
+//     });
+//   })
+//   .catch(function (error) {
+//     console.log(error);
+//   });
+// }
 
   render() {
     const { movies, selectedMovie, user } = this.state;
