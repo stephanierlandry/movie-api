@@ -38239,6 +38239,8 @@ exports.LoginView = LoginView;
 
 var _react = _interopRequireWildcard(require("react"));
 
+var _axios = _interopRequireDefault(require("axios"));
+
 var _registrationView = require("../registration-view/registration-view");
 
 require("./login-view.scss");
@@ -38284,9 +38286,17 @@ function LoginView(props) {
 
   var handleSubmit = function handleSubmit(e) {
     e.preventDefault();
-    console.log(username, password); // Send a request to the server for authentication then call props.onLoggedIn(username)
+    /* Send a request to the server for authentication */
 
-    props.onLoggedIn(username);
+    _axios.default.post('http://localhost:3000/login', {
+      Username: username,
+      Password: password
+    }) // axios.get('https://design-and-a-movie.herokuapp.com/get-users/' + username)
+    .then(function (response) {// console.log(response)
+      // const data = response.data;
+      // props.onLoggedIn(data);
+    }).catch(function (e) {// console.log('no such user')
+    });
   };
 
   return _react.default.createElement("div", {
@@ -38337,7 +38347,7 @@ function LoginView(props) {
     className: "btn"
   }, "New User? Register Here")))), _react.default.createElement(_Col.default, null))));
 }
-},{"react":"../../node_modules/react/index.js","../registration-view/registration-view":"components/registration-view/registration-view.jsx","./login-view.scss":"components/login-view/login-view.scss","react-bootstrap/Form":"../node_modules/react-bootstrap/esm/Form.js","react-bootstrap/Button":"../node_modules/react-bootstrap/esm/Button.js","react-bootstrap/Navbar":"../node_modules/react-bootstrap/esm/Navbar.js","react-bootstrap/Container":"../node_modules/react-bootstrap/esm/Container.js","react-bootstrap/Row":"../node_modules/react-bootstrap/esm/Row.js","react-bootstrap/Col":"../node_modules/react-bootstrap/esm/Col.js"}],"../node_modules/react-bootstrap/esm/divWithClassName.js":[function(require,module,exports) {
+},{"react":"../../node_modules/react/index.js","axios":"../node_modules/axios/index.js","../registration-view/registration-view":"components/registration-view/registration-view.jsx","./login-view.scss":"components/login-view/login-view.scss","react-bootstrap/Form":"../node_modules/react-bootstrap/esm/Form.js","react-bootstrap/Button":"../node_modules/react-bootstrap/esm/Button.js","react-bootstrap/Navbar":"../node_modules/react-bootstrap/esm/Navbar.js","react-bootstrap/Container":"../node_modules/react-bootstrap/esm/Container.js","react-bootstrap/Row":"../node_modules/react-bootstrap/esm/Row.js","react-bootstrap/Col":"../node_modules/react-bootstrap/esm/Col.js"}],"../node_modules/react-bootstrap/esm/divWithClassName.js":[function(require,module,exports) {
 "use strict";
 
 Object.defineProperty(exports, "__esModule", {
@@ -39769,6 +39779,8 @@ function (_React$Component) {
         _this2.setState({
           movies: response.data
         });
+
+        console.log(movies);
       }).catch(function (error) {
         console.log(error);
       });
@@ -39961,7 +39973,7 @@ var parent = module.bundle.parent;
 if ((!parent || !parent.isParcelRequire) && typeof WebSocket !== 'undefined') {
   var hostname = "" || location.hostname;
   var protocol = location.protocol === 'https:' ? 'wss' : 'ws';
-  var ws = new WebSocket(protocol + '://' + hostname + ':' + "63293" + '/');
+  var ws = new WebSocket(protocol + '://' + hostname + ':' + "56467" + '/');
 
   ws.onmessage = function (event) {
     checkedAssets = {};
