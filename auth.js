@@ -17,24 +17,24 @@ module.exports = (router) => {
    passport.authenticate('local', { session : false}, (error, user, info) => {
 
      console.log(user);
-     // if (error) {
-     //   return res.status(400).json({
-     //     message: 'Something is not right'
-     //   });
-     // }
-     // if (!user) {
-     //   return res.status(400).json({
-     //     message: 'No User',
-     //     user
-     //   });
-     // }
-     // req.login(user, { session: false }, (error) => {
-     //   if (error) {
-     //     res.send(error);
-     //   }
-     //   var token = generateJWTToken(user.toJSON());
-     //   return res.json({ user, token });
-     // });
+     if (error) {
+       return res.status(400).json({
+         message: 'Something is not right'
+       });
+     }
+     if (!user) {
+       return res.status(400).json({
+         message: 'No User',
+         user
+       });
+     }
+     req.login(user, { session: false }, (error) => {
+       if (error) {
+         res.send(error);
+       }
+       var token = generateJWTToken(user.toJSON());
+       return res.json({ user, token });
+     });
    })(req, res, next);
  });
 }
