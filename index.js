@@ -12,36 +12,38 @@ const morgan = require('morgan');
 const bodyParser = require('body-parser');
 const uuid = require('uuid');
 
+const passport = require('passport');
+// require('./passport');
+
 const app = express();
-
-app.use(bodyParser.json());
-
 app.use(express.static('public'));
 app.use(express.static('/assets'));
-
+app.use(bodyParser.json());
+app.use(bodyParser.urlencoded({extended: true}));
+app.use(passport.initialize());
 app.use(morgan('common'));
 
 const cors = require('cors');
 app.use(cors());
 
-let allowedOrigins = ['http://localhost:1234', 'http://localhost:3000', 'http://testsite.com', 'https://design-and-a-movie.herokuapp.com/'];
+let auth = require('./auth')(app);
 
-app.use(cors({
-  origin: function(origin, callback){
-    if(!origin) return callback(null, true);
-    if(allowedOrigins.indexOf(origin) === -1){ // If a specific origin isn’t found on the list of allowed origins
-      var message = 'The CORS policy for this application doesn’t allow access from origin ' + origin;
-      return callback(new Error(message ), false);
-    }
-    return callback(null, true);
-  }
-}));
+// let allowedOrigins = ['http://localhost:1234', 'http://localhost:3000', 'http://testsite.com', 'https://design-and-a-movie.herokuapp.com/'];
+//
+// app.use(cors({
+//   origin: function(origin, callback){
+//     if(!origin) return callback(null, true);
+//     if(allowedOrigins.indexOf(origin) === -1){ // If a specific origin isn’t found on the list of allowed origins
+//       var message = 'The CORS policy for this application doesn’t allow access from origin ' + origin;
+//       return callback(new Error(message ), false);
+//     }
+//     return callback(null, true);
+//   }
+// }));
 
 const { check, validationResult } = require('express-validator');
 
-let auth = require('./auth')(app);
-const passport = require('passport');
-require('./passport');
+
 
 //Root Route
 app.get('/', function(req, res){

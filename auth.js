@@ -12,11 +12,11 @@ function generateJWTToken(user){
 }
 
 module.exports = (router) => {
- router.post('/login', (req, res) => {
+ router.post('/login', function(req, res, next){
    // console.log({req: req.body})
    passport.authenticate('local', { session : false}, (error, user, info) => {
 
-     // console.log(user);
+     console.log(user);
      // if (error) {
      //   return res.status(400).json({
      //     message: 'Something is not right'
@@ -35,6 +35,6 @@ module.exports = (router) => {
      //   var token = generateJWTToken(user.toJSON());
      //   return res.json({ user, token });
      // });
-   })(req, res);
+   })(req, res, next);
  });
 }
