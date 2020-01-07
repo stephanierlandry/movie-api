@@ -39774,13 +39774,11 @@ function (_React$Component) {
     value: function componentDidMount() {
       var _this2 = this;
 
-      _axios.default.get('https://design-and-a-movie.herokuapp.com/movies').then(function (response) {
+      _axios.default.get('http://localhost:3000/movies').then(function (response) {
         // Assign the result to the state
         _this2.setState({
           movies: response.data
         });
-
-        console.log(movies);
       }).catch(function (error) {
         console.log(error);
       });
