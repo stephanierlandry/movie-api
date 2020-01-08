@@ -22,14 +22,14 @@ export function LoginView(props) {
       Username: username,
       Password: password
     })
-    // axios.get('https://design-and-a-movie.herokuapp.com/get-users/' + username)
+    axios.get('https://design-and-a-movie.herokuapp.com/get-users/' + username)
     .then(response => {
       // console.log(response)
-      // const data = response.data;
-      // props.onLoggedIn(data);
+      const data = response.data;
+      props.onLoggedIn(data);
     })
     .catch(e => {
-      // console.log('no such user')
+      console.log('no such user')
     });
   };
 

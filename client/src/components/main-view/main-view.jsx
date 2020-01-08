@@ -32,7 +32,7 @@ export class MainView extends React.Component {
 
   // One of the "hooks" available in a React Component
   componentDidMount() {
-    axios.get('http://localhost:3000/movies')
+    axios.get('https://design-and-a-movie.herokuapp.com/movies')
       .then(response => {
         // Assign the result to the state
         this.setState({
