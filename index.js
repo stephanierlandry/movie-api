@@ -53,7 +53,7 @@ app.get('/', function(req, res){
 //    ---MOVIE ENDPOINTS---
 
 //This endpoint gets all of the movies + data in the API
-app.get("/movies",  (req, res) => {
+app.get("/movies", passport.authenticate('jwt', { session: false }), (req, res) => {
   Movies.find()
   .then(function(movie) {
     res.json(movie)

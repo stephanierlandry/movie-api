@@ -38285,6 +38285,7 @@ function LoginView(props) {
       setPassword = _useState4[1];
 
   var handleSubmit = function handleSubmit(e) {
+    /*prevents the form from being submitted until after authentication*/
     e.preventDefault();
     /* Send a request to the server for authentication */
 
@@ -38292,13 +38293,16 @@ function LoginView(props) {
       Username: username,
       Password: password
     });
+    /*retrieves users from the host*/
+
 
     _axios.default.get('https://design-and-a-movie.herokuapp.com/get-users/' + username).then(function (response) {
-      // console.log(response)
       var data = response.data;
+      /*if there is a match onLoggedIn (from the main-view.jsx) is passed through the props*/
+
       props.onLoggedIn(data);
     }).catch(function (e) {
-      console.log('no such user');
+      console.log(e);
     });
   };
 
@@ -39795,15 +39799,36 @@ function (_React$Component) {
     }
   }, {
     key: "onLoggedIn",
-    value: function onLoggedIn(user) {
+    value: function onLoggedIn(authData) {
+      console.log(authData);
       this.setState({
-        user: user
+        user: authData.user.Username
+      });
+      localStorage.setItem('token', authData.token);
+      localStorage.setItem('user', authData.user.Username);
+      this.getMovies(authData.token);
+    }
+  }, {
+    key: "getMovies",
+    value: function getMovies(token) {
+      var _this3 = this;
+
+      _axios.default.get('https://design-and-a-movie.herokuapp.com/movies', {
+        headers: {
+          Authorization: "Bearer ".concat(token)
+        }
+      }).then(function (response) {
+        _this3.setState({
+          movies: response.data
+        });
+      }).catch(function (error) {
+        console.log(error);
       });
     }
   }, {
     key: "render",
     value: function render() {
-      var _this3 = this;
+      var _this4 = this;
 
       var _this$state = this.state,
           movies = _this$state.movies,
@@ -39812,7 +39837,7 @@ function (_React$Component) {
 
       if (!user) return _react.default.createElement(_loginView.LoginView, {
         onLoggedIn: function onLoggedIn(user) {
-          return _this3.onLoggedIn(user);
+          return _this4.onLoggedIn(user);
         }
       }); // if (!user) return <RegistrationView onLoggedIn={user => this.onLoggedIn(user)} />;
 
@@ -39851,7 +39876,7 @@ function (_React$Component) {
           key: "".concat(movie._id, "-").concat(Math.random()),
           movie: movie,
           onClick: function onClick(movie) {
-            return _this3.onMovieClick(movie);
+            return _this4.onMovieClick(movie);
           }
         }));
       }) : _react.default.createElement("div", {
