@@ -38288,12 +38288,12 @@ function LoginView(props) {
     e.preventDefault();
     /* Send a request to the server for authentication */
 
-    _axios.default.post('https://design-and-a-movie.herokuapp.com/login', {
+    _axios.default.post('http://localhost:3000/login', {
       Username: username,
       Password: password
     });
 
-    _axios.default.get('https://design-and-a-movie.herokuapp.com/get-users/' + username).then(function (response) {
+    _axios.default.get('http://localhost:3000/get-users/' + username).then(function (response) {
       // console.log(response)
       var data = response.data;
       props.onLoggedIn(data);

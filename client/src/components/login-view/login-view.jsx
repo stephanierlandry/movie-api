@@ -18,11 +18,11 @@ export function LoginView(props) {
   const handleSubmit = (e) => {
     e.preventDefault();
     /* Send a request to the server for authentication */
-    axios.post('https://design-and-a-movie.herokuapp.com/login', {
+    axios.post('http://localhost:3000/login', {
       Username: username,
       Password: password
     })
-    axios.get('https://design-and-a-movie.herokuapp.com/get-users/' + username)
+    axios.get('http://localhost:3000/get-users/' + username)
     .then(response => {
       // console.log(response)
       const data = response.data;
