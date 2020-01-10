@@ -39561,7 +39561,7 @@ function (_PureComponent) {
   _createClass(IconInner, [{
     key: "createMarkup",
     value: function createMarkup(markup) {
-      // we dont sanitize markup 
+      // we dont sanitize markup
       // since icons.json is maintained within the package before build
       // do the weird thing for dangerouslySetInnerHTML
       return {
@@ -39781,7 +39781,7 @@ function (_React$Component) {
     value: function componentDidMount() {
       var _this2 = this;
 
-      _axios.default.get('https://design-and-a-movie.herokuapp.com/movies').then(function (response) {
+      _axios.default.get('http://localhost:3000/movies').then(function (response) {
         // Assign the result to the state
         _this2.setState({
           movies: response.data
@@ -39799,7 +39799,8 @@ function (_React$Component) {
     }
   }, {
     key: "onLoggedIn",
-    value: function onLoggedIn(user) {
+    value: function onLoggedIn(authData) {
+      console.log(authData);
       this.setState({
         user: user
       }); // console.log({from: mainview, m:user});
@@ -39807,7 +39808,7 @@ function (_React$Component) {
   }, {
     key: "render",
     value: function render() {
-      var _this3 = this;
+      var _this4 = this;
 
       var _this$state = this.state,
           movies = _this$state.movies,
@@ -39816,7 +39817,7 @@ function (_React$Component) {
 
       if (!user) return _react.default.createElement(_loginView.LoginView, {
         onLoggedIn: function onLoggedIn(user) {
-          return _this3.onLoggedIn(user);
+          return _this4.onLoggedIn(user);
         }
       }); // if (!user) return <RegistrationView onLoggedIn={user => this.onLoggedIn(user)} />;
 
@@ -39855,7 +39856,7 @@ function (_React$Component) {
           key: "".concat(movie._id, "-").concat(Math.random()),
           movie: movie,
           onClick: function onClick(movie) {
-            return _this3.onMovieClick(movie);
+            return _this4.onMovieClick(movie);
           }
         }));
       }) : _react.default.createElement("div", {

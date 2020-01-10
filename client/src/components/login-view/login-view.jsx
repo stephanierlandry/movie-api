@@ -16,22 +16,20 @@ export function LoginView(props) {
   const [ password, setPassword ] = useState('');
 
   const handleSubmit = (e) => {
-    /*prevents the form from being submitted until after authentication*/
     e.preventDefault();
     /* Send a request to the server for authentication */
     axios.post('http://localhost:3000/login', {
       Username: username,
       Password: password
     })
-    /*retrieves users from the host*/
-    axios.get('https://design-and-a-movie.herokuapp.com/get-users/' + username)
+    axios.get('http://localhost:3000/get-users/' + username)
     .then(response => {
+      // console.log(response)
       const data = response.data;
-      /*if there is a match onLoggedIn (from the main-view.jsx) is passed through the props*/
       props.onLoggedIn(data);
     })
     .catch(e => {
-      console.log(e)
+      console.log('no such user')
     });
   };
 
