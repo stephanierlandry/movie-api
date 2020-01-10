@@ -38285,6 +38285,7 @@ function LoginView(props) {
       setPassword = _useState4[1];
 
   var handleSubmit = function handleSubmit(e) {
+    /*prevents the form from being submitted until after authentication*/
     e.preventDefault();
     /* Send a request to the server for authentication */
 
@@ -38292,13 +38293,16 @@ function LoginView(props) {
       Username: username,
       Password: password
     });
+    /*retrieves users from the host*/
 
-    _axios.default.get('http://localhost:3000/get-users/' + username).then(function (response) {
-      // console.log(response)
+
+    _axios.default.get('https://design-and-a-movie.herokuapp.com/get-users/' + username).then(function (response) {
       var data = response.data;
+      /*if there is a match onLoggedIn (from the main-view.jsx) is passed through the props*/
+
       props.onLoggedIn(data);
     }).catch(function (e) {
-      console.log('no such user');
+      console.log(e);
     });
   };
 
@@ -39557,7 +39561,7 @@ function (_PureComponent) {
   _createClass(IconInner, [{
     key: "createMarkup",
     value: function createMarkup(markup) {
-      // we dont sanitize markup 
+      // we dont sanitize markup
       // since icons.json is maintained within the package before build
       // do the weird thing for dangerouslySetInnerHTML
       return {
@@ -39798,29 +39802,8 @@ function (_React$Component) {
     value: function onLoggedIn(authData) {
       console.log(authData);
       this.setState({
-        user: authData.user.Username
-      });
-      localStorage.setItem('token', authData.token);
-      localStorage.setItem('user', authData.user.Username);
-      this.getMovies(authData.token);
-    }
-  }, {
-    key: "getMovies",
-    value: function getMovies(token) {
-      var _this3 = this;
-
-      _axios.default.get('http://localhost:3000/movies', {
-        headers: {
-          Authorization: "Bearer ".concat(token)
-        }
-      }).then(function (response) {
-        // Assign the result to the state
-        _this3.setState({
-          movies: response.data
-        });
-      }).catch(function (error) {
-        console.log(error);
-      });
+        user: user
+      }); // console.log({from: mainview, m:user});
     }
   }, {
     key: "render",
