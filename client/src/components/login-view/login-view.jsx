@@ -22,7 +22,7 @@ export function LoginView(props) {
       Username: username,
       Password: password
     })
-    axios.get('https://design-and-a-movie.herokuapp.com/get-users/' + username)
+    axios.get('http://localhost:3000/get-users/' + username)
     .then(response => {
       // console.log(response)
       const data = response.data;

@@ -38293,7 +38293,7 @@ function LoginView(props) {
       Password: password
     });
 
-    _axios.default.get('https://design-and-a-movie.herokuapp.com/get-users/' + username).then(function (response) {
+    _axios.default.get('http://localhost:3000/get-users/' + username).then(function (response) {
       // console.log(response)
       var data = response.data;
       props.onLoggedIn(data);
@@ -39777,7 +39777,7 @@ function (_React$Component) {
     value: function componentDidMount() {
       var _this2 = this;
 
-      _axios.default.get('https://design-and-a-movie.herokuapp.com/movies').then(function (response) {
+      _axios.default.get('http://localhost:3000/movies').then(function (response) {
         // Assign the result to the state
         _this2.setState({
           movies: response.data
