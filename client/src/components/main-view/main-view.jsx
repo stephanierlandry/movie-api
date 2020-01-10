@@ -31,32 +31,20 @@ export class MainView extends React.Component {
   }
 
   // One of the "hooks" available in a React Component
-  componentDidMount() {
-    getMovies(token) {
-    axios.get('http://localhost:3000/movies', {
-      headers: { Authorization: `Bearer ${token}`}
-    })
-    .then(response => {
-      // Assign the result to the state
-      this.setState({
-        movies: response.data
-      });
-    })
-    .catch(function (error) {
-      console.log(error);
-    });
-  }
-    // axios.get('http://localhost:3000/movies')
-    //   .then(response => {
-    //     // Assign the result to the state
-    //     this.setState({
-    //       movies: response.data
-    //     });
-    //   })
-    //   .catch(function (error) {
-    //     console.log(error);
-    //   });
-  }
+  componentDidMount(getMovies);
+
+  // {
+  //   axios.get('http://localhost:3000/movies')
+  //     .then(response => {
+  //       // Assign the result to the state
+  //       this.setState({
+  //         movies: response.data
+  //       });
+  //     })
+  //     .catch(function (error) {
+  //       console.log(error);
+  //     });
+  // }
 
   onMovieClick(movie) {
     this.setState({
@@ -75,20 +63,20 @@ export class MainView extends React.Component {
     this.getMovies(authData.token);
   }
 
-//   getMovies(token) {
-//   axios.get('http://localhost:3000/movies', {
-//     headers: { Authorization: `Bearer ${token}`}
-//   })
-//   .then(response => {
-//     // Assign the result to the state
-//     this.setState({
-//       movies: response.data
-//     });
-//   })
-//   .catch(function (error) {
-//     console.log(error);
-//   });
-// }
+  getMovies(token) {
+  axios.get('http://localhost:3000/movies', {
+    headers: { Authorization: `Bearer ${token}`}
+  })
+  .then(response => {
+    // Assign the result to the state
+    this.setState({
+      movies: response.data
+    });
+  })
+  .catch(function (error) {
+    console.log(error);
+  });
+}
 
   render() {
     const { movies, selectedMovie, user } = this.state;
