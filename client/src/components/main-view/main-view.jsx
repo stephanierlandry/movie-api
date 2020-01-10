@@ -31,20 +31,18 @@ export class MainView extends React.Component {
   }
 
   // One of the "hooks" available in a React Component
-  componentDidMount(getMovies);
-
-  // {
-  //   axios.get('http://localhost:3000/movies')
-  //     .then(response => {
-  //       // Assign the result to the state
-  //       this.setState({
-  //         movies: response.data
-  //       });
-  //     })
-  //     .catch(function (error) {
-  //       console.log(error);
-  //     });
-  // }
+  componentDidMount() {
+    axios.get('http://localhost:3000/movies')
+      .then(response => {
+        // Assign the result to the state
+        this.setState({
+          movies: response.data
+        });
+      })
+      .catch(function (error) {
+        console.log(error);
+      });
+  }
 
   onMovieClick(movie) {
     this.setState({

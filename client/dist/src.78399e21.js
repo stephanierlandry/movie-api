@@ -38288,12 +38288,12 @@ function LoginView(props) {
     e.preventDefault();
     /* Send a request to the server for authentication */
 
-    _axios.default.post('http://localhost:3000/login', {
+    _axios.default.post('https://design-and-a-movie.herokuapp.com/login', {
       Username: username,
       Password: password
     });
 
-    _axios.default.get('http://localhost:3000/get-users/' + username).then(function (response) {
+    _axios.default.get('https://design-and-a-movie.herokuapp.com/get-users/' + username).then(function (response) {
       // console.log(response)
       var data = response.data;
       props.onLoggedIn(data);
@@ -39795,15 +39795,37 @@ function (_React$Component) {
     }
   }, {
     key: "onLoggedIn",
-    value: function onLoggedIn(user) {
+    value: function onLoggedIn(authData) {
+      console.log(authData);
       this.setState({
-        user: user
+        user: authData.user.Username
+      });
+      localStorage.setItem('token', authData.token);
+      localStorage.setItem('user', authData.user.Username);
+      this.getMovies(authData.token);
+    }
+  }, {
+    key: "getMovies",
+    value: function getMovies(token) {
+      var _this3 = this;
+
+      _axios.default.get('http://localhost:3000/movies', {
+        headers: {
+          Authorization: "Bearer ".concat(token)
+        }
+      }).then(function (response) {
+        // Assign the result to the state
+        _this3.setState({
+          movies: response.data
+        });
+      }).catch(function (error) {
+        console.log(error);
       });
     }
   }, {
     key: "render",
     value: function render() {
-      var _this3 = this;
+      var _this4 = this;
 
       var _this$state = this.state,
           movies = _this$state.movies,
@@ -39812,7 +39834,7 @@ function (_React$Component) {
 
       if (!user) return _react.default.createElement(_loginView.LoginView, {
         onLoggedIn: function onLoggedIn(user) {
-          return _this3.onLoggedIn(user);
+          return _this4.onLoggedIn(user);
         }
       }); // if (!user) return <RegistrationView onLoggedIn={user => this.onLoggedIn(user)} />;
 
@@ -39851,7 +39873,7 @@ function (_React$Component) {
           key: "".concat(movie._id, "-").concat(Math.random()),
           movie: movie,
           onClick: function onClick(movie) {
-            return _this3.onMovieClick(movie);
+            return _this4.onMovieClick(movie);
           }
         }));
       }) : _react.default.createElement("div", {
