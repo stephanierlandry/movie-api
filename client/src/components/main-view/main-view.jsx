@@ -51,7 +51,7 @@ export class MainView extends React.Component {
   }
 
   onLoggedIn(authData) {
-    console.log(authData);
+    console.log({from: 'mainview', m: authData});
     this.setState({
       user: authData.user.Username
     });
@@ -62,11 +62,12 @@ export class MainView extends React.Component {
   }
 
   getMovies(token) {
-    axios.get('YOUR_API_URL/movies', {
+    axios.get('https://design-and-a-movie.herokuapp.com/movies', {
       headers: { Authorization: `Bearer ${token}`}
     })
     .then(response => {
       // Assign the result to the state
+      console.log({from: 'mainview', m: 'response'})
       this.setState({
         movies: response.data
       });

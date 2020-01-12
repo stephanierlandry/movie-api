@@ -38285,24 +38285,19 @@ function LoginView(props) {
       setPassword = _useState4[1];
 
   var handleSubmit = function handleSubmit(e) {
-    /*prevents the form from being submitted until after authentication*/
     e.preventDefault();
     /* Send a request to the server for authentication */
 
-    _axios.default.post('http://localhost:3000/login', {
+    _axios.default.post('https://design-and-a-movie.herokuapp.com/login', {
       Username: username,
       Password: password
-    });
-    /*retrieves users from the host*/
-
-
-    _axios.default.get('https://design-and-a-movie.herokuapp.com/get-users/' + username).then(function (response) {
+    }) // axios.get('http://localhost:3000/get-users/' + username)
+    .then(function (response) {
+      // console.log({from: 'loginview', m: response});
       var data = response.data;
-      /*if there is a match onLoggedIn (from the main-view.jsx) is passed through the props*/
-
       props.onLoggedIn(data);
     }).catch(function (e) {
-      console.log(e);
+      console.log('no such user');
     });
   };
 
@@ -39561,7 +39556,7 @@ function (_PureComponent) {
   _createClass(IconInner, [{
     key: "createMarkup",
     value: function createMarkup(markup) {
-      // we dont sanitize markup
+      // we dont sanitize markup 
       // since icons.json is maintained within the package before build
       // do the weird thing for dangerouslySetInnerHTML
       return {
@@ -39781,7 +39776,7 @@ function (_React$Component) {
     value: function componentDidMount() {
       var _this2 = this;
 
-      _axios.default.get('http://localhost:3000/movies').then(function (response) {
+      _axios.default.get('https://design-and-a-movie.herokuapp.com/movies').then(function (response) {
         // Assign the result to the state
         _this2.setState({
           movies: response.data
@@ -39800,10 +39795,39 @@ function (_React$Component) {
   }, {
     key: "onLoggedIn",
     value: function onLoggedIn(authData) {
-      console.log(authData);
+      console.log({
+        from: 'mainview',
+        m: authData
+      });
       this.setState({
-        user: user
-      }); // console.log({from: mainview, m:user});
+        user: authData.user.Username
+      });
+      localStorage.setItem('token', authData.token);
+      localStorage.setItem('user', authData.user.Username);
+      this.getMovies(authData.token);
+    }
+  }, {
+    key: "getMovies",
+    value: function getMovies(token) {
+      var _this3 = this;
+
+      _axios.default.get('https://design-and-a-movie.herokuapp.com/movies', {
+        headers: {
+          Authorization: "Bearer ".concat(token)
+        }
+      }).then(function (response) {
+        // Assign the result to the state
+        console.log({
+          from: 'mainview',
+          m: 'response'
+        });
+
+        _this3.setState({
+          movies: response.data
+        });
+      }).catch(function (error) {
+        console.log(error);
+      });
     }
   }, {
     key: "render",
@@ -39979,7 +40003,7 @@ var parent = module.bundle.parent;
 if ((!parent || !parent.isParcelRequire) && typeof WebSocket !== 'undefined') {
   var hostname = "" || location.hostname;
   var protocol = location.protocol === 'https:' ? 'wss' : 'ws';
-  var ws = new WebSocket(protocol + '://' + hostname + ':' + "56467" + '/');
+  var ws = new WebSocket(protocol + '://' + hostname + ':' + "60177" + '/');
 
   ws.onmessage = function (event) {
     checkedAssets = {};
