@@ -16,16 +16,19 @@ export function LoginView(props) {
   const [ password, setPassword ] = useState('');
 
   const handleSubmit = (e) => {
+    //prevents the default behavior of submitting the form so authentication can happen
     e.preventDefault();
-    /* Send a request to the server for authentication */
+    //Send a request to the server for authentication
     axios.post('https://design-and-a-movie.herokuapp.com/login', {
       Username: username,
       Password: password
     })
     // axios.get('http://localhost:3000/get-users/' + username)
+    //response comes in from the database
     .then(response => {
       // console.log({from: 'loginview', m: response});
       const data = response.data;
+      //If there is a match onLoggedIn is called.
       props.onLoggedIn(data);
     })
     .catch(e => {

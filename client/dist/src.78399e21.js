@@ -38285,16 +38285,18 @@ function LoginView(props) {
       setPassword = _useState4[1];
 
   var handleSubmit = function handleSubmit(e) {
-    e.preventDefault();
-    /* Send a request to the server for authentication */
+    //prevents the default behavior of submitting the form so authentication can happen
+    e.preventDefault(); //Send a request to the server for authentication
 
     _axios.default.post('https://design-and-a-movie.herokuapp.com/login', {
       Username: username,
       Password: password
     }) // axios.get('http://localhost:3000/get-users/' + username)
+    //response comes in from the database
     .then(function (response) {
       // console.log({from: 'loginview', m: response});
-      var data = response.data;
+      var data = response.data; //If there is a match onLoggedIn is called.
+
       props.onLoggedIn(data);
     }).catch(function (e) {
       console.log('no such user');
@@ -39774,7 +39776,7 @@ function (_React$Component) {
   _createClass(MainView, [{
     key: "componentDidMount",
     value: function componentDidMount() {
-      var accessToken = localStorage.getItem('token');
+      var accessToken = localStorage.getItem('token'); //If there is a token sign the user in and getMovies
 
       if (accessToken !== null) {
         this.setState({
@@ -39793,13 +39795,12 @@ function (_React$Component) {
   }, {
     key: "onLoggedIn",
     value: function onLoggedIn(authData) {
-      console.log({
-        from: 'mainview',
-        m: authData
-      });
+      // console.log({from: 'mainview', m: authData});
+      //authData refers to the username and the token
       this.setState({
         user: authData.user.Username
-      });
+      }); //Actually stores the token and username. setItem takes in a key/value pair
+
       localStorage.setItem('token', authData.token);
       localStorage.setItem('user', authData.user.Username);
       this.getMovies(authData.token);
@@ -39810,16 +39811,13 @@ function (_React$Component) {
       var _this2 = this;
 
       _axios.default.get('https://design-and-a-movie.herokuapp.com/movies', {
+        //this passes the bearer authorization into your header with http requests, making authentication requests to your API possible.
         headers: {
           Authorization: "Bearer ".concat(token)
         }
       }).then(function (response) {
         // Assign the result to the state
-        console.log({
-          from: 'mainview',
-          m: 'response'
-        });
-
+        // console.log({from: 'mainview', m: 'response'})
         _this2.setState({
           movies: response.data
         });

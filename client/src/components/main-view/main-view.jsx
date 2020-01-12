@@ -33,6 +33,7 @@ export class MainView extends React.Component {
   // One of the "hooks" available in a React Component
   componentDidMount() {
     let accessToken = localStorage.getItem('token');
+    //If there is a token sign the user in and getMovies
     if (accessToken !== null) {
       this.setState({
         user: localStorage.getItem('user')
@@ -48,11 +49,13 @@ export class MainView extends React.Component {
   }
 
   onLoggedIn(authData) {
-    console.log({from: 'mainview', m: authData});
+    // console.log({from: 'mainview', m: authData});
+    //authData refers to the username and the token
     this.setState({
       user: authData.user.Username
     });
 
+    //Actually stores the token and username. setItem takes in a key/value pair
     localStorage.setItem('token', authData.token);
     localStorage.setItem('user', authData.user.Username);
     this.getMovies(authData.token);
@@ -60,11 +63,12 @@ export class MainView extends React.Component {
 
   getMovies(token) {
     axios.get('https://design-and-a-movie.herokuapp.com/movies', {
+      //this passes the bearer authorization into your header with http requests, making authentication requests to your API possible.
       headers: { Authorization: `Bearer ${token}`}
     })
     .then(response => {
       // Assign the result to the state
-      console.log({from: 'mainview', m: 'response'})
+      // console.log({from: 'mainview', m: 'response'})
       this.setState({
         movies: response.data
       });
