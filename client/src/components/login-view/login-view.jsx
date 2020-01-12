@@ -15,6 +15,7 @@ export function LoginView(props) {
   const [ username, setUsername ] = useState('');
   const [ password, setPassword ] = useState('');
 
+  //called in render()
   const handleSubmit = (e) => {
     //prevents the default behavior of submitting the form so authentication can happen
     e.preventDefault();

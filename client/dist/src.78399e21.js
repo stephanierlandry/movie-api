@@ -38282,7 +38282,8 @@ function LoginView(props) {
   var _useState3 = (0, _react.useState)(''),
       _useState4 = _slicedToArray(_useState3, 2),
       password = _useState4[0],
-      setPassword = _useState4[1];
+      setPassword = _useState4[1]; //called in render()
+
 
   var handleSubmit = function handleSubmit(e) {
     //prevents the default behavior of submitting the form so authentication can happen
@@ -39784,14 +39785,16 @@ function (_React$Component) {
         });
         this.getMovies(accessToken);
       }
-    }
+    } //called in the render()
+
   }, {
     key: "onMovieClick",
     value: function onMovieClick(movie) {
       this.setState({
         selectedMovie: movie
       });
-    }
+    } //called in the render()
+
   }, {
     key: "onLoggedIn",
     value: function onLoggedIn(authData) {
@@ -39804,7 +39807,8 @@ function (_React$Component) {
       localStorage.setItem('token', authData.token);
       localStorage.setItem('user', authData.user.Username);
       this.getMovies(authData.token);
-    }
+    } //Called in componentDidMount
+
   }, {
     key: "getMovies",
     value: function getMovies(token) {

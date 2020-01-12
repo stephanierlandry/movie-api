@@ -42,12 +42,14 @@ export class MainView extends React.Component {
     }
   }
 
+  //called in the render()
   onMovieClick(movie) {
     this.setState({
       selectedMovie: movie
     });
   }
 
+  //called in the render()
   onLoggedIn(authData) {
     // console.log({from: 'mainview', m: authData});
     //authData refers to the username and the token
@@ -61,6 +63,7 @@ export class MainView extends React.Component {
     this.getMovies(authData.token);
   }
 
+  //Called in componentDidMount
   getMovies(token) {
     axios.get('https://design-and-a-movie.herokuapp.com/movies', {
       //this passes the bearer authorization into your header with http requests, making authentication requests to your API possible.
