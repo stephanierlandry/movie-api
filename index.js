@@ -65,7 +65,7 @@ app.get("/movies", passport.authenticate('jwt', { session: false }), (req, res) 
 });
 
 //This endpoint gets all data for a movie by the movie name
-app.get("/get-movies/title/:title", (req, res) => {
+app.get("/get-movies/title/:title", passport.authenticate('jwt', { session: false }), (req, res) => {
   Movies.findOne({ Title : req.params.title })
   .then(function(movie) {
     res.json(movie)
@@ -77,7 +77,7 @@ app.get("/get-movies/title/:title", (req, res) => {
 });
 
 //This endpoint gets all data for a movie by the genre
-app.get("/get-movies/genre/:genre",  (req, res) => {
+app.get("/get-movies/genre/:genre", passport.authenticate('jwt', { session: false }), (req, res) => {
   Movies.find({ 'Genre.Name' : req.params.genre})
   .then(function(movie) {
     console.log(movie);
@@ -90,7 +90,7 @@ app.get("/get-movies/genre/:genre",  (req, res) => {
 });
 
 //This endpoint gets all data for a movie by the director
-app.get("/get-movies/director/:director",  (req,res) => {
+app.get("/get-movies/director/:director", passport.authenticate('jwt', { session: false }), (req,res) => {
   Movies.findOne({ 'Director.Name' : req.params.director })
   .then(function(movie) {
     console.log(req.params.director);
@@ -106,7 +106,7 @@ app.get("/get-movies/director/:director",  (req,res) => {
 //   ---USER ENDPOINTS---
 
 //This endpoint shows a user by Username
-app.get('/get-users/:Username', function(req, res) {
+app.get('/get-users/:Username', passport.authenticate('jwt', { session: false }), function(req, res) {
   Users.findOne({ Username : req.params.Username })
   .then(function(user) {
     res.json(user)
