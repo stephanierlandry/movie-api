@@ -1,6 +1,8 @@
 import React from 'react';
 import axios from 'axios';
 
+import { BrowserRouter as Router, Route} from "react-router-dom";
+
 import { LoginView } from '../login-view/login-view';
 import {RegistrationView} from '../registration-view/registration-view';
 import { MovieCard } from '../movie-card/movie-card';
@@ -62,6 +64,11 @@ export class MainView extends React.Component {
     localStorage.setItem('user', authData.user.Username);
     this.getMovies(authData.token);
   }
+
+  onLoggedOut(event) {
+    localStorage.removeItem('token');
+    localStorage.removeItem('user');
+  };
 
   //Called in componentDidMount
   getMovies(token) {
@@ -144,6 +151,7 @@ export class MainView extends React.Component {
             <Nav.Link href="https://granthurlbert.bigcartel.com/" className="footer-link">
               <FeatherIcon icon="shopping-bag" />
             </Nav.Link>
+            <button className="btn btn-primary" type="button" value="button" onClick={this.onLoggedOut}>logout</button>
           </Navbar>
         </Container>
       </div>
