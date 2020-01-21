@@ -3,10 +3,10 @@ import axios from 'axios';
 
 import { BrowserRouter as Router, Route} from "react-router-dom";
 
-import { LoginView } from '../login-view/login-view';
-import {RegistrationView} from '../registration-view/registration-view';
 import { MovieCard } from '../movie-card/movie-card';
 import { MovieView } from '../movie-view/movie-view';
+import { LoginView } from '../login-view/login-view';
+import {RegistrationView} from '../registration-view/registration-view';
 
 import Container from 'react-bootstrap/Container';
 import Row from 'react-bootstrap/Row';
@@ -65,7 +65,13 @@ export class MainView extends React.Component {
     this.getMovies(authData.token);
   }
 
-  onLoggedOut(event) {
+  onLoggedOut(user) {
+    // this.setState ({
+    //   user: null
+    // });
+    //
+    // console.log(user)
+
     localStorage.removeItem('token');
     localStorage.removeItem('user');
   };
@@ -96,65 +102,110 @@ export class MainView extends React.Component {
 
     // if (!user) return <RegistrationView onLoggedIn={user => this.onLoggedIn(user)} />;
 
+    if (!movies) return <div className="main-view"/>;
 
     return(
-      <div>
-        <Container>
-          <Navbar expand="md" fixed="top">
-            <Navbar.Brand href="../main-view/main-view">
-              <img src="https://scontent-atl3-1.cdninstagram.com/v/t51.2885-19/s320x320/22157915_286342841858633_7255692800950272000_n.jpg?_nc_ht=scontent-atl3-1.cdninstagram.com&amp;_nc_ohc=kIG5qCpFmHYAX97KJQU&amp;oh=9381e9e2f373a66031f4f936fd9f51ff&amp;oe=5EA94421" alt="Design and a Movie Logo" width="120" height="120" className="design-movie-logo"/>
-            </Navbar.Brand>
+      <Router>
+        <div>
+          <Container>
+            <Navbar expand="md" fixed="top">
+              <Navbar.Brand href="../main-view/main-view">
+                <img src="https://scontent-atl3-1.cdninstagram.com/v/t51.2885-19/s320x320/22157915_286342841858633_7255692800950272000_n.jpg?_nc_ht=scontent-atl3-1.cdninstagram.com&amp;_nc_ohc=kIG5qCpFmHYAX97KJQU&amp;oh=9381e9e2f373a66031f4f936fd9f51ff&amp;oe=5EA94421" alt="Design and a Movie Logo" width="120" height="120" className="design-movie-logo"/>
+              </Navbar.Brand>
 
-            <Navbar.Toggle aria-controls="basic-navbar-nav" />
+              <Navbar.Toggle aria-controls="basic-navbar-nav" />
 
-            <Navbar.Collapse id="basic-navbar-nav">
-              <Form inline className="search-form">
-                <FormControl type="text" placeholder="Search" className="mr-sm-2 search" />
-                <Button className="btn">Search</Button>
-              </Form>
-            </Navbar.Collapse>
-          </Navbar>
-        </Container>
+              <Navbar.Collapse id="basic-navbar-nav">
+                <Form inline className="search-form">
+                  <FormControl type="text" placeholder="Search" className="mr-sm-2 search" />
+                  <Button className="btn">Search</Button>
+                </Form>
+              </Navbar.Collapse>
+            </Navbar>
+          </Container>
 
-        <div className="main-view">
-          {selectedMovie ?
+          <div className="main-view">
             <Container>
               <Row>
-                <MovieView movie={selectedMovie}/>
+                <Route exact path="/"
+                       render={() => movies.map((m) => {
+                         // console.log(m)
+
+                         return (
+                           <Col md={4}> <MovieCard key={m._id} movie={m}/> </Col>
+                         );
+                       })}/>
+
+                <Route exact path="/movies/:movieId"
+                       render={({match}) => {
+
+                         return (
+                           <MovieView movie={movies.find(m =>m._id === match.params.movieId)}/>
+                         );
+                       }}/>
+
+                <Route exact path="/directors/:name"
+                        render={({match}) => {
+                          if (!movies) return <div className="main-view"/>;
+                          return (
+                            <DirectorView director={movies.find(m => m.Director.Name === match.params.name).Director}/>
+                          );
+                        }}/>
+
+                <Route exact path="/genres/:name"
+                        render={({match}) => {
+                          if (!movies) return <div className="main-view"/>;
+                          return (
+                            <GenreView director={movies.find(m => m.Genre.Name === match.params.name).Genre}/>
+                          );
+                        }}/>
               </Row>
             </Container>
-            :
-            <Container>
-              <Row>
-              { movies ?
-                movies.map(movie => (
-                  <Col md={4}>
-                    <MovieCard key={`${movie._id}-${Math.random()}`} movie={movie} onClick={movie => this.onMovieClick(movie)}/>
-                  </Col>
-                ))
-                :
-                <div className="loading">loading...</div>
-              }
-              </Row>
-            </Container>
-          }
+          </div>
+
+          <Container>
+            <Navbar expand="md" fixed="bottom">
+              <Nav.Link href="https://www.facebook.com/designandamovie/" className="footer-link">
+                <FeatherIcon icon="facebook" />
+              </Nav.Link>
+              <Nav.Link href="https://www.instagram.com/designandamovie/" className="footer-link">
+                <FeatherIcon icon="instagram" />
+              </Nav.Link>
+              <Nav.Link href="https://granthurlbert.bigcartel.com/" className="footer-link">
+                <FeatherIcon icon="shopping-bag" />
+              </Nav.Link>
+              <button className="btn btn-primary" type="button" value="button" onClick={this.onLoggedOut}>logout</button>
+            </Navbar>
+          </Container>
         </div>
-
-        <Container>
-          <Navbar expand="md" fixed="bottom">
-            <Nav.Link href="https://www.facebook.com/designandamovie/" className="footer-link">
-              <FeatherIcon icon="facebook" />
-            </Nav.Link>
-            <Nav.Link href="https://www.instagram.com/designandamovie/" className="footer-link">
-              <FeatherIcon icon="instagram" />
-            </Nav.Link>
-            <Nav.Link href="https://granthurlbert.bigcartel.com/" className="footer-link">
-              <FeatherIcon icon="shopping-bag" />
-            </Nav.Link>
-            <button className="btn btn-primary" type="button" value="button" onClick={this.onLoggedOut}>logout</button>
-          </Navbar>
-        </Container>
-      </div>
+      </Router>
     )
   }
 }
+
+
+
+
+// {selectedMovie ?
+//   <Container>
+//     <Row>
+//       <MovieView movie={selectedMovie}/>
+//     </Row>
+//   </Container>
+//   :
+//   <Container>
+//     <Row>
+//     { movies ?
+//       movies.map(movie => (
+//         <Col md={4}>
+//           <MovieCard key={`${movie._id}-${Math.random()}`} movie={movie} onClick={movie => this.onMovieClick(movie)}/>
+//         </Col>
+//       ))
+//       :
+//       <div className="loading">loading...</div>
+//     }
+//     </Row>
+//   </Container>
+// }
+
+//key refers to what the may be updated in the DOM

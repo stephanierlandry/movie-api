@@ -10222,6 +10222,36 @@ a.text-dark:hover, a.text-dark:focus {
   }
 }
 
+.main-view {
+  margin: 5em;
+}
+
+.movie-poster {
+  width: 75%;
+  height: auto;
+}
+
+.movie-block {
+  position: absolute;
+  color: white;
+  line-height: 1.65em;
+  display: contents;
+}
+
+.movie-title {
+  font-size: 2em;
+  padding-bottom: 0.5em;
+}
+
+.movie-description {
+  padding-bottom: 0.85em;
+}
+
+.back-button {
+  height: 2.5em;
+  position: relative;
+  left: 90%;
+}
 body {
   display: flex;
 }
@@ -10268,36 +10298,6 @@ body {
 
 .new-registration-button {
   position: relative;
-}
-.main-view {
-  margin: 5em;
-}
-
-.movie-poster {
-  width: 75%;
-  height: auto;
-}
-
-.movie-block {
-  position: absolute;
-  color: white;
-  line-height: 1.65em;
-  display: contents;
-}
-
-.movie-title {
-  font-size: 2em;
-  padding-bottom: 0.5em;
-}
-
-.movie-description {
-  padding-bottom: 0.85em;
-}
-
-.back-button {
-  height: 2.5em;
-  position: relative;
-  left: 90%;
 }
 body {
   background: #060807;
