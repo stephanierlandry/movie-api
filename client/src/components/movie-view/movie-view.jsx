@@ -6,6 +6,7 @@ import Container from 'react-bootstrap/Container';
 import Row from 'react-bootstrap/Row';
 import Col from 'react-bootstrap/Col';
 import Button from 'react-bootstrap/Button';
+import { Link } from "react-router-dom";
 
 export class MovieView extends React.Component {
 
@@ -54,9 +55,11 @@ export class MovieView extends React.Component {
                     <Button variant="link" className="btn">Director</Button>
                   </Link>
                 </div>
-              <a href="../movie-view/movie-view" onClick={movie =>this.goBack()} className="back-button btn">Back</a>
+              <Link to={`/`}>
+                <Button variant="link" className="btn back-button">Back</Button>
+              </Link>
             </div>
-            </Col>
+          </Col>
         </Row>
       </Container>
     );

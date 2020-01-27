@@ -6,7 +6,9 @@ import { BrowserRouter as Router, Route} from "react-router-dom";
 import { MovieCard } from '../movie-card/movie-card';
 import { MovieView } from '../movie-view/movie-view';
 import { LoginView } from '../login-view/login-view';
-import {RegistrationView} from '../registration-view/registration-view';
+import { RegistrationView } from '../registration-view/registration-view';
+import { DirectorView } from '../director-view/director-view';
+import { GenreView } from '../genre-view/genre-view';
 
 import Container from 'react-bootstrap/Container';
 import Row from 'react-bootstrap/Row';
@@ -146,7 +148,7 @@ export class MainView extends React.Component {
 
                 <Route exact path="/directors/:name"
                         render={({match}) => {
-                          if (!movies) return <div className="main-view"/>;
+                          // if (!movies) return <div className="main-view"/>;)
                           return (
                             <DirectorView director={movies.find(m => m.Director.Name === match.params.name).Director}/>
                           );
@@ -156,7 +158,7 @@ export class MainView extends React.Component {
                         render={({match}) => {
                           if (!movies) return <div className="main-view"/>;
                           return (
-                            <GenreView director={movies.find(m => m.Genre.Name === match.params.name).Genre}/>
+                            <GenreView genre={movies.find(m => m.Genre.Name === match.params.name).Genre}/>
                           );
                         }}/>
               </Row>

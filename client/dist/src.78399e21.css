@@ -10299,6 +10299,12 @@ body {
 .new-registration-button {
   position: relative;
 }
+.director-block {
+  color: white;
+}
+.genre-block {
+  color: white;
+}
 body {
   background: #060807;
 }
