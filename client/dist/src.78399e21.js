@@ -39575,25 +39575,19 @@ function (_React$Component) {
         className: "movie-genre"
       }, _react.default.createElement("span", {
         className: "label"
-      }, "Genre: "), _react.default.createElement("span", {
-        className: "value"
-      }, movie.Genre.Name), _react.default.createElement(_reactRouterDom.Link, {
+      }, "Genre: "), _react.default.createElement(_reactRouterDom.Link, {
         to: "/genres/".concat(movie.Genre.Name)
-      }, _react.default.createElement(_Button.default, {
-        variant: "link",
-        className: "btn"
-      }, "Genre"))), _react.default.createElement("div", {
+      }, _react.default.createElement("span", {
+        className: "value link"
+      }, movie.Genre.Name))), _react.default.createElement("div", {
         className: "movie-director"
       }, _react.default.createElement("span", {
         className: "label"
-      }, "Director: "), _react.default.createElement("span", {
-        className: "value"
-      }, movie.Director.Name), _react.default.createElement(_reactRouterDom.Link, {
+      }, "Director: "), _react.default.createElement(_reactRouterDom.Link, {
         to: "/directors/".concat(movie.Director.Name)
-      }, _react.default.createElement(_Button.default, {
-        variant: "link",
-        className: "btn"
-      }, "Director"))), _react.default.createElement(_reactRouterDom.Link, {
+      }, _react.default.createElement("span", {
+        className: "value link"
+      }, movie.Director.Name))), _react.default.createElement(_reactRouterDom.Link, {
         to: "/"
       }, _react.default.createElement(_Button.default, {
         variant: "link",
