@@ -68,15 +68,15 @@ export class MainView extends React.Component {
   }
 
   onLoggedOut(user) {
-    // this.setState ({
-    //   user: null
-    // });
-    //
-    // console.log(user)
-
     localStorage.removeItem('token');
     localStorage.removeItem('user');
+
+    this.setState({
+     user: null
+   })
+    window.open('/', '_self');
   };
+
 
   //Called in componentDidMount
   getMovies(token) {
@@ -176,7 +176,7 @@ export class MainView extends React.Component {
               <Nav.Link href="https://granthurlbert.bigcartel.com/" className="footer-link">
                 <FeatherIcon icon="shopping-bag" />
               </Nav.Link>
-              <button className="btn btn-primary" type="button" value="button" onClick={this.onLoggedOut}>logout</button>
+              <button className="btn btn-primary" type="button" value="button" onClick={this.onLoggedOut.bind(this)}>logout</button>
             </Navbar>
           </Container>
         </div>
@@ -184,30 +184,5 @@ export class MainView extends React.Component {
     )
   }
 }
-
-
-
-
-// {selectedMovie ?
-//   <Container>
-//     <Row>
-//       <MovieView movie={selectedMovie}/>
-//     </Row>
-//   </Container>
-//   :
-//   <Container>
-//     <Row>
-//     { movies ?
-//       movies.map(movie => (
-//         <Col md={4}>
-//           <MovieCard key={`${movie._id}-${Math.random()}`} movie={movie} onClick={movie => this.onMovieClick(movie)}/>
-//         </Col>
-//       ))
-//       :
-//       <div className="loading">loading...</div>
-//     }
-//     </Row>
-//   </Container>
-// }
 
 //key refers to what the may be updated in the DOM
