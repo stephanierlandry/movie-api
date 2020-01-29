@@ -42431,6 +42431,8 @@ exports.RegistrationView = RegistrationView;
 
 var _react = _interopRequireWildcard(require("react"));
 
+var _axios = _interopRequireDefault(require("axios"));
+
 var _Form = _interopRequireDefault(require("react-bootstrap/Form"));
 
 var _Button = _interopRequireDefault(require("react-bootstrap/Button"));
@@ -42487,6 +42489,23 @@ function RegistrationView(props) {
     props.onLoggedIn(username);
   };
 
+  var handleRegister = function handleRegister(e) {
+    e.preventDefault();
+
+    _axios.default.post('https://design-and-a-movie.herokuapp.com/update-users/newuser', {
+      Username: username,
+      Passsword: password,
+      Email: email,
+      Birthday: birthday
+    }).then(function (response) {
+      var data = response.data;
+      console.log(data);
+      window.open('/', '_self');
+    }).catch(function (e) {
+      console.log('error registering user');
+    });
+  };
+
   return _react.default.createElement("div", {
     className: "login-body"
   }, _react.default.createElement(_Container.default, null, _react.default.createElement(_Navbar.default, {
@@ -42521,7 +42540,7 @@ function RegistrationView(props) {
   }, _react.default.createElement(_Form.default.Label, null, "Email"), _react.default.createElement(_Form.default.Control, {
     type: "email",
     className: "form",
-    value: password,
+    value: email,
     onChange: function onChange(e) {
       return setEmail(e.target.value);
     }
@@ -42530,7 +42549,7 @@ function RegistrationView(props) {
   }, _react.default.createElement(_Form.default.Label, null, "Birthday"), _react.default.createElement(_Form.default.Control, {
     type: "date",
     className: "form",
-    value: password,
+    value: birthday,
     onChange: function onChange(e) {
       return setBirthday(e.target.value);
     }
@@ -42539,8 +42558,8 @@ function RegistrationView(props) {
   }, _react.default.createElement(_Button.default, {
     variant: "primary",
     type: "submit",
-    onClick: handleSubmit
-  }, "Submit"), _react.default.createElement("a", {
+    onClick: handleRegister
+  }, "Register"), _react.default.createElement("a", {
     href: "../login-view/login-view",
     type: "button",
     value: "button",
@@ -42548,29 +42567,9 @@ function RegistrationView(props) {
       return _this.goBack();
     },
     className: "btn"
-  }, "Already a User? Login Here!")))), _react.default.createElement(_Col.default, null)))) // <form>
-  //   <label>
-  //     Username:
-  //     <input type="text" value={username} onChange={e => setUsername(e.target.value)} />
-  //   </label>
-  //   <label>
-  //     Password:
-  //     <input type="password" value={password} onChange={e => setPassword(e.target.value)} />
-  //   </label>
-  //   <label>
-  //     Email:
-  //     <input type="email" value={email} onChange={e => setEmail(e.target.value)}/>
-  //   </label>
-  //   <label>
-  //     Birthday:
-  //     <input type="date" value={birthday} onChange={e => setBirhtday(e.target.value)}/>
-  //   </label>
-  //   <button type="button" onClick={handleSubmit}>Submit</button>
-  //   <a href="../login-view/login-view" onClick={movie =>this.goBack()} className="login-button" type="button">Existing User? Sign In Here!</a>
-  // </form>
-  ;
+  }, "Already a User? Login Here!")))), _react.default.createElement(_Col.default, null))));
 }
-},{"react":"../../node_modules/react/index.js","react-bootstrap/Form":"../node_modules/react-bootstrap/esm/Form.js","react-bootstrap/Button":"../node_modules/react-bootstrap/esm/Button.js","react-bootstrap/Navbar":"../node_modules/react-bootstrap/esm/Navbar.js","react-bootstrap/Container":"../node_modules/react-bootstrap/esm/Container.js","react-bootstrap/Row":"../node_modules/react-bootstrap/esm/Row.js","react-bootstrap/Col":"../node_modules/react-bootstrap/esm/Col.js"}],"components/login-view/login-view.scss":[function(require,module,exports) {
+},{"react":"../../node_modules/react/index.js","axios":"../node_modules/axios/index.js","react-bootstrap/Form":"../node_modules/react-bootstrap/esm/Form.js","react-bootstrap/Button":"../node_modules/react-bootstrap/esm/Button.js","react-bootstrap/Navbar":"../node_modules/react-bootstrap/esm/Navbar.js","react-bootstrap/Container":"../node_modules/react-bootstrap/esm/Container.js","react-bootstrap/Row":"../node_modules/react-bootstrap/esm/Row.js","react-bootstrap/Col":"../node_modules/react-bootstrap/esm/Col.js"}],"components/login-view/login-view.scss":[function(require,module,exports) {
 var reloadCSS = require('_css_loader');
 
 module.hot.dispose(reloadCSS);
@@ -42586,6 +42585,8 @@ exports.LoginView = LoginView;
 var _react = _interopRequireWildcard(require("react"));
 
 var _axios = _interopRequireDefault(require("axios"));
+
+var _reactRouterDom = require("react-router-dom");
 
 var _registrationView = require("../registration-view/registration-view");
 
@@ -42618,8 +42619,6 @@ function _iterableToArrayLimit(arr, i) { if (!(Symbol.iterator in Object(arr) ||
 function _arrayWithHoles(arr) { if (Array.isArray(arr)) return arr; }
 
 function LoginView(props) {
-  var _this = this;
-
   var _useState = (0, _react.useState)(''),
       _useState2 = _slicedToArray(_useState, 2),
       username = _useState2[0],
@@ -42650,7 +42649,7 @@ function LoginView(props) {
     });
   };
 
-  return _react.default.createElement("div", {
+  return _react.default.createElement(_reactRouterDom.BrowserRouter, null, _react.default.createElement("div", {
     className: "login-body"
   }, _react.default.createElement(_Container.default, null, _react.default.createElement(_Navbar.default, {
     expand: "md",
@@ -42688,17 +42687,13 @@ function LoginView(props) {
     variant: "primary",
     type: "submit",
     onClick: handleSubmit
-  }, "Submit"), _react.default.createElement("a", {
-    href: "../registration-view/registration-view",
-    type: "button",
-    value: "button",
-    onClick: function onClick(movie) {
-      return _this.goBack();
-    },
+  }, "Submit"), _react.default.createElement(_reactRouterDom.Link, {
+    to: "/register"
+  }, _react.default.createElement(_Button.default, {
     className: "btn"
-  }, "New User? Register Here")))), _react.default.createElement(_Col.default, null))));
+  }, "Register"))))), _react.default.createElement(_Col.default, null)))));
 }
-},{"react":"../../node_modules/react/index.js","axios":"../node_modules/axios/index.js","../registration-view/registration-view":"components/registration-view/registration-view.jsx","./login-view.scss":"components/login-view/login-view.scss","react-bootstrap/Form":"../node_modules/react-bootstrap/esm/Form.js","react-bootstrap/Button":"../node_modules/react-bootstrap/esm/Button.js","react-bootstrap/Navbar":"../node_modules/react-bootstrap/esm/Navbar.js","react-bootstrap/Container":"../node_modules/react-bootstrap/esm/Container.js","react-bootstrap/Row":"../node_modules/react-bootstrap/esm/Row.js","react-bootstrap/Col":"../node_modules/react-bootstrap/esm/Col.js"}],"components/director-view/director-view.scss":[function(require,module,exports) {
+},{"react":"../../node_modules/react/index.js","axios":"../node_modules/axios/index.js","react-router-dom":"../../node_modules/react-router-dom/esm/react-router-dom.js","../registration-view/registration-view":"components/registration-view/registration-view.jsx","./login-view.scss":"components/login-view/login-view.scss","react-bootstrap/Form":"../node_modules/react-bootstrap/esm/Form.js","react-bootstrap/Button":"../node_modules/react-bootstrap/esm/Button.js","react-bootstrap/Navbar":"../node_modules/react-bootstrap/esm/Navbar.js","react-bootstrap/Container":"../node_modules/react-bootstrap/esm/Container.js","react-bootstrap/Row":"../node_modules/react-bootstrap/esm/Row.js","react-bootstrap/Col":"../node_modules/react-bootstrap/esm/Col.js"}],"components/director-view/director-view.scss":[function(require,module,exports) {
 var reloadCSS = require('_css_loader');
 
 module.hot.dispose(reloadCSS);
@@ -44020,13 +44015,13 @@ function (_React$Component) {
           movies = _this$state.movies,
           selectedMovie = _this$state.selectedMovie,
           user = _this$state.user; // If no user has been logged in this view will be loaded
+      // if (!user) return <LoginView onLoggedIn={user => this.onLoggedIn(user)} />;
 
-      if (!user) return _react.default.createElement(_loginView.LoginView, {
+      if (!user) return _react.default.createElement(_registrationView.RegistrationView, {
         onLoggedIn: function onLoggedIn(user) {
           return _this3.onLoggedIn(user);
         }
-      }); // if (!user) return <RegistrationView onLoggedIn={user => this.onLoggedIn(user)} />;
-
+      });
       if (!movies) return _react.default.createElement("div", {
         className: "main-view"
       });
@@ -44106,6 +44101,12 @@ function (_React$Component) {
               return m.Genre.Name === match.params.name;
             }).Genre
           });
+        }
+      }), _react.default.createElement(_reactRouterDom.Route, {
+        exact: true,
+        path: "/register",
+        render: function render() {
+          return _react.default.createElement(_registrationView.RegistrationView, null);
         }
       })))), _react.default.createElement(_Container.default, null, _react.default.createElement(_Navbar.default, {
         expand: "md",
@@ -44231,7 +44232,7 @@ var parent = module.bundle.parent;
 if ((!parent || !parent.isParcelRequire) && typeof WebSocket !== 'undefined') {
   var hostname = "" || location.hostname;
   var protocol = location.protocol === 'https:' ? 'wss' : 'ws';
-  var ws = new WebSocket(protocol + '://' + hostname + ':' + "59038" + '/');
+  var ws = new WebSocket(protocol + '://' + hostname + ':' + "56289" + '/');
 
   ws.onmessage = function (event) {
     checkedAssets = {};

@@ -1,7 +1,7 @@
 import React from 'react';
 import axios from 'axios';
 
-import { BrowserRouter as Router, Route} from "react-router-dom";
+import { BrowserRouter, Route, Link} from "react-router-dom";
 
 import { MovieCard } from '../movie-card/movie-card';
 import { MovieView } from '../movie-view/movie-view';
@@ -100,14 +100,14 @@ export class MainView extends React.Component {
     const { movies, selectedMovie, user } = this.state;
 
     // If no user has been logged in this view will be loaded
-    if (!user) return <LoginView onLoggedIn={user => this.onLoggedIn(user)} />;
+    // if (!user) return <LoginView onLoggedIn={user => this.onLoggedIn(user)} />;
 
-    // if (!user) return <RegistrationView onLoggedIn={user => this.onLoggedIn(user)} />;
+    if (!user) return <RegistrationView onLoggedIn={user => this.onLoggedIn(user)} />;
 
     if (!movies) return <div className="main-view"/>;
 
     return(
-      <Router>
+      <BrowserRouter>
         <div>
           <Container>
             <Navbar expand="md" fixed="top">
@@ -161,6 +161,11 @@ export class MainView extends React.Component {
                             <GenreView genre={movies.find(m => m.Genre.Name === match.params.name).Genre}/>
                           );
                         }}/>
+
+                <Route exact path="/register"
+                        render={() =>
+                          <RegistrationView />
+                        }/>
               </Row>
             </Container>
           </div>
@@ -180,7 +185,7 @@ export class MainView extends React.Component {
             </Navbar>
           </Container>
         </div>
-      </Router>
+      </BrowserRouter>
     )
   }
 }
