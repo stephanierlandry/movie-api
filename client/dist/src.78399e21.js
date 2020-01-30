@@ -42480,29 +42480,28 @@ function RegistrationView(props) {
   var _useState7 = (0, _react.useState)(''),
       _useState8 = _slicedToArray(_useState7, 2),
       birthday = _useState8[0],
-      setBirthday = _useState8[1];
+      setBirthday = _useState8[1]; // const handleSubmit = (e) => {
+  //   e.preventDefault();
+  //   console.log(username, password);
+  //   // Send a request to the server for authentication then call props.onLoggedIn(username)
+  //   props.onLoggedIn(username);
+  // };
 
-  var handleSubmit = function handleSubmit(e) {
-    e.preventDefault();
-    console.log(username, password); // Send a request to the server for authentication then call props.onLoggedIn(username)
-
-    props.onLoggedIn(username);
-  };
 
   var handleRegister = function handleRegister(e) {
     e.preventDefault();
 
     _axios.default.post('https://design-and-a-movie.herokuapp.com/update-users/newuser', {
       Username: username,
-      Passsword: password,
+      Password: password,
       Email: email,
       Birthday: birthday
     }).then(function (response) {
       var data = response.data;
-      console.log(data);
-      window.open('/', '_self');
+      console.log(response);
+      window.open('/', '_self'); // the second argument '_self' is necessary so that the page will open in the current tab
     }).catch(function (e) {
-      console.log('error registering user');
+      console.log('error registering the user');
     });
   };
 
@@ -43933,7 +43932,7 @@ function (_React$Component) {
 
     _this = _possibleConstructorReturn(this, _getPrototypeOf(MainView).call(this, props));
     _this.state = {
-      movies: null,
+      movies: [],
       selectedMovie: null,
       user: null
     };
@@ -44232,7 +44231,7 @@ var parent = module.bundle.parent;
 if ((!parent || !parent.isParcelRequire) && typeof WebSocket !== 'undefined') {
   var hostname = "" || location.hostname;
   var protocol = location.protocol === 'https:' ? 'wss' : 'ws';
-  var ws = new WebSocket(protocol + '://' + hostname + ':' + "56289" + '/');
+  var ws = new WebSocket(protocol + '://' + hostname + ':' + "58921" + '/');
 
   ws.onmessage = function (event) {
     checkedAssets = {};

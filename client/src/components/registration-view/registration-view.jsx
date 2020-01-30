@@ -14,33 +14,31 @@ export function RegistrationView(props) {
   const [ email, setEmail ] = useState('');
   const [ birthday, setBirthday ] = useState('');
 
-  const handleSubmit = (e) => {
-    e.preventDefault();
-    console.log(username, password);
-    // Send a request to the server for authentication then call props.onLoggedIn(username)
-    props.onLoggedIn(username);
-  };
+  // const handleSubmit = (e) => {
+  //   e.preventDefault();
+  //   console.log(username, password);
+  //   // Send a request to the server for authentication then call props.onLoggedIn(username)
+  //   props.onLoggedIn(username);
+  // };
 
   const handleRegister = (e) => {
+  e.preventDefault();
 
-    e.preventDefault();
-
-    axios.post('https://design-and-a-movie.herokuapp.com/update-users/newuser', {
-      Username: username,
-      Passsword: password,
-      Email: email,
-      Birthday: birthday
-    })
-
+  axios.post('https://design-and-a-movie.herokuapp.com/update-users/newuser', {
+    Username: username,
+    Password: password,
+    Email: email,
+    Birthday: birthday
+  })
     .then(response => {
       const data = response.data;
-      console.log(data);
-      window.open('/', '_self')
+      console.log(response);
+      window.open('/', '_self'); // the second argument '_self' is necessary so that the page will open in the current tab
     })
     .catch(e => {
-      console.log('error registering user')
+      console.log('error registering the user')
     });
-  }
+};
 
   return (
 
