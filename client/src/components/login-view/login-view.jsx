@@ -39,8 +39,13 @@ export function LoginView(props) {
     });
   };
 
+  if (props.userData) {
+    window.location="/movies"
+  }
+  console.log(props)
+
   return (
-    <BrowserRouter>
+
       <div className="login-body">
         <Container>
           <Navbar expand="md" fixed="top">
@@ -68,9 +73,7 @@ export function LoginView(props) {
 
                 <div className="button-group">
                   <Button variant="primary" type="submit" onClick={handleSubmit}>Submit</Button>
-                  <Link to={`/register`}>
-                    <Button className="btn">Register</Button>
-                  </Link>
+                  <Link to="/register" className="btn">Register</Link>
                 </div>
               </Form>
             </Col>
@@ -78,7 +81,5 @@ export function LoginView(props) {
           </Row>
         </Container>
       </div>
-    </BrowserRouter>
-
   );
 }

@@ -20,46 +20,52 @@ export class MovieView extends React.Component {
   }
 
   render() {
-    const { movie } = this.props;
+    const { movie, userData } = this.props;
+    console.log(this.props)
 
-    if (!movie) return null;
+    if(!movie){
+      return null
+    }
 
-    return (
-      <Container>
-        <Row>
-          <Col>
-            <div className="movie-view">
-              <img className="movie-poster" src={movie.ImagePath} />
-            </div>
-          </Col>
-          <Col>
-            <div className="movie-block">
-                <div className="movie-title">
-                  <span className="value">{movie.Title}</span>
-                </div>
-                <div className="movie-description">
-                  <span className="value">{movie.Description}</span>
-                </div>
+    if (movie && userData) {
 
-                <div className="movie-genre">
-                  <span className="label">Genre: </span>
-                  <Link to={`/genres/${movie.Genre.Name}`}>
-                    <span className="value link">{movie.Genre.Name}</span>
-                  </Link>
-                </div>
-                <div className="movie-director">
-                  <span className="label">Director: </span>
-                  <Link to={`/directors/${movie.Director.Name}`}>
-                    <span className="value link">{movie.Director.Name}</span>
-                  </Link>
-                </div>
-              <Link to={`/`}>
-                <Button variant="link" className="btn back-button">Back</Button>
-              </Link>
-            </div>
-          </Col>
-        </Row>
-      </Container>
-    );
+      return (
+        <Container>
+          <Row>
+            <Col>
+              <div className="movie-view">
+                <img className="movie-poster" src={movie.ImagePath} />
+              </div>
+            </Col>
+            <Col>
+              <div className="movie-block">
+                  <div className="movie-title">
+                    <span className="value">{movie.Title}</span>
+                  </div>
+                  <div className="movie-description">
+                    <span className="value">{movie.Description}</span>
+                  </div>
+
+                  <div className="movie-genre">
+                    <span className="label">Genre: </span>
+                    <Link to={`/genres/${movie.Genre.Name}`}>
+                      <span className="value link">{movie.Genre.Name}</span>
+                    </Link>
+                  </div>
+                  <div className="movie-director">
+                    <span className="label">Director: </span>
+                    <Link to={`/directors/${movie.Director.Name}`}>
+                      <span className="value link">{movie.Director.Name}</span>
+                    </Link>
+                  </div>
+                <Link to={`/`}>
+                  <Button variant="link" className="btn back-button">Back</Button>
+                </Link>
+              </div>
+            </Col>
+          </Row>
+        </Container>
+      );
+    }
   }
 }

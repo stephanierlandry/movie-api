@@ -39300,7 +39300,7 @@ function (_React$Component) {
     value: function render() {
       var movie = this.props.movie;
       return _react.default.createElement(_reactRouterDom.Link, {
-        to: "/movies/".concat(movie._id)
+        to: "/movie/".concat(movie._id)
       }, _react.default.createElement(_Card.default, {
         variant: "link"
       }, _react.default.createElement(_Card.default.Img, {
@@ -39554,45 +39554,54 @@ function (_React$Component) {
   }, {
     key: "render",
     value: function render() {
-      var movie = this.props.movie;
-      if (!movie) return null;
-      return _react.default.createElement(_Container.default, null, _react.default.createElement(_Row.default, null, _react.default.createElement(_Col.default, null, _react.default.createElement("div", {
-        className: "movie-view"
-      }, _react.default.createElement("img", {
-        className: "movie-poster",
-        src: movie.ImagePath
-      }))), _react.default.createElement(_Col.default, null, _react.default.createElement("div", {
-        className: "movie-block"
-      }, _react.default.createElement("div", {
-        className: "movie-title"
-      }, _react.default.createElement("span", {
-        className: "value"
-      }, movie.Title)), _react.default.createElement("div", {
-        className: "movie-description"
-      }, _react.default.createElement("span", {
-        className: "value"
-      }, movie.Description)), _react.default.createElement("div", {
-        className: "movie-genre"
-      }, _react.default.createElement("span", {
-        className: "label"
-      }, "Genre: "), _react.default.createElement(_reactRouterDom.Link, {
-        to: "/genres/".concat(movie.Genre.Name)
-      }, _react.default.createElement("span", {
-        className: "value link"
-      }, movie.Genre.Name))), _react.default.createElement("div", {
-        className: "movie-director"
-      }, _react.default.createElement("span", {
-        className: "label"
-      }, "Director: "), _react.default.createElement(_reactRouterDom.Link, {
-        to: "/directors/".concat(movie.Director.Name)
-      }, _react.default.createElement("span", {
-        className: "value link"
-      }, movie.Director.Name))), _react.default.createElement(_reactRouterDom.Link, {
-        to: "/"
-      }, _react.default.createElement(_Button.default, {
-        variant: "link",
-        className: "btn back-button"
-      }, "Back"))))));
+      var _this$props = this.props,
+          movie = _this$props.movie,
+          userData = _this$props.userData;
+      console.log(this.props);
+
+      if (!movie) {
+        return null;
+      }
+
+      if (movie && userData) {
+        return _react.default.createElement(_Container.default, null, _react.default.createElement(_Row.default, null, _react.default.createElement(_Col.default, null, _react.default.createElement("div", {
+          className: "movie-view"
+        }, _react.default.createElement("img", {
+          className: "movie-poster",
+          src: movie.ImagePath
+        }))), _react.default.createElement(_Col.default, null, _react.default.createElement("div", {
+          className: "movie-block"
+        }, _react.default.createElement("div", {
+          className: "movie-title"
+        }, _react.default.createElement("span", {
+          className: "value"
+        }, movie.Title)), _react.default.createElement("div", {
+          className: "movie-description"
+        }, _react.default.createElement("span", {
+          className: "value"
+        }, movie.Description)), _react.default.createElement("div", {
+          className: "movie-genre"
+        }, _react.default.createElement("span", {
+          className: "label"
+        }, "Genre: "), _react.default.createElement(_reactRouterDom.Link, {
+          to: "/genres/".concat(movie.Genre.Name)
+        }, _react.default.createElement("span", {
+          className: "value link"
+        }, movie.Genre.Name))), _react.default.createElement("div", {
+          className: "movie-director"
+        }, _react.default.createElement("span", {
+          className: "label"
+        }, "Director: "), _react.default.createElement(_reactRouterDom.Link, {
+          to: "/directors/".concat(movie.Director.Name)
+        }, _react.default.createElement("span", {
+          className: "value link"
+        }, movie.Director.Name))), _react.default.createElement(_reactRouterDom.Link, {
+          to: "/"
+        }, _react.default.createElement(_Button.default, {
+          variant: "link",
+          className: "btn back-button"
+        }, "Back"))))));
+      }
     }
   }]);
 
@@ -42433,6 +42442,8 @@ var _react = _interopRequireWildcard(require("react"));
 
 var _axios = _interopRequireDefault(require("axios"));
 
+var _reactRouterDom = require("react-router-dom");
+
 var _Form = _interopRequireDefault(require("react-bootstrap/Form"));
 
 var _Button = _interopRequireDefault(require("react-bootstrap/Button"));
@@ -42460,8 +42471,6 @@ function _iterableToArrayLimit(arr, i) { if (!(Symbol.iterator in Object(arr) ||
 function _arrayWithHoles(arr) { if (Array.isArray(arr)) return arr; }
 
 function RegistrationView(props) {
-  var _this = this;
-
   var _useState = (0, _react.useState)(''),
       _useState2 = _slicedToArray(_useState, 2),
       username = _useState2[0],
@@ -42491,7 +42500,7 @@ function RegistrationView(props) {
   var handleRegister = function handleRegister(e) {
     e.preventDefault();
 
-    _axios.default.post('https://design-and-a-movie.herokuapp.com/update-users/newuser', {
+    _axios.default.post('http://localhost:3000/update-users/newuser', {
       Username: username,
       Password: password,
       Email: email,
@@ -42501,7 +42510,7 @@ function RegistrationView(props) {
       console.log(response);
       window.open('/', '_self'); // the second argument '_self' is necessary so that the page will open in the current tab
     }).catch(function (e) {
-      console.log('error registering the user');
+      console.log(e, 'error registering the user');
     });
   };
 
@@ -42558,17 +42567,12 @@ function RegistrationView(props) {
     variant: "primary",
     type: "submit",
     onClick: handleRegister
-  }, "Register"), _react.default.createElement("a", {
-    href: "../login-view/login-view",
-    type: "button",
-    value: "button",
-    onClick: function onClick(movie) {
-      return _this.goBack();
-    },
+  }, "Register"), _react.default.createElement(_reactRouterDom.Link, {
+    to: "/login",
     className: "btn"
-  }, "Already a User? Login Here!")))), _react.default.createElement(_Col.default, null))));
+  }, "Already a User? Login Here")))), _react.default.createElement(_Col.default, null))));
 }
-},{"react":"../../node_modules/react/index.js","axios":"../node_modules/axios/index.js","react-bootstrap/Form":"../node_modules/react-bootstrap/esm/Form.js","react-bootstrap/Button":"../node_modules/react-bootstrap/esm/Button.js","react-bootstrap/Navbar":"../node_modules/react-bootstrap/esm/Navbar.js","react-bootstrap/Container":"../node_modules/react-bootstrap/esm/Container.js","react-bootstrap/Row":"../node_modules/react-bootstrap/esm/Row.js","react-bootstrap/Col":"../node_modules/react-bootstrap/esm/Col.js"}],"components/login-view/login-view.scss":[function(require,module,exports) {
+},{"react":"../../node_modules/react/index.js","axios":"../node_modules/axios/index.js","react-router-dom":"../../node_modules/react-router-dom/esm/react-router-dom.js","react-bootstrap/Form":"../node_modules/react-bootstrap/esm/Form.js","react-bootstrap/Button":"../node_modules/react-bootstrap/esm/Button.js","react-bootstrap/Navbar":"../node_modules/react-bootstrap/esm/Navbar.js","react-bootstrap/Container":"../node_modules/react-bootstrap/esm/Container.js","react-bootstrap/Row":"../node_modules/react-bootstrap/esm/Row.js","react-bootstrap/Col":"../node_modules/react-bootstrap/esm/Col.js"}],"components/login-view/login-view.scss":[function(require,module,exports) {
 var reloadCSS = require('_css_loader');
 
 module.hot.dispose(reloadCSS);
@@ -42648,7 +42652,12 @@ function LoginView(props) {
     });
   };
 
-  return _react.default.createElement(_reactRouterDom.BrowserRouter, null, _react.default.createElement("div", {
+  if (props.userData) {
+    window.location = "/movies";
+  }
+
+  console.log(props);
+  return _react.default.createElement("div", {
     className: "login-body"
   }, _react.default.createElement(_Container.default, null, _react.default.createElement(_Navbar.default, {
     expand: "md",
@@ -42687,10 +42696,9 @@ function LoginView(props) {
     type: "submit",
     onClick: handleSubmit
   }, "Submit"), _react.default.createElement(_reactRouterDom.Link, {
-    to: "/register"
-  }, _react.default.createElement(_Button.default, {
+    to: "/register",
     className: "btn"
-  }, "Register"))))), _react.default.createElement(_Col.default, null)))));
+  }, "Register")))), _react.default.createElement(_Col.default, null))));
 }
 },{"react":"../../node_modules/react/index.js","axios":"../node_modules/axios/index.js","react-router-dom":"../../node_modules/react-router-dom/esm/react-router-dom.js","../registration-view/registration-view":"components/registration-view/registration-view.jsx","./login-view.scss":"components/login-view/login-view.scss","react-bootstrap/Form":"../node_modules/react-bootstrap/esm/Form.js","react-bootstrap/Button":"../node_modules/react-bootstrap/esm/Button.js","react-bootstrap/Navbar":"../node_modules/react-bootstrap/esm/Navbar.js","react-bootstrap/Container":"../node_modules/react-bootstrap/esm/Container.js","react-bootstrap/Row":"../node_modules/react-bootstrap/esm/Row.js","react-bootstrap/Col":"../node_modules/react-bootstrap/esm/Col.js"}],"components/director-view/director-view.scss":[function(require,module,exports) {
 var reloadCSS = require('_css_loader');
@@ -44014,13 +44022,13 @@ function (_React$Component) {
           movies = _this$state.movies,
           selectedMovie = _this$state.selectedMovie,
           user = _this$state.user; // If no user has been logged in this view will be loaded
-      // if (!user) return <LoginView onLoggedIn={user => this.onLoggedIn(user)} />;
+      // if (!user) return (
+      //   <BrowserRouter>
+      //
+      //   </BrowserRouter>
+      // );
+      // if (!user) return <RegistrationView onLoggedIn={user => this.onLoggedIn(user)} />;
 
-      if (!user) return _react.default.createElement(_registrationView.RegistrationView, {
-        onLoggedIn: function onLoggedIn(user) {
-          return _this3.onLoggedIn(user);
-        }
-      });
       if (!movies) return _react.default.createElement("div", {
         className: "main-view"
       });
@@ -44054,6 +44062,35 @@ function (_React$Component) {
         exact: true,
         path: "/",
         render: function render() {
+          if (!user) {
+            window.location = "http://localhost:1234/login";
+          } else {
+            window.location = "/movies";
+          }
+        }
+      }), _react.default.createElement(_reactRouterDom.Route, {
+        path: "/login",
+        render: function render() {
+          return _react.default.createElement(_loginView.LoginView, {
+            onLoggedIn: function onLoggedIn(user) {
+              return _this3.onLoggedIn(user);
+            },
+            userData: _this3.state.user
+          });
+        }
+      }), _react.default.createElement(_reactRouterDom.Route, {
+        path: "/register",
+        render: function render() {
+          return _react.default.createElement(_registrationView.RegistrationView, {
+            onLoggedIn: function onLoggedIn(user) {
+              return _this3.onLoggedIn(user);
+            }
+          });
+        }
+      }), _react.default.createElement(_reactRouterDom.Route, {
+        exact: true,
+        path: "/movies",
+        render: function render() {
           return movies.map(function (m) {
             // console.log(m)
             return _react.default.createElement(_Col.default, {
@@ -44066,13 +44103,14 @@ function (_React$Component) {
         }
       }), _react.default.createElement(_reactRouterDom.Route, {
         exact: true,
-        path: "/movies/:movieId",
+        path: "/movie/:movieId",
         render: function render(_ref) {
           var match = _ref.match;
           return _react.default.createElement(_movieView.MovieView, {
             movie: movies.find(function (m) {
               return m._id === match.params.movieId;
-            })
+            }),
+            userData: _this3.state.user
           });
         }
       }), _react.default.createElement(_reactRouterDom.Route, {
@@ -44100,12 +44138,6 @@ function (_React$Component) {
               return m.Genre.Name === match.params.name;
             }).Genre
           });
-        }
-      }), _react.default.createElement(_reactRouterDom.Route, {
-        exact: true,
-        path: "/register",
-        render: function render() {
-          return _react.default.createElement(_registrationView.RegistrationView, null);
         }
       })))), _react.default.createElement(_Container.default, null, _react.default.createElement(_Navbar.default, {
         expand: "md",
@@ -44231,7 +44263,7 @@ var parent = module.bundle.parent;
 if ((!parent || !parent.isParcelRequire) && typeof WebSocket !== 'undefined') {
   var hostname = "" || location.hostname;
   var protocol = location.protocol === 'https:' ? 'wss' : 'ws';
-  var ws = new WebSocket(protocol + '://' + hostname + ':' + "58921" + '/');
+  var ws = new WebSocket(protocol + '://' + hostname + ':' + "57042" + '/');
 
   ws.onmessage = function (event) {
     checkedAssets = {};

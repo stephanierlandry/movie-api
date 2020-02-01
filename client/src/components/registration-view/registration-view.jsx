@@ -1,5 +1,6 @@
 import React, { useState } from 'react';
 import axios from 'axios';
+import {Link} from 'react-router-dom';
 
 import Form from 'react-bootstrap/Form';
 import Button from 'react-bootstrap/Button';
@@ -7,6 +8,7 @@ import Navbar from 'react-bootstrap/Navbar';
 import Container from 'react-bootstrap/Container';
 import Row from 'react-bootstrap/Row';
 import Col from 'react-bootstrap/Col';
+
 
 export function RegistrationView(props) {
   const [ username, setUsername ] = useState('');
@@ -24,20 +26,20 @@ export function RegistrationView(props) {
   const handleRegister = (e) => {
   e.preventDefault();
 
-  axios.post('https://design-and-a-movie.herokuapp.com/update-users/newuser', {
+  axios.post('http://localhost:3000/update-users/newuser', {
     Username: username,
     Password: password,
     Email: email,
     Birthday: birthday
   })
-    .then(response => {
-      const data = response.data;
-      console.log(response);
-      window.open('/', '_self'); // the second argument '_self' is necessary so that the page will open in the current tab
-    })
-    .catch(e => {
-      console.log('error registering the user')
-    });
+  .then(response => {
+    const data = response.data;
+    console.log(response);
+    window.open('/', '_self'); // the second argument '_self' is necessary so that the page will open in the current tab
+  })
+  .catch(e => {
+    console.log(e,'error registering the user')
+  });
 };
 
   return (
@@ -78,7 +80,7 @@ export function RegistrationView(props) {
 
               <div className="button-group">
                 <Button variant="primary" type="submit" onClick={handleRegister}>Register</Button>
-                <a href="../login-view/login-view" type="button" value="button" onClick={movie=>this.goBack()} className="btn">Already a User? Login Here!</a>
+                <Link to="/login" className="btn">Already a User? Login Here</Link>
               </div>
             </Form>
           </Col>

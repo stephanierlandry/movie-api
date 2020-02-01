@@ -100,9 +100,13 @@ export class MainView extends React.Component {
     const { movies, selectedMovie, user } = this.state;
 
     // If no user has been logged in this view will be loaded
-    // if (!user) return <LoginView onLoggedIn={user => this.onLoggedIn(user)} />;
+    // if (!user) return (
+    //   <BrowserRouter>
+    //
+    //   </BrowserRouter>
+    // );
 
-    if (!user) return <RegistrationView onLoggedIn={user => this.onLoggedIn(user)} />;
+    // if (!user) return <RegistrationView onLoggedIn={user => this.onLoggedIn(user)} />;
 
     if (!movies) return <div className="main-view"/>;
 
@@ -130,6 +134,32 @@ export class MainView extends React.Component {
             <Container>
               <Row>
                 <Route exact path="/"
+                        render={() => {
+                          if (!user) {
+                            window.location="http://localhost:1234/login"
+                          } else {
+                            window.location="/movies"
+                          }
+                        }}
+                />
+
+                <Route path="/login"
+                            render={() => {
+                              return (
+                                <LoginView onLoggedIn={user => this.onLoggedIn(user)}
+                                           userData={this.state.user} />
+                              )
+                            }}
+                />
+
+                <Route path="/register"
+                        render={() => {
+                          return (
+                            <RegistrationView onLoggedIn={user => this.onLoggedIn(user)} />
+                          )
+                        }}
+                />
+                <Route exact path="/movies"
                        render={() => movies.map((m) => {
                          // console.log(m)
 
@@ -138,11 +168,12 @@ export class MainView extends React.Component {
                          );
                        })}/>
 
-                <Route exact path="/movies/:movieId"
+                <Route exact path="/movie/:movieId"
                        render={({match}) => {
 
                          return (
-                           <MovieView movie={movies.find(m =>m._id === match.params.movieId)}/>
+                           <MovieView movie={movies.find(m =>m._id === match.params.movieId)}
+                                      userData={this.state.user}/>
                          );
                        }}/>
 
@@ -161,11 +192,6 @@ export class MainView extends React.Component {
                             <GenreView genre={movies.find(m => m.Genre.Name === match.params.name).Genre}/>
                           );
                         }}/>
-
-                <Route exact path="/register"
-                        render={() =>
-                          <RegistrationView />
-                        }/>
               </Row>
             </Container>
           </div>

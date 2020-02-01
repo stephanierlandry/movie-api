@@ -118,14 +118,15 @@ app.get('/get-users/:Username', passport.authenticate('jwt', { session: false })
 });
 
 //This endpoint adds new users to the API by name
-app.post("/update-users/newuser", [check('Username', 'Username is not long enough').isLength({min: 5}),
+app.post("/update-users/newuser", [check('Username', 'Username is not long enough').isLength({min: 4}),
   check('Username', 'Username contains non alphanumeric characters - not allowed.').isAlphanumeric(),
   check('Password', 'Password is required').not().isEmpty(),
   check('Email', 'Email does not appear to be valid').isEmail()], (req, res) => {
-    let errors = validationResult(req);
-    if (!errors.isEmpty()) {
-      return res.status(422).json({ errors: errors.array()});
-    }
+  let errors = validationResult(req);
+  console.log(errors)
+  if (!errors.isEmpty()) {
+    return res.status(422).json({ errors: errors.array()});
+  }
   let hashedPassword = Users.hashPassword(req.body.Password);
   Users.findOne({ Username : req.body.Username})
   .then(function(user){
