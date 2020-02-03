@@ -42,7 +42,7 @@ export function LoginView(props) {
   if (props.userData) {
     window.location="/movies"
   }
-  console.log(props)
+  // console.log(props)
 
   return (
 

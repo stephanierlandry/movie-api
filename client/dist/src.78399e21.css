@@ -10315,8 +10315,15 @@ body {
 .genre-block {
   color: white;
 }
+.profileBlock {
+  color: white;
+}
 body {
   background: #060807;
+}
+
+.loading {
+  color: white;
 }
 
 .navbar {

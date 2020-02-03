@@ -1,4 +1,5 @@
 import React from 'react';
+import axios from 'axios';
 
 import './director-view.scss';
 
@@ -19,6 +20,8 @@ export class DirectorView extends React.Component {
     history.back();
   }
 
+
+
   render(){
     console.log(this.props)
     const {director} = this.props;
@@ -38,7 +41,7 @@ export class DirectorView extends React.Component {
                 <p>{director.Bio}</p>
                 <p>{director.Birth} {director.Death}</p>
               </div>
-              <button onClick={director =>this.goBack()} className="back-button btn">Back</button>          
+              <button onClick={director =>this.goBack()} className="back-button btn">Back</button>
             </div>
           </Col>
           <Col></Col>
