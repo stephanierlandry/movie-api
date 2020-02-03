@@ -21,7 +21,6 @@ export class MovieView extends React.Component {
 
   render() {
     const { movie, userData } = this.props;
-    console.log(this.props)
 
     if(!movie){
       return null

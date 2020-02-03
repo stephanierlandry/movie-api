@@ -1,5 +1,4 @@
 import React from 'react';
-import axios from 'axios';
 
 import './profile-view.scss';
 
@@ -13,13 +12,15 @@ export class ProfileView extends React.Component {
 
   constructor(props) {
     super(props);
-    this.state = {};
+    this.state = {
+      userProfile: {}
+    };
   }
 
   render(){
 
-    const { movie, user } = this.props;
-    console.log(this.props);
+    const { user, userProfile } = this.props;
+    console.log({m:'profileView', r:userProfile});
 
     if(!user){
       return null

@@ -39557,7 +39557,6 @@ function (_React$Component) {
       var _this$props = this.props,
           movie = _this$props.movie,
           userData = _this$props.userData;
-      console.log(this.props);
 
       if (!movie) {
         return null;
@@ -42909,8 +42908,6 @@ exports.ProfileView = void 0;
 
 var _react = _interopRequireDefault(require("react"));
 
-var _axios = _interopRequireDefault(require("axios"));
-
 require("./profile-view.scss");
 
 var _Container = _interopRequireDefault(require("react-bootstrap/Container"));
@@ -42954,7 +42951,9 @@ function (_React$Component) {
     _classCallCheck(this, ProfileView);
 
     _this = _possibleConstructorReturn(this, _getPrototypeOf(ProfileView).call(this, props));
-    _this.state = {};
+    _this.state = {
+      userProfile: {}
+    };
     return _this;
   }
 
@@ -42962,9 +42961,12 @@ function (_React$Component) {
     key: "render",
     value: function render() {
       var _this$props = this.props,
-          movie = _this$props.movie,
-          user = _this$props.user;
-      console.log(this.props);
+          user = _this$props.user,
+          userProfile = _this$props.userProfile;
+      console.log({
+        m: 'profileView',
+        r: userProfile
+      });
 
       if (!user) {
         return null;
@@ -42982,7 +42984,7 @@ function (_React$Component) {
 }(_react.default.Component);
 
 exports.ProfileView = ProfileView;
-},{"react":"../../node_modules/react/index.js","axios":"../node_modules/axios/index.js","./profile-view.scss":"components/profile-view/profile-view.scss","react-bootstrap/Container":"../node_modules/react-bootstrap/esm/Container.js","react-bootstrap/Row":"../node_modules/react-bootstrap/esm/Row.js","react-bootstrap/Col":"../node_modules/react-bootstrap/esm/Col.js","react-bootstrap/Button":"../node_modules/react-bootstrap/esm/Button.js","react-router-dom":"../../node_modules/react-router-dom/esm/react-router-dom.js"}],"../node_modules/dom-helpers/esm/querySelectorAll.js":[function(require,module,exports) {
+},{"react":"../../node_modules/react/index.js","./profile-view.scss":"components/profile-view/profile-view.scss","react-bootstrap/Container":"../node_modules/react-bootstrap/esm/Container.js","react-bootstrap/Row":"../node_modules/react-bootstrap/esm/Row.js","react-bootstrap/Col":"../node_modules/react-bootstrap/esm/Col.js","react-bootstrap/Button":"../node_modules/react-bootstrap/esm/Button.js","react-router-dom":"../../node_modules/react-router-dom/esm/react-router-dom.js"}],"../node_modules/dom-helpers/esm/querySelectorAll.js":[function(require,module,exports) {
 "use strict";
 
 Object.defineProperty(exports, "__esModule", {
@@ -44035,60 +44037,14 @@ function (_React$Component) {
       movies: [],
       selectedMovie: null,
       user: null,
-      userInfo: {}
+      userProfile: {}
     };
     return _this;
-  } // One of the "hooks" available in a React Component
+  } //Called in componentDidMount
 
 
   _createClass(MainView, [{
-    key: "componentDidMount",
-    value: function componentDidMount() {
-      var accessToken = localStorage.getItem('token'); //If there is a token sign the user in and getMovies
-
-      if (accessToken !== null) {
-        this.setState({
-          user: localStorage.getItem('user')
-        });
-        this.getMovies(accessToken);
-        this.getUserInfo(accessToken);
-      }
-    } //called in the render()
-
-  }, {
-    key: "onMovieClick",
-    value: function onMovieClick(movie) {
-      this.setState({
-        selectedMovie: movie
-      });
-    } //Called in the render()
-
-  }, {
-    key: "onLoggedIn",
-    value: function onLoggedIn(authData) {
-      //authData refers to the username and the token
-      this.setState({
-        user: authData.user.Username
-      }); //Actually stores the token and username. setItem takes in a key/value pair
-
-      localStorage.setItem('token', authData.token);
-      localStorage.setItem('user', authData.user.Username);
-      this.getMovies(authData.token);
-    } //Called in the render()
-
-  }, {
-    key: "onLoggedOut",
-    value: function onLoggedOut(user) {
-      localStorage.removeItem('token');
-      localStorage.removeItem('user');
-      this.setState({
-        user: null
-      });
-      window.open('/', '_self');
-    }
-  }, {
     key: "getMovies",
-    //Called in componentDidMount
     value: function getMovies(token) {
       var _this2 = this;
 
@@ -44108,8 +44064,8 @@ function (_React$Component) {
       });
     }
   }, {
-    key: "getUserInfo",
-    value: function getUserInfo(token) {
+    key: "getUserProfile",
+    value: function getUserProfile(token) {
       var _this3 = this;
 
       _axios.default.get("http://localhost:3000/get-users/".concat(localStorage.getItem('user')), {
@@ -44117,11 +44073,60 @@ function (_React$Component) {
           Authorization: "Bearer ".concat(token)
         }
       }).then(function (response) {
-        console.log(response);
+        // console.log(response)
+        _this3.setState({
+          userProfile: response.data
+        }); // console.log({f:'mainview', m:userProfile})
 
-        _this3.props.setUserInfo(response.data);
       }).catch(function (error) {
         console.log(error);
+      });
+    } // One of the "hooks" available in a React Component
+
+  }, {
+    key: "componentDidMount",
+    value: function componentDidMount() {
+      var accessToken = localStorage.getItem('token'); //If there is a token sign the user in and getMovies
+
+      if (accessToken !== null) {
+        this.setState({
+          user: localStorage.getItem('user')
+        });
+        this.getMovies(accessToken);
+        this.getUserProfile(accessToken);
+      }
+    } //Called in the render()
+
+  }, {
+    key: "onLoggedIn",
+    value: function onLoggedIn(authData) {
+      //authData refers to the username and the token
+      this.setState({
+        user: authData.user.Username
+      }); //Actually stores the token and username. setItem takes in a key/value pair
+
+      localStorage.setItem('token', authData.token);
+      localStorage.setItem('user', authData.user.Username);
+      this.getMovies(authData.token);
+      this.getUserProfile(authData.token);
+    } //Called in the render()
+
+  }, {
+    key: "onLoggedOut",
+    value: function onLoggedOut(user) {
+      localStorage.removeItem('token');
+      localStorage.removeItem('user');
+      this.setState({
+        user: null
+      });
+      window.open('/', '_self');
+    }
+  }, {
+    key: "onMovieClick",
+    //called in the render()
+    value: function onMovieClick(movie) {
+      this.setState({
+        selectedMovie: movie
       });
     }
   }, {
@@ -44133,7 +44138,7 @@ function (_React$Component) {
           movies = _this$state.movies,
           selectedMovie = _this$state.selectedMovie,
           user = _this$state.user,
-          userInfo = _this$state.userInfo;
+          userProfile = _this$state.userProfile;
       if (!movies) return _react.default.createElement("div", {
         className: "main-view loading"
       }, "loading");
@@ -44162,7 +44167,7 @@ function (_React$Component) {
       }), _react.default.createElement(_Button.default, {
         className: "btn"
       }, "Search"))), _react.default.createElement(_reactRouterDom.Link, {
-        to: "/user/".concat(user),
+        to: "/user/".concat(userProfile.Username),
         className: "userProfile"
       }, _react.default.createElement("div", null, user)))), _react.default.createElement("div", {
         className: "main-view"
@@ -44378,7 +44383,7 @@ var parent = module.bundle.parent;
 if ((!parent || !parent.isParcelRequire) && typeof WebSocket !== 'undefined') {
   var hostname = "" || location.hostname;
   var protocol = location.protocol === 'https:' ? 'wss' : 'ws';
-  var ws = new WebSocket(protocol + '://' + hostname + ':' + "57042" + '/');
+  var ws = new WebSocket(protocol + '://' + hostname + ':' + "57360" + '/');
 
   ws.onmessage = function (event) {
     checkedAssets = {};

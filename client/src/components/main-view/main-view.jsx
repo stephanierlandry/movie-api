@@ -32,54 +32,9 @@ export class MainView extends React.Component {
       movies: [],
       selectedMovie: null,
       user: null,
-      userInfo: {}
+      userProfile: {}
     };
   }
-
-  // One of the "hooks" available in a React Component
-  componentDidMount() {
-    let accessToken = localStorage.getItem('token');
-    //If there is a token sign the user in and getMovies
-    if (accessToken !== null) {
-      this.setState({
-        user: localStorage.getItem('user')
-      });
-      this.getMovies(accessToken);
-      this.getUserInfo(accessToken);
-    }
-  }
-
-  //called in the render()
-  onMovieClick(movie) {
-    this.setState({
-      selectedMovie: movie
-    });
-  }
-
-  //Called in the render()
-  onLoggedIn(authData) {
-    //authData refers to the username and the token
-    this.setState({
-      user: authData.user.Username
-    });
-
-    //Actually stores the token and username. setItem takes in a key/value pair
-    localStorage.setItem('token', authData.token);
-    localStorage.setItem('user', authData.user.Username);
-    this.getMovies(authData.token);
-  }
-
-  //Called in the render()
-  onLoggedOut(user) {
-    localStorage.removeItem('token');
-    localStorage.removeItem('user');
-
-    this.setState({
-     user: null
-   })
-    window.open('/', '_self');
-  };
-
 
   //Called in componentDidMount
   getMovies(token) {
@@ -99,21 +54,69 @@ export class MainView extends React.Component {
     });
   }
 
-  getUserInfo(token){
+  getUserProfile(token){
     axios.get(`http://localhost:3000/get-users/${localStorage.getItem('user')}`,{
       headers: {Authorization: `Bearer ${token}`}
     })
     .then(response => {
-      console.log(response)
-      this.props.setUserInfo(response.data)
+      // console.log(response)
+      this.setState({
+        userProfile: response.data
+      });
+      // console.log({f:'mainview', m:userProfile})
     })
     .catch(function(error){
       console.log(error);
     })
   }
 
+  // One of the "hooks" available in a React Component
+  componentDidMount() {
+    let accessToken = localStorage.getItem('token');
+    //If there is a token sign the user in and getMovies
+    if (accessToken !== null) {
+      this.setState({
+        user: localStorage.getItem('user')
+      });
+      this.getMovies(accessToken);
+      this.getUserProfile(accessToken);
+    }
+  }
+
+  //Called in the render()
+  onLoggedIn(authData) {
+    //authData refers to the username and the token
+    this.setState({
+      user: authData.user.Username
+    });
+
+    //Actually stores the token and username. setItem takes in a key/value pair
+    localStorage.setItem('token', authData.token);
+    localStorage.setItem('user', authData.user.Username);
+    this.getMovies(authData.token);
+    this.getUserProfile(authData.token);
+  }
+
+  //Called in the render()
+  onLoggedOut(user) {
+    localStorage.removeItem('token');
+    localStorage.removeItem('user');
+
+    this.setState({
+     user: null
+   })
+    window.open('/', '_self');
+  };
+
+  //called in the render()
+  onMovieClick(movie) {
+    this.setState({
+      selectedMovie: movie
+    });
+  }
+
   render() {
-    const { movies, selectedMovie, user, userInfo } = this.state;
+    const { movies, selectedMovie, user, userProfile } = this.state;
 
     if (!movies) return <div className="main-view loading">loading</div>;
 
@@ -134,7 +137,7 @@ export class MainView extends React.Component {
                   <Button className="btn">Search</Button>
                 </Form>
               </Navbar.Collapse>
-              <Link to={`/user/${user}`} className="userProfile">
+              <Link to={`/user/${userProfile.Username}`} className="userProfile">
                 <div>{user}</div>
               </Link>
             </Navbar>
