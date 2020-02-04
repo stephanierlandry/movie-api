@@ -10222,6 +10222,10 @@ a.text-dark:hover, a.text-dark:focus {
   }
 }
 
+.loading {
+  color: white;
+}
+
 .main-view {
   margin: 5em;
 }

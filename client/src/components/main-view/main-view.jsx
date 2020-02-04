@@ -118,7 +118,7 @@ export class MainView extends React.Component {
   render() {
     const { movies, selectedMovie, user, userProfile } = this.state;
 
-    if (!movies) return <div className="main-view loading">loading</div>;
+    if (!movies) return <div className="loading">loading</div>;
 
     return(
       <BrowserRouter>
@@ -206,8 +206,15 @@ export class MainView extends React.Component {
                 <Route exact path="/user/:username"
                         render={() => {
                           return (
-                            <ProfileView user={user}/>
+                            <ProfileView user={user} userProfile={userProfile}/>
                           );
+                        }}/>
+
+                <Route exact path="/update-user/:username"
+                        render={() => {
+                          return (
+                            <ProfileUpdateView user={user} userProfile={userProfile}/>
+                          )
                         }}/>
 
               </Row>

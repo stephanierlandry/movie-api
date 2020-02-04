@@ -39299,14 +39299,23 @@ function (_React$Component) {
     key: "render",
     value: function render() {
       var movie = this.props.movie;
-      return _react.default.createElement(_reactRouterDom.Link, {
-        to: "/movie/".concat(movie._id)
-      }, _react.default.createElement(_Card.default, {
-        variant: "link"
-      }, _react.default.createElement(_Card.default.Img, {
-        variant: "top",
-        src: movie.ImagePath
-      }), _react.default.createElement(_Card.default.Title, null, movie.Title)));
+
+      if (!movie) {
+        return _react.default.createElement("div", {
+          className: "loading"
+        }, "loading");
+      }
+
+      if (movie) {
+        return _react.default.createElement(_reactRouterDom.Link, {
+          to: "/movie/".concat(movie._id)
+        }, _react.default.createElement(_Card.default, {
+          variant: "link"
+        }, _react.default.createElement(_Card.default.Img, {
+          variant: "top",
+          src: movie.ImagePath
+        }), _react.default.createElement(_Card.default.Title, null, movie.Title)));
+      }
     }
   }]);
 
@@ -39559,7 +39568,9 @@ function (_React$Component) {
           userData = _this$props.userData;
 
       if (!movie) {
-        return null;
+        return _react.default.createElement("div", {
+          className: "loading"
+        }, "loading");
       }
 
       if (movie && userData) {
@@ -42958,6 +42969,11 @@ function (_React$Component) {
   }
 
   _createClass(ProfileView, [{
+    key: "goBack",
+    value: function goBack() {
+      history.back();
+    }
+  }, {
     key: "render",
     value: function render() {
       var _this$props = this.props,
@@ -42973,9 +42989,22 @@ function (_React$Component) {
       }
 
       if (user) {
-        return _react.default.createElement("div", {
-          className: "profileBlock"
-        }, "hi");
+        return _react.default.createElement(_Container.default, null, _react.default.createElement(_Row.default, null, _react.default.createElement(_Col.default, null, _react.default.createElement("div", {
+          className: "user-info-block"
+        }, _react.default.createElement("div", {
+          className: "user-name"
+        }, _react.default.createElement("span", {
+          className: "value"
+        }, userProfile.Username)), _react.default.createElement("div", {
+          className: "user-favorites"
+        }, _react.default.createElement("span", {
+          className: "value"
+        }, userProfile.FavoriteMovies)), _react.default.createElement(_reactRouterDom.Link, {
+          to: "/"
+        }, _react.default.createElement(_Button.default, {
+          variant: "link",
+          className: "btn back-button"
+        }, "Back"))))));
       }
     }
   }]);
@@ -44140,7 +44169,7 @@ function (_React$Component) {
           user = _this$state.user,
           userProfile = _this$state.userProfile;
       if (!movies) return _react.default.createElement("div", {
-        className: "main-view loading"
+        className: "loading"
       }, "loading");
       return _react.default.createElement(_reactRouterDom.BrowserRouter, null, _react.default.createElement("div", null, _react.default.createElement(_Container.default, null, _react.default.createElement(_Navbar.default, {
         expand: "md",
@@ -44256,7 +44285,17 @@ function (_React$Component) {
         path: "/user/:username",
         render: function render() {
           return _react.default.createElement(_profileView.ProfileView, {
-            user: user
+            user: user,
+            userProfile: userProfile
+          });
+        }
+      }), _react.default.createElement(_reactRouterDom.Route, {
+        exact: true,
+        path: "/update-user/:username",
+        render: function render() {
+          return _react.default.createElement(ProfileUpdateView, {
+            user: user,
+            userProfile: userProfile
           });
         }
       })))), _react.default.createElement(_Container.default, null, _react.default.createElement(_Navbar.default, {

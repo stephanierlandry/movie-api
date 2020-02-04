@@ -8,14 +8,22 @@ export class MovieCard extends React.Component {
   render() {
     const { movie } = this.props;
 
-    return (
-      <Link to={`/movie/${movie._id}`}>
-        <Card variant="link">
-          <Card.Img variant="top" src={movie.ImagePath} />
-            <Card.Title>{movie.Title}</Card.Title>
-        </Card>
-      </Link>
-    );
+    if(!movie){
+      return <div className="loading">loading</div>
+    }
+
+    if(movie){
+      return (
+        <Link to={`/movie/${movie._id}`}>
+          <Card variant="link">
+            <Card.Img variant="top" src={movie.ImagePath} />
+              <Card.Title>{movie.Title}</Card.Title>
+          </Card>
+        </Link>
+      );
+    }
+
+
   }
 }
 

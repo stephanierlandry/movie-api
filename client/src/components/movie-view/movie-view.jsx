@@ -23,7 +23,7 @@ export class MovieView extends React.Component {
     const { movie, userData } = this.props;
 
     if(!movie){
-      return null
+      return <div className="loading">loading</div>
     }
 
     if (movie && userData) {

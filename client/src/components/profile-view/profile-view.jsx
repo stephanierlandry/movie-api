@@ -17,6 +17,10 @@ export class ProfileView extends React.Component {
     };
   }
 
+  goBack() {
+    history.back();
+  }
+
   render(){
 
     const { user, userProfile } = this.props;
@@ -28,7 +32,23 @@ export class ProfileView extends React.Component {
 
     if(user) {
       return(
-        <div className="profileBlock">hi</div>
+        <Container>
+          <Row>
+            <Col>
+              <div className="user-info-block">
+                <div className="user-name">
+                  <span className="value">{userProfile.Username}</span>
+                </div>
+                <div className="user-favorites">
+                  <span className="value">{userProfile.FavoriteMovies}</span>
+                </div>
+                <Link to={`/`}>
+                  <Button variant="link" className="btn back-button">Back</Button>
+                </Link>
+              </div>
+            </Col>
+          </Row>
+        </Container>
       )
     }
   }
