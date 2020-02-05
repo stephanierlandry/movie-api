@@ -42999,7 +42999,12 @@ function (_React$Component) {
           className: "user-favorites"
         }, _react.default.createElement("span", {
           className: "value"
-        }, userProfile.FavoriteMovies)), _react.default.createElement(_reactRouterDom.Link, {
+        }, userProfile.FavoriteMovies)), _react.default.createElement("div", {
+          className: "updateButton"
+        }, _react.default.createElement(_reactRouterDom.Link, {
+          to: "/update-user/:username",
+          className: "btn"
+        }, "Update Your Profile")), _react.default.createElement(_reactRouterDom.Link, {
           to: "/"
         }, _react.default.createElement(_Button.default, {
           variant: "link",
@@ -43013,7 +43018,143 @@ function (_React$Component) {
 }(_react.default.Component);
 
 exports.ProfileView = ProfileView;
-},{"react":"../../node_modules/react/index.js","./profile-view.scss":"components/profile-view/profile-view.scss","react-bootstrap/Container":"../node_modules/react-bootstrap/esm/Container.js","react-bootstrap/Row":"../node_modules/react-bootstrap/esm/Row.js","react-bootstrap/Col":"../node_modules/react-bootstrap/esm/Col.js","react-bootstrap/Button":"../node_modules/react-bootstrap/esm/Button.js","react-router-dom":"../../node_modules/react-router-dom/esm/react-router-dom.js"}],"../node_modules/dom-helpers/esm/querySelectorAll.js":[function(require,module,exports) {
+},{"react":"../../node_modules/react/index.js","./profile-view.scss":"components/profile-view/profile-view.scss","react-bootstrap/Container":"../node_modules/react-bootstrap/esm/Container.js","react-bootstrap/Row":"../node_modules/react-bootstrap/esm/Row.js","react-bootstrap/Col":"../node_modules/react-bootstrap/esm/Col.js","react-bootstrap/Button":"../node_modules/react-bootstrap/esm/Button.js","react-router-dom":"../../node_modules/react-router-dom/esm/react-router-dom.js"}],"components/profile-view/profile-update-view.scss":[function(require,module,exports) {
+var reloadCSS = require('_css_loader');
+
+module.hot.dispose(reloadCSS);
+module.hot.accept(reloadCSS);
+},{"_css_loader":"../../../../../.nvm/versions/node/v10.15.3/lib/node_modules/parcel-bundler/src/builtins/css-loader.js"}],"components/profile-view/profile-update-view.jsx":[function(require,module,exports) {
+"use strict";
+
+Object.defineProperty(exports, "__esModule", {
+  value: true
+});
+exports.ProfileUpdateView = ProfileUpdateView;
+
+var _react = _interopRequireWildcard(require("react"));
+
+var _axios = _interopRequireDefault(require("axios"));
+
+var _reactRouterDom = require("react-router-dom");
+
+require("./profile-update-view.scss");
+
+var _Form = _interopRequireDefault(require("react-bootstrap/Form"));
+
+var _Button = _interopRequireDefault(require("react-bootstrap/Button"));
+
+var _Navbar = _interopRequireDefault(require("react-bootstrap/Navbar"));
+
+var _Container = _interopRequireDefault(require("react-bootstrap/Container"));
+
+var _Row = _interopRequireDefault(require("react-bootstrap/Row"));
+
+var _Col = _interopRequireDefault(require("react-bootstrap/Col"));
+
+function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
+function _getRequireWildcardCache() { if (typeof WeakMap !== "function") return null; var cache = new WeakMap(); _getRequireWildcardCache = function () { return cache; }; return cache; }
+
+function _interopRequireWildcard(obj) { if (obj && obj.__esModule) { return obj; } if (obj === null || typeof obj !== "object" && typeof obj !== "function") { return { default: obj }; } var cache = _getRequireWildcardCache(); if (cache && cache.has(obj)) { return cache.get(obj); } var newObj = {}; var hasPropertyDescriptor = Object.defineProperty && Object.getOwnPropertyDescriptor; for (var key in obj) { if (Object.prototype.hasOwnProperty.call(obj, key)) { var desc = hasPropertyDescriptor ? Object.getOwnPropertyDescriptor(obj, key) : null; if (desc && (desc.get || desc.set)) { Object.defineProperty(newObj, key, desc); } else { newObj[key] = obj[key]; } } } newObj.default = obj; if (cache) { cache.set(obj, newObj); } return newObj; }
+
+function _slicedToArray(arr, i) { return _arrayWithHoles(arr) || _iterableToArrayLimit(arr, i) || _nonIterableRest(); }
+
+function _nonIterableRest() { throw new TypeError("Invalid attempt to destructure non-iterable instance"); }
+
+function _iterableToArrayLimit(arr, i) { if (!(Symbol.iterator in Object(arr) || Object.prototype.toString.call(arr) === "[object Arguments]")) { return; } var _arr = []; var _n = true; var _d = false; var _e = undefined; try { for (var _i = arr[Symbol.iterator](), _s; !(_n = (_s = _i.next()).done); _n = true) { _arr.push(_s.value); if (i && _arr.length === i) break; } } catch (err) { _d = true; _e = err; } finally { try { if (!_n && _i["return"] != null) _i["return"](); } finally { if (_d) throw _e; } } return _arr; }
+
+function _arrayWithHoles(arr) { if (Array.isArray(arr)) return arr; }
+
+function ProfileUpdateView(props) {
+  var _useState = (0, _react.useState)(''),
+      _useState2 = _slicedToArray(_useState, 2),
+      username = _useState2[0],
+      updateUsername = _useState2[1];
+
+  var _useState3 = (0, _react.useState)(''),
+      _useState4 = _slicedToArray(_useState3, 2),
+      password = _useState4[0],
+      updatePassword = _useState4[1];
+
+  var _useState5 = (0, _react.useState)(''),
+      _useState6 = _slicedToArray(_useState5, 2),
+      email = _useState6[0],
+      updateEmail = _useState6[1];
+
+  var _useState7 = (0, _react.useState)(''),
+      _useState8 = _slicedToArray(_useState7, 2),
+      birthday = _useState8[0],
+      updateBirthday = _useState8[1];
+
+  var handleUpdate = function handleUpdate(e) {
+    //prevents the default behavior of submitting the form so authentication can happen
+    e.preventDefault(); //Sends an update to the database
+
+    _axios.default.put("http://localhost:3000/update-users/".concat(localStorage.getItem('user')), {
+      Username: username,
+      Password: password,
+      Email: email,
+      Birthday: birthday
+    }, {
+      headers: {
+        Authorization: "Bearer ".concat(localStorage.getItem('token'))
+      }
+    }).then(function (response) {
+      var data = response.data;
+      alert('Your profile has been updated!');
+      localStorage.setItem('user', data.Username);
+      window.open('/user/:username', '_self');
+    }).catch(function (error) {
+      alert('Error updating profile');
+    });
+  };
+
+  return _react.default.createElement(_Form.default, null, _react.default.createElement(_Form.default.Group, {
+    controlId: "formBasicUsername"
+  }, _react.default.createElement(_Form.default.Label, null, "Username"), _react.default.createElement(_Form.default.Control, {
+    type: "text",
+    className: "form",
+    placeholder: "Username",
+    value: username,
+    onChange: function onChange(e) {
+      return updateUsername(e.target.value);
+    }
+  })), _react.default.createElement(_Form.default.Group, {
+    controlId: "formBasicPassword"
+  }, _react.default.createElement(_Form.default.Label, null, "Password"), _react.default.createElement(_Form.default.Control, {
+    type: "password",
+    className: "form",
+    value: password,
+    onChange: function onChange(e) {
+      return updatePassword(e.target.value);
+    }
+  })), _react.default.createElement(_Form.default.Group, {
+    controlId: "formBasicEmail"
+  }, _react.default.createElement(_Form.default.Label, null, "Email"), _react.default.createElement(_Form.default.Control, {
+    type: "email",
+    className: "form",
+    value: email,
+    onChange: function onChange(e) {
+      return updateEmail(e.target.value);
+    }
+  })), _react.default.createElement(_Form.default.Group, {
+    controlId: "formBasicBirthday"
+  }, _react.default.createElement(_Form.default.Label, null, "Birthday"), _react.default.createElement(_Form.default.Control, {
+    type: "date",
+    className: "form",
+    value: birthday,
+    onChange: function onChange(e) {
+      return updateBirthday(e.target.value);
+    }
+  })), _react.default.createElement("div", {
+    className: "button-group"
+  }, _react.default.createElement(_Button.default, {
+    variant: "primary",
+    type: "submit",
+    onClick: handleUpdate
+  }, "Update")));
+}
+},{"react":"../../node_modules/react/index.js","axios":"../node_modules/axios/index.js","react-router-dom":"../../node_modules/react-router-dom/esm/react-router-dom.js","./profile-update-view.scss":"components/profile-view/profile-update-view.scss","react-bootstrap/Form":"../node_modules/react-bootstrap/esm/Form.js","react-bootstrap/Button":"../node_modules/react-bootstrap/esm/Button.js","react-bootstrap/Navbar":"../node_modules/react-bootstrap/esm/Navbar.js","react-bootstrap/Container":"../node_modules/react-bootstrap/esm/Container.js","react-bootstrap/Row":"../node_modules/react-bootstrap/esm/Row.js","react-bootstrap/Col":"../node_modules/react-bootstrap/esm/Col.js"}],"../node_modules/dom-helpers/esm/querySelectorAll.js":[function(require,module,exports) {
 "use strict";
 
 Object.defineProperty(exports, "__esModule", {
@@ -44011,6 +44152,8 @@ var _genreView = require("../genre-view/genre-view");
 
 var _profileView = require("../profile-view/profile-view");
 
+var _profileUpdateView = require("../profile-view/profile-update-view");
+
 var _Container = _interopRequireDefault(require("react-bootstrap/Container"));
 
 var _Row = _interopRequireDefault(require("react-bootstrap/Row"));
@@ -44293,7 +44436,7 @@ function (_React$Component) {
         exact: true,
         path: "/update-user/:username",
         render: function render() {
-          return _react.default.createElement(ProfileUpdateView, {
+          return _react.default.createElement(_profileUpdateView.ProfileUpdateView, {
             user: user,
             userProfile: userProfile
           });
@@ -44330,7 +44473,7 @@ function (_React$Component) {
 
 
 exports.MainView = MainView;
-},{"react":"../../node_modules/react/index.js","axios":"../node_modules/axios/index.js","react-router-dom":"../../node_modules/react-router-dom/esm/react-router-dom.js","../movie-card/movie-card":"components/movie-card/movie-card.jsx","../movie-view/movie-view":"components/movie-view/movie-view.jsx","../login-view/login-view":"components/login-view/login-view.jsx","../registration-view/registration-view":"components/registration-view/registration-view.jsx","../director-view/director-view":"components/director-view/director-view.jsx","../genre-view/genre-view":"components/genre-view/genre-view.jsx","../profile-view/profile-view":"components/profile-view/profile-view.jsx","react-bootstrap/Container":"../node_modules/react-bootstrap/esm/Container.js","react-bootstrap/Row":"../node_modules/react-bootstrap/esm/Row.js","react-bootstrap/Col":"../node_modules/react-bootstrap/esm/Col.js","react-bootstrap/Navbar":"../node_modules/react-bootstrap/esm/Navbar.js","react-bootstrap/Nav":"../node_modules/react-bootstrap/esm/Nav.js","react-bootstrap/Form":"../node_modules/react-bootstrap/esm/Form.js","react-bootstrap/Button":"../node_modules/react-bootstrap/esm/Button.js","react-bootstrap/FormControl":"../node_modules/react-bootstrap/esm/FormControl.js","feather-icons-react":"../node_modules/feather-icons-react/build/index.js","./main-view.scss":"components/main-view/main-view.scss"}],"index.scss":[function(require,module,exports) {
+},{"react":"../../node_modules/react/index.js","axios":"../node_modules/axios/index.js","react-router-dom":"../../node_modules/react-router-dom/esm/react-router-dom.js","../movie-card/movie-card":"components/movie-card/movie-card.jsx","../movie-view/movie-view":"components/movie-view/movie-view.jsx","../login-view/login-view":"components/login-view/login-view.jsx","../registration-view/registration-view":"components/registration-view/registration-view.jsx","../director-view/director-view":"components/director-view/director-view.jsx","../genre-view/genre-view":"components/genre-view/genre-view.jsx","../profile-view/profile-view":"components/profile-view/profile-view.jsx","../profile-view/profile-update-view":"components/profile-view/profile-update-view.jsx","react-bootstrap/Container":"../node_modules/react-bootstrap/esm/Container.js","react-bootstrap/Row":"../node_modules/react-bootstrap/esm/Row.js","react-bootstrap/Col":"../node_modules/react-bootstrap/esm/Col.js","react-bootstrap/Navbar":"../node_modules/react-bootstrap/esm/Navbar.js","react-bootstrap/Nav":"../node_modules/react-bootstrap/esm/Nav.js","react-bootstrap/Form":"../node_modules/react-bootstrap/esm/Form.js","react-bootstrap/Button":"../node_modules/react-bootstrap/esm/Button.js","react-bootstrap/FormControl":"../node_modules/react-bootstrap/esm/FormControl.js","feather-icons-react":"../node_modules/feather-icons-react/build/index.js","./main-view.scss":"components/main-view/main-view.scss"}],"index.scss":[function(require,module,exports) {
 var reloadCSS = require('_css_loader');
 
 module.hot.dispose(reloadCSS);

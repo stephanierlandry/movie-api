@@ -42,6 +42,9 @@ export class ProfileView extends React.Component {
                 <div className="user-favorites">
                   <span className="value">{userProfile.FavoriteMovies}</span>
                 </div>
+                <div className="updateButton">
+                  <Link to="/update-user/:username" className="btn">Update Your Profile</Link>
+                </div>
                 <Link to={`/`}>
                   <Button variant="link" className="btn back-button">Back</Button>
                 </Link>
