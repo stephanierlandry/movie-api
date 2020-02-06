@@ -1,4 +1,5 @@
 import React from 'react';
+import axios from 'axios';
 
 import './movie-view.scss';
 
@@ -17,6 +18,22 @@ export class MovieView extends React.Component {
 
   goBack() {
     history.back();
+  }
+
+  addUserFavorites(e){
+    const {movie} = this.props;
+    e.preventDefault();
+    axios.post(`https://design-and-a-movie.herokuapp.com/update-users/${localStorage.getItem('user')}/movies/${movie._id}`,
+    {username: localStorage.getItem('user')},
+    {
+      headers: {Authorization: `Bearer ${localStorage.getItem('token')}`}
+    })
+    .then(resposne => {
+      alert(`${movie.Title} was added to your Favorites List`)
+    })
+    .catch(error => {
+      alert(error + ` ${movie.Title} cannot be added to your Favorites List`)
+    })
   }
 
   render() {
@@ -56,6 +73,9 @@ export class MovieView extends React.Component {
                     <Link to={`/directors/${movie.Director.Name}`}>
                       <span className="value link">{movie.Director.Name}</span>
                     </Link>
+                  </div>
+                  <div>
+                    <Button className="btn" onClick={this.addUserFavorites.bind(this)}>Add Movie to Favorites!</Button>
                   </div>
                 <Link to={`/`}>
                   <Button variant="link" className="btn back-button">Back</Button>

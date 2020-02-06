@@ -24,7 +24,8 @@ export class ProfileView extends React.Component {
   render(){
 
     const { user, userProfile } = this.props;
-    console.log({m:'profileView', r:userProfile});
+    console.log({m:'profileView', r:userProfile.FavoritesMovies});
+
 
     if(!user){
       return null
@@ -40,7 +41,7 @@ export class ProfileView extends React.Component {
                   <span className="value">{userProfile.Username}</span>
                 </div>
                 <div className="user-favorites">
-                  <span className="value">{userProfile.FavoriteMovies}</span>
+                  <span className="value">{userProfile.FavoritesMovies}</span>
                 </div>
                 <div className="updateButton">
                   <Link to="/update-user/:username" className="btn">Update Your Profile</Link>

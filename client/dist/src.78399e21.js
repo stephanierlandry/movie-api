@@ -39508,6 +39508,8 @@ exports.MovieView = void 0;
 
 var _react = _interopRequireDefault(require("react"));
 
+var _axios = _interopRequireDefault(require("axios"));
+
 require("./movie-view.scss");
 
 var _Container = _interopRequireDefault(require("react-bootstrap/Container"));
@@ -39561,6 +39563,24 @@ function (_React$Component) {
       history.back();
     }
   }, {
+    key: "addUserFavorites",
+    value: function addUserFavorites(e) {
+      var movie = this.props.movie;
+      e.preventDefault();
+
+      _axios.default.post("https://design-and-a-movie.herokuapp.com/update-users/".concat(localStorage.getItem('user'), "/movies/").concat(movie._id), {
+        username: localStorage.getItem('user')
+      }, {
+        headers: {
+          Authorization: "Bearer ".concat(localStorage.getItem('token'))
+        }
+      }).then(function (resposne) {
+        alert("".concat(movie.Title, " was added to your Favorites List"));
+      }).catch(function (error) {
+        alert(error + " ".concat(movie.Title, " cannot be added to your Favorites List"));
+      });
+    }
+  }, {
     key: "render",
     value: function render() {
       var _this$props = this.props,
@@ -39605,7 +39625,10 @@ function (_React$Component) {
           to: "/directors/".concat(movie.Director.Name)
         }, _react.default.createElement("span", {
           className: "value link"
-        }, movie.Director.Name))), _react.default.createElement(_reactRouterDom.Link, {
+        }, movie.Director.Name))), _react.default.createElement("div", null, _react.default.createElement(_Button.default, {
+          className: "btn",
+          onClick: this.addUserFavorites.bind(this)
+        }, "Add Movie to Favorites!")), _react.default.createElement(_reactRouterDom.Link, {
           to: "/"
         }, _react.default.createElement(_Button.default, {
           variant: "link",
@@ -39619,7 +39642,7 @@ function (_React$Component) {
 }(_react.default.Component);
 
 exports.MovieView = MovieView;
-},{"react":"../../node_modules/react/index.js","./movie-view.scss":"components/movie-view/movie-view.scss","react-bootstrap/Container":"../node_modules/react-bootstrap/esm/Container.js","react-bootstrap/Row":"../node_modules/react-bootstrap/esm/Row.js","react-bootstrap/Col":"../node_modules/react-bootstrap/esm/Col.js","react-bootstrap/Button":"../node_modules/react-bootstrap/esm/Button.js","react-router-dom":"../../node_modules/react-router-dom/esm/react-router-dom.js"}],"../node_modules/prop-types-extra/lib/utils/createChainableTypeChecker.js":[function(require,module,exports) {
+},{"react":"../../node_modules/react/index.js","axios":"../node_modules/axios/index.js","./movie-view.scss":"components/movie-view/movie-view.scss","react-bootstrap/Container":"../node_modules/react-bootstrap/esm/Container.js","react-bootstrap/Row":"../node_modules/react-bootstrap/esm/Row.js","react-bootstrap/Col":"../node_modules/react-bootstrap/esm/Col.js","react-bootstrap/Button":"../node_modules/react-bootstrap/esm/Button.js","react-router-dom":"../../node_modules/react-router-dom/esm/react-router-dom.js"}],"../node_modules/prop-types-extra/lib/utils/createChainableTypeChecker.js":[function(require,module,exports) {
 'use strict';
 
 Object.defineProperty(exports, "__esModule", {
@@ -42981,7 +43004,7 @@ function (_React$Component) {
           userProfile = _this$props.userProfile;
       console.log({
         m: 'profileView',
-        r: userProfile
+        r: userProfile.FavoritesMovies
       });
 
       if (!user) {
@@ -42999,7 +43022,7 @@ function (_React$Component) {
           className: "user-favorites"
         }, _react.default.createElement("span", {
           className: "value"
-        }, userProfile.FavoriteMovies)), _react.default.createElement("div", {
+        }, userProfile.FavoritesMovies)), _react.default.createElement("div", {
           className: "updateButton"
         }, _react.default.createElement(_reactRouterDom.Link, {
           to: "/update-user/:username",
