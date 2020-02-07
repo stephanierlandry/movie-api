@@ -204,7 +204,7 @@ app.delete('/delete-users/:Username', passport.authenticate('jwt', {session: fal
 //Update this to only add a movie once
 app.post('/update-users/:username/movies/:movieID', passport.authenticate('jwt', {session: false}), function(req, res) {
   Users.findOneAndUpdate({ Username : req.params.username }, {
-    $push : { Favorites : req.params.movieID }
+    $addToSet : { FavoritesMovies : req.params.movieID }
   },
   { new : true },
   function(err, updatedUser) {

@@ -39568,7 +39568,7 @@ function (_React$Component) {
       var movie = this.props.movie;
       e.preventDefault();
 
-      _axios.default.post("https://design-and-a-movie.herokuapp.com/update-users/".concat(localStorage.getItem('user'), "/movies/").concat(movie._id), {
+      _axios.default.post("http://localhost:3000/update-users/".concat(localStorage.getItem('user'), "/movies/").concat(movie._id), {
         username: localStorage.getItem('user')
       }, {
         headers: {
@@ -43022,7 +43022,7 @@ function (_React$Component) {
           className: "user-favorites"
         }, _react.default.createElement("span", {
           className: "value"
-        }, userProfile.FavoritesMovies)), _react.default.createElement("div", {
+        }, userProfile.FavoritesMovies)))), _react.default.createElement(_Col.default, null, _react.default.createElement("div", {
           className: "updateButton"
         }, _react.default.createElement(_reactRouterDom.Link, {
           to: "/update-user/:username",
@@ -43032,7 +43032,7 @@ function (_React$Component) {
         }, _react.default.createElement(_Button.default, {
           variant: "link",
           className: "btn back-button"
-        }, "Back"))))));
+        }, "Back")))));
       }
     }
   }]);
@@ -44588,7 +44588,7 @@ var parent = module.bundle.parent;
 if ((!parent || !parent.isParcelRequire) && typeof WebSocket !== 'undefined') {
   var hostname = "" || location.hostname;
   var protocol = location.protocol === 'https:' ? 'wss' : 'ws';
-  var ws = new WebSocket(protocol + '://' + hostname + ':' + "57360" + '/');
+  var ws = new WebSocket(protocol + '://' + hostname + ':' + "49764" + '/');
 
   ws.onmessage = function (event) {
     checkedAssets = {};
