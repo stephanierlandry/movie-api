@@ -10319,8 +10319,16 @@ body {
 .genre-block {
   color: white;
 }
+.loading {
+  color: white;
+}
+
 .user-info-block {
   color: white;
+}
+
+ul {
+  list-style: none;
 }
 body {
   background: #060807;

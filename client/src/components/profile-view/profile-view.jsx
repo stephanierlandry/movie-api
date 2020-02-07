@@ -13,7 +13,6 @@ export class ProfileView extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
-      userProfile: {}
     };
   }
 
@@ -23,15 +22,14 @@ export class ProfileView extends React.Component {
 
   render(){
 
-    const { user, userProfile } = this.props;
-    console.log({m:'profileView', r:userProfile.FavoritesMovies});
+    const { user, userProfile, movies } = this.props;
+    const favoritesList = movies.filter(movie => userProfile.FavoritesMovies.includes(movie._id));
 
-
-    if(!user){
-      return null
+    if(!user || !userProfile){
+      return <div className="loading">loading</div>
     }
 
-    if(user) {
+    if(user || userProfile) {
       return(
         <Container>
           <Row>
@@ -41,7 +39,15 @@ export class ProfileView extends React.Component {
                   <span className="value">{userProfile.Username}</span>
                 </div>
                 <div className="user-favorites">
-                  <span className="value">{userProfile.FavoritesMovies}</span>
+                  {!userProfile.FavoritesMovies && <div>no movies</div>}
+                  {userProfile.FavoritesMovies &&
+                    <ul>
+                      {favoritesList.map(movie =>
+                        <li key={movie._id}>
+                          <Link to={`/movie/${movie._id}`}>{movie.Title}</Link>
+                        </li>
+                      )}
+                    </ul>}
                 </div>
               </div>
             </Col>

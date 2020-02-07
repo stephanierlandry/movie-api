@@ -39628,12 +39628,11 @@ function (_React$Component) {
         }, movie.Director.Name))), _react.default.createElement("div", null, _react.default.createElement(_Button.default, {
           className: "btn",
           onClick: this.addUserFavorites.bind(this)
-        }, "Add Movie to Favorites!")), _react.default.createElement(_reactRouterDom.Link, {
-          to: "/"
-        }, _react.default.createElement(_Button.default, {
+        }, "Add Movie to Favorites!")), _react.default.createElement(_Button.default, {
           variant: "link",
-          className: "btn back-button"
-        }, "Back"))))));
+          className: "btn back-button",
+          onClick: this.goBack.bind(this)
+        }, "Back")))));
       }
     }
   }]);
@@ -42522,13 +42521,7 @@ function RegistrationView(props) {
   var _useState7 = (0, _react.useState)(''),
       _useState8 = _slicedToArray(_useState7, 2),
       birthday = _useState8[0],
-      setBirthday = _useState8[1]; // const handleSubmit = (e) => {
-  //   e.preventDefault();
-  //   console.log(username, password);
-  //   // Send a request to the server for authentication then call props.onLoggedIn(username)
-  //   props.onLoggedIn(username);
-  // };
-
+      setBirthday = _useState8[1];
 
   var handleRegister = function handleRegister(e) {
     e.preventDefault();
@@ -42985,9 +42978,7 @@ function (_React$Component) {
     _classCallCheck(this, ProfileView);
 
     _this = _possibleConstructorReturn(this, _getPrototypeOf(ProfileView).call(this, props));
-    _this.state = {
-      userProfile: {}
-    };
+    _this.state = {};
     return _this;
   }
 
@@ -43001,17 +42992,19 @@ function (_React$Component) {
     value: function render() {
       var _this$props = this.props,
           user = _this$props.user,
-          userProfile = _this$props.userProfile;
-      console.log({
-        m: 'profileView',
-        r: userProfile.FavoritesMovies
+          userProfile = _this$props.userProfile,
+          movies = _this$props.movies;
+      var favoritesList = movies.filter(function (movie) {
+        return userProfile.FavoritesMovies.includes(movie._id);
       });
 
-      if (!user) {
-        return null;
+      if (!user || !userProfile) {
+        return _react.default.createElement("div", {
+          className: "loading"
+        }, "loading");
       }
 
-      if (user) {
+      if (user || userProfile) {
         return _react.default.createElement(_Container.default, null, _react.default.createElement(_Row.default, null, _react.default.createElement(_Col.default, null, _react.default.createElement("div", {
           className: "user-info-block"
         }, _react.default.createElement("div", {
@@ -43020,9 +43013,13 @@ function (_React$Component) {
           className: "value"
         }, userProfile.Username)), _react.default.createElement("div", {
           className: "user-favorites"
-        }, _react.default.createElement("span", {
-          className: "value"
-        }, userProfile.FavoritesMovies)))), _react.default.createElement(_Col.default, null, _react.default.createElement("div", {
+        }, !userProfile.FavoritesMovies && _react.default.createElement("div", null, "no movies"), userProfile.FavoritesMovies && _react.default.createElement("ul", null, favoritesList.map(function (movie) {
+          return _react.default.createElement("li", {
+            key: movie._id
+          }, _react.default.createElement(_reactRouterDom.Link, {
+            to: "/movie/".concat(movie._id)
+          }, movie.Title));
+        }))))), _react.default.createElement(_Col.default, null, _react.default.createElement("div", {
           className: "updateButton"
         }, _react.default.createElement(_reactRouterDom.Link, {
           to: "/update-user/:username",
@@ -44452,7 +44449,8 @@ function (_React$Component) {
         render: function render() {
           return _react.default.createElement(_profileView.ProfileView, {
             user: user,
-            userProfile: userProfile
+            userProfile: userProfile,
+            movies: movies
           });
         }
       }), _react.default.createElement(_reactRouterDom.Route, {
@@ -44588,7 +44586,7 @@ var parent = module.bundle.parent;
 if ((!parent || !parent.isParcelRequire) && typeof WebSocket !== 'undefined') {
   var hostname = "" || location.hostname;
   var protocol = location.protocol === 'https:' ? 'wss' : 'ws';
-  var ws = new WebSocket(protocol + '://' + hostname + ':' + "49764" + '/');
+  var ws = new WebSocket(protocol + '://' + hostname + ':' + "49849" + '/');
 
   ws.onmessage = function (event) {
     checkedAssets = {};

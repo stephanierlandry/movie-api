@@ -77,9 +77,7 @@ export class MovieView extends React.Component {
                   <div>
                     <Button className="btn" onClick={this.addUserFavorites.bind(this)}>Add Movie to Favorites!</Button>
                   </div>
-                <Link to={`/`}>
-                  <Button variant="link" className="btn back-button">Back</Button>
-                </Link>
+                  <Button variant="link" className="btn back-button" onClick={this.goBack.bind(this)}>Back</Button>
               </div>
             </Col>
           </Row>

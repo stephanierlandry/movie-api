@@ -207,7 +207,7 @@ export class MainView extends React.Component {
                 <Route exact path="/user/:username"
                         render={() => {
                           return (
-                            <ProfileView user={user} userProfile={userProfile}/>
+                            <ProfileView user={user} userProfile={userProfile} movies={movies}/>
                           );
                         }}/>
 
