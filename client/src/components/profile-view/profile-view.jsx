@@ -100,6 +100,9 @@ export class ProfileView extends React.Component {
               <Link to={`/`}>
                 <Button variant="link" className="btn back-button">Back</Button>
               </Link>
+
+            </Col>
+            <Col>
               <Button type="button" onClick={this.deleteUserProfile.bind(this)}>Delete Account</Button>
             </Col>
           </Row>

@@ -42535,7 +42535,8 @@ function RegistrationView(props) {
       Birthday: birthday
     }).then(function (response) {
       var data = response.data;
-      window.open('/', '_self'); // the second argument '_self' is necessary so that the page will open in the current tab
+      alert('You have successfully registered. Please login now!');
+      window.open('/login', '_self'); // the second argument '_self' is necessary so that the page will open in the current tab
     }).catch(function (e) {
       console.log(e, 'error registering the user');
     });
@@ -43078,7 +43079,7 @@ function (_React$Component) {
         }, _react.default.createElement(_Button.default, {
           variant: "link",
           className: "btn back-button"
-        }, "Back")), _react.default.createElement(_Button.default, {
+        }, "Back"))), _react.default.createElement(_Col.default, null, _react.default.createElement(_Button.default, {
           type: "button",
           onClick: this.deleteUserProfile.bind(this)
         }, "Delete Account"))));
@@ -44383,7 +44384,7 @@ function (_React$Component) {
           selectedMovie = _this$state.selectedMovie,
           user = _this$state.user,
           userProfile = _this$state.userProfile;
-      if (!movies || !user || !userProfile) return _react.default.createElement("div", {
+      if (!movies) return _react.default.createElement("div", {
         className: "loading"
       }, "loading");
       return _react.default.createElement(_reactRouterDom.BrowserRouter, null, _react.default.createElement("div", null, _react.default.createElement(_Container.default, null, _react.default.createElement(_Navbar.default, {
