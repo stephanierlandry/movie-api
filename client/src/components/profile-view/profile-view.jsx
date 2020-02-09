@@ -1,4 +1,5 @@
 import React from 'react';
+import axios from 'axios';
 
 import './profile-view.scss';
 
@@ -15,6 +16,22 @@ export class ProfileView extends React.Component {
     this.state = {
     };
   }
+
+  deleteFavorites(movieId) {
+      axios.delete(`https://design-and-a-movie.herokuapp.com/update-users/${localStorage.getItem('user')}/favorites/${movieId}`, {
+        headers: { Authorization: `Bearer ${localStorage.getItem('token')}` }
+      })
+        .then(res => {
+          document.location.reload(true);
+        })
+        .then(res => {
+          alert('Movie successfully deleted from favorites');
+        })
+
+        .catch(e => {
+          alert('Movie could not be deleted from favorites ' + e)
+        });
+    }
 
   goBack() {
     history.back();
@@ -45,6 +62,7 @@ export class ProfileView extends React.Component {
                       {favoritesList.map(movie =>
                         <li key={movie._id}>
                           <Link to={`/movie/${movie._id}`}>{movie.Title}</Link>
+                          <Button type="button" onClick={this.deleteFavorites.bind(this)}>X</Button>
                         </li>
                       )}
                     </ul>}

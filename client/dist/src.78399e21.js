@@ -39574,6 +39574,8 @@ function (_React$Component) {
         headers: {
           Authorization: "Bearer ".concat(localStorage.getItem('token'))
         }
+      }).then(function (response) {
+        document.location.reload(true);
       }).then(function (resposne) {
         alert("".concat(movie.Title, " was added to your Favorites List"));
       }).catch(function (error) {
@@ -42533,7 +42535,6 @@ function RegistrationView(props) {
       Birthday: birthday
     }).then(function (response) {
       var data = response.data;
-      console.log(response);
       window.open('/', '_self'); // the second argument '_self' is necessary so that the page will open in the current tab
     }).catch(function (e) {
       console.log(e, 'error registering the user');
@@ -42935,6 +42936,8 @@ exports.ProfileView = void 0;
 
 var _react = _interopRequireDefault(require("react"));
 
+var _axios = _interopRequireDefault(require("axios"));
+
 require("./profile-view.scss");
 
 var _Container = _interopRequireDefault(require("react-bootstrap/Container"));
@@ -42983,6 +42986,21 @@ function (_React$Component) {
   }
 
   _createClass(ProfileView, [{
+    key: "deleteFavorites",
+    value: function deleteFavorites(movieId) {
+      _axios.default.delete("https://design-and-a-movie.herokuapp.com/update-users/".concat(localStorage.getItem('user'), "/favorites/").concat(movieId), {
+        headers: {
+          Authorization: "Bearer ".concat(localStorage.getItem('token'))
+        }
+      }).then(function (res) {
+        document.location.reload(true);
+      }).then(function (res) {
+        alert('Movie successfully deleted from favorites');
+      }).catch(function (e) {
+        alert('Movie could not be deleted from favorites ' + e);
+      });
+    }
+  }, {
     key: "goBack",
     value: function goBack() {
       history.back();
@@ -42990,6 +43008,8 @@ function (_React$Component) {
   }, {
     key: "render",
     value: function render() {
+      var _this2 = this;
+
       var _this$props = this.props,
           user = _this$props.user,
           userProfile = _this$props.userProfile,
@@ -43018,7 +43038,10 @@ function (_React$Component) {
             key: movie._id
           }, _react.default.createElement(_reactRouterDom.Link, {
             to: "/movie/".concat(movie._id)
-          }, movie.Title));
+          }, movie.Title), _react.default.createElement(_Button.default, {
+            type: "button",
+            onClick: _this2.deleteFavorites.bind(_this2)
+          }, "X"));
         }))))), _react.default.createElement(_Col.default, null, _react.default.createElement("div", {
           className: "updateButton"
         }, _react.default.createElement(_reactRouterDom.Link, {
@@ -43038,7 +43061,7 @@ function (_React$Component) {
 }(_react.default.Component);
 
 exports.ProfileView = ProfileView;
-},{"react":"../../node_modules/react/index.js","./profile-view.scss":"components/profile-view/profile-view.scss","react-bootstrap/Container":"../node_modules/react-bootstrap/esm/Container.js","react-bootstrap/Row":"../node_modules/react-bootstrap/esm/Row.js","react-bootstrap/Col":"../node_modules/react-bootstrap/esm/Col.js","react-bootstrap/Button":"../node_modules/react-bootstrap/esm/Button.js","react-router-dom":"../../node_modules/react-router-dom/esm/react-router-dom.js"}],"components/profile-view/profile-update-view.scss":[function(require,module,exports) {
+},{"react":"../../node_modules/react/index.js","axios":"../node_modules/axios/index.js","./profile-view.scss":"components/profile-view/profile-view.scss","react-bootstrap/Container":"../node_modules/react-bootstrap/esm/Container.js","react-bootstrap/Row":"../node_modules/react-bootstrap/esm/Row.js","react-bootstrap/Col":"../node_modules/react-bootstrap/esm/Col.js","react-bootstrap/Button":"../node_modules/react-bootstrap/esm/Button.js","react-router-dom":"../../node_modules/react-router-dom/esm/react-router-dom.js"}],"components/profile-view/profile-update-view.scss":[function(require,module,exports) {
 var reloadCSS = require('_css_loader');
 
 module.hot.dispose(reloadCSS);
@@ -44331,7 +44354,7 @@ function (_React$Component) {
           selectedMovie = _this$state.selectedMovie,
           user = _this$state.user,
           userProfile = _this$state.userProfile;
-      if (!movies) return _react.default.createElement("div", {
+      if (!movies || !user || !userProfile) return _react.default.createElement("div", {
         className: "loading"
       }, "loading");
       return _react.default.createElement(_reactRouterDom.BrowserRouter, null, _react.default.createElement("div", null, _react.default.createElement(_Container.default, null, _react.default.createElement(_Navbar.default, {
@@ -44586,7 +44609,7 @@ var parent = module.bundle.parent;
 if ((!parent || !parent.isParcelRequire) && typeof WebSocket !== 'undefined') {
   var hostname = "" || location.hostname;
   var protocol = location.protocol === 'https:' ? 'wss' : 'ws';
-  var ws = new WebSocket(protocol + '://' + hostname + ':' + "49849" + '/');
+  var ws = new WebSocket(protocol + '://' + hostname + ':' + "53214" + '/');
 
   ws.onmessage = function (event) {
     checkedAssets = {};

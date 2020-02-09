@@ -28,6 +28,9 @@ export class MovieView extends React.Component {
     },
     {headers: {Authorization: `Bearer ${localStorage.getItem('token')}`}
     })
+    .then(response => {
+      document.location.reload(true);
+    })
     .then(resposne => {
       alert(`${movie.Title} was added to your Favorites List`)
     })

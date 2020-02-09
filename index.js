@@ -220,7 +220,7 @@ app.post('/update-users/:username/movies/:movieID', passport.authenticate('jwt',
 //This endpoint deletes a favorite from a users profile
 app.delete("/update-users/:username/favorites/:movieID", passport.authenticate('jwt', {session: false}), (req,res) => {
   Users.findOneAndUpdate({ Username : req.params.username}, {
-    $unset : { Favorites : req.params.movieID}
+    $pull : { FavoritesMovies : req.params.movieID }
   },
   {new : true})
   .then(function(user){
