@@ -33,6 +33,30 @@ export class ProfileView extends React.Component {
         });
     }
 
+    deleteUserProfile() {
+      axios.delete(`http://localhost:3000/delete-users/${localStorage.getItem('user')}`, {
+        headers: { Authorization: `Bearer ${localStorage.getItem('token')}` }
+      })
+        .then(response => {
+          alert('Do you really want to delete your account?')
+        })
+        .then(response => {
+          alert('Account was successfully deleted!')
+        })
+        .then(response => {
+          localStorage.removeItem('token');
+          localStorage.removeItem('user');
+
+          this.setState({
+           user: null
+         })
+          window.open('/', '_self');
+        })
+        .catch(error => {
+          alert('There was an error. Your account could not be deleted. ' + error);
+        })
+    }
+
   goBack() {
     history.back();
   }
@@ -76,6 +100,7 @@ export class ProfileView extends React.Component {
               <Link to={`/`}>
                 <Button variant="link" className="btn back-button">Back</Button>
               </Link>
+              <Button type="button" onClick={this.deleteUserProfile.bind(this)}>Delete Account</Button>
             </Col>
           </Row>
         </Container>

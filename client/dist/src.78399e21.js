@@ -43001,6 +43001,32 @@ function (_React$Component) {
       });
     }
   }, {
+    key: "deleteUserProfile",
+    value: function deleteUserProfile() {
+      var _this2 = this;
+
+      _axios.default.delete("http://localhost:3000/delete-users/".concat(localStorage.getItem('user')), {
+        headers: {
+          Authorization: "Bearer ".concat(localStorage.getItem('token'))
+        }
+      }).then(function (response) {
+        alert('Do you really want to delete your account?');
+      }).then(function (response) {
+        alert('Account was successfully deleted!');
+      }).then(function (response) {
+        localStorage.removeItem('token');
+        localStorage.removeItem('user');
+
+        _this2.setState({
+          user: null
+        });
+
+        window.open('/', '_self');
+      }).catch(function (error) {
+        alert('There was an error. Your account could not be deleted. ' + error);
+      });
+    }
+  }, {
     key: "goBack",
     value: function goBack() {
       history.back();
@@ -43008,7 +43034,7 @@ function (_React$Component) {
   }, {
     key: "render",
     value: function render() {
-      var _this2 = this;
+      var _this3 = this;
 
       var _this$props = this.props,
           user = _this$props.user,
@@ -43040,7 +43066,7 @@ function (_React$Component) {
             to: "/movie/".concat(movie._id)
           }, movie.Title), _react.default.createElement(_Button.default, {
             type: "button",
-            onClick: _this2.deleteFavorites.bind(_this2)
+            onClick: _this3.deleteFavorites.bind(_this3)
           }, "X"));
         }))))), _react.default.createElement(_Col.default, null, _react.default.createElement("div", {
           className: "updateButton"
@@ -43052,7 +43078,10 @@ function (_React$Component) {
         }, _react.default.createElement(_Button.default, {
           variant: "link",
           className: "btn back-button"
-        }, "Back")))));
+        }, "Back")), _react.default.createElement(_Button.default, {
+          type: "button",
+          onClick: this.deleteUserProfile.bind(this)
+        }, "Delete Account"))));
       }
     }
   }]);
