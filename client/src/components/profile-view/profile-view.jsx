@@ -34,7 +34,7 @@ export class ProfileView extends React.Component {
     }
 
     deleteUserProfile() {
-      axios.delete(`http://localhost:3000/delete-users/${localStorage.getItem('user')}`, {
+      axios.delete(`https://design-and-a-movie.herokuapp.com/delete-users/${localStorage.getItem('user')}`, {
         headers: { Authorization: `Bearer ${localStorage.getItem('token')}` }
       })
         .then(response => {

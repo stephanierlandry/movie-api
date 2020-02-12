@@ -39568,7 +39568,7 @@ function (_React$Component) {
       var movie = this.props.movie;
       e.preventDefault();
 
-      _axios.default.post("http://localhost:3000/update-users/".concat(localStorage.getItem('user'), "/movies/").concat(movie._id), {
+      _axios.default.post("https://design-and-a-movie.herokuapp.com/update-users/".concat(localStorage.getItem('user'), "/movies/").concat(movie._id), {
         username: localStorage.getItem('user')
       }, {
         headers: {
@@ -42528,7 +42528,7 @@ function RegistrationView(props) {
   var handleRegister = function handleRegister(e) {
     e.preventDefault();
 
-    _axios.default.post('http://localhost:3000/update-users/newuser', {
+    _axios.default.post('https://design-and-a-movie.herokuapp.com/update-users/newuser', {
       Username: username,
       Password: password,
       Email: email,
@@ -43006,7 +43006,7 @@ function (_React$Component) {
     value: function deleteUserProfile() {
       var _this2 = this;
 
-      _axios.default.delete("http://localhost:3000/delete-users/".concat(localStorage.getItem('user')), {
+      _axios.default.delete("https://design-and-a-movie.herokuapp.com/delete-users/".concat(localStorage.getItem('user')), {
         headers: {
           Authorization: "Bearer ".concat(localStorage.getItem('token'))
         }
@@ -43163,7 +43163,7 @@ function ProfileUpdateView(props) {
     //prevents the default behavior of submitting the form so authentication can happen
     e.preventDefault(); //Sends an update to the database
 
-    _axios.default.put("http://localhost:3000/update-users/".concat(localStorage.getItem('user')), {
+    _axios.default.put("https://design-and-a-movie.herokuapp.com/update-users/".concat(localStorage.getItem('user')), {
       Username: username,
       Password: password,
       Email: email,
@@ -44313,7 +44313,7 @@ function (_React$Component) {
     value: function getUserProfile(token) {
       var _this3 = this;
 
-      _axios.default.get("http://localhost:3000/get-users/".concat(localStorage.getItem('user')), {
+      _axios.default.get("https://design-and-a-movie.herokuapp.com/get-users/".concat(localStorage.getItem('user')), {
         headers: {
           Authorization: "Bearer ".concat(token)
         }

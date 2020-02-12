@@ -56,7 +56,7 @@ export class MainView extends React.Component {
   }
 
   getUserProfile(token){
-    axios.get(`http://localhost:3000/get-users/${localStorage.getItem('user')}`,{
+    axios.get(`https://design-and-a-movie.herokuapp.com/get-users/${localStorage.getItem('user')}`,{
       headers: {Authorization: `Bearer ${token}`}
     })
     .then(response => {

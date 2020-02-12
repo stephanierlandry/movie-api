@@ -19,7 +19,7 @@ export function RegistrationView(props) {
   const handleRegister = (e) => {
   e.preventDefault();
 
-  axios.post('http://localhost:3000/update-users/newuser', {
+  axios.post('https://design-and-a-movie.herokuapp.com/update-users/newuser', {
     Username: username,
     Password: password,
     Email: email,
