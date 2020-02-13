@@ -14,6 +14,7 @@ export class ProfileView extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
+
     };
   }
 
@@ -25,11 +26,11 @@ export class ProfileView extends React.Component {
           document.location.reload(true);
         })
         .then(res => {
+          console.log('res')
           alert('Movie successfully deleted from favorites');
         })
-
         .catch(e => {
-          alert('Movie could not be deleted from favorites ' + e)
+          alert( `${ movieId } could not be deleted from favorites ` + e)
         });
     }
 
@@ -86,7 +87,7 @@ export class ProfileView extends React.Component {
                       {favoritesList.map(movie =>
                         <li key={movie._id}>
                           <Link to={`/movie/${movie._id}`}>{movie.Title}</Link>
-                          <Button type="button" onClick={this.deleteFavorites.bind(this)}>X</Button>
+                          <Button type="button" onClick={e => this.deleteFavorites(movie._id)}>X</Button>
                         </li>
                       )}
                     </ul>}

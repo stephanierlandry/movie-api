@@ -42996,9 +42996,10 @@ function (_React$Component) {
       }).then(function (res) {
         document.location.reload(true);
       }).then(function (res) {
+        console.log('res');
         alert('Movie successfully deleted from favorites');
       }).catch(function (e) {
-        alert('Movie could not be deleted from favorites ' + e);
+        alert("".concat(movieId, " could not be deleted from favorites ") + e);
       });
     }
   }, {
@@ -43067,7 +43068,9 @@ function (_React$Component) {
             to: "/movie/".concat(movie._id)
           }, movie.Title), _react.default.createElement(_Button.default, {
             type: "button",
-            onClick: _this3.deleteFavorites.bind(_this3)
+            onClick: function onClick(e) {
+              return _this3.deleteFavorites(movie._id);
+            }
           }, "X"));
         }))))), _react.default.createElement(_Col.default, null, _react.default.createElement("div", {
           className: "updateButton"
