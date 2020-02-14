@@ -10323,12 +10323,47 @@ body {
   color: white;
 }
 
+.main-view {
+  width: 100%;
+}
+
 .user-info-block {
   color: white;
 }
 
+.update-btn {
+  margin: 1em;
+}
+
+.delete-user-btn {
+  margin: 1em;
+}
+
+.user-fav-block {
+  position: absolute;
+  color: white;
+  line-height: 1.65em;
+  display: contents;
+}
+
+.fav-title {
+  color: white;
+}
+
+.movie-image {
+  width: 70%;
+  height: auto;
+  margin: 2em 2em 2em 0;
+}
+
+.movie-image:hover {
+  opacity: 40%;
+  cursor: pointer;
+}
+
 ul {
   list-style: none;
+  padding: 0;
 }
 body {
   background: #060807;

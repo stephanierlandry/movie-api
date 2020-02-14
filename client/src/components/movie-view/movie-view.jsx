@@ -71,12 +71,14 @@ export class MovieView extends React.Component {
                       <span className="value link">{movie.Genre.Name}</span>
                     </Link>
                   </div>
+
                   <div className="movie-director">
                     <span className="label">Director: </span>
                     <Link to={`/directors/${movie.Director.Name}`}>
                       <span className="value link">{movie.Director.Name}</span>
                     </Link>
                   </div>
+                  
                   <div>
                     <Button className="btn" onClick={this.addUserFavorites.bind(this)}>Add Movie to Favorites!</Button>
                   </div>

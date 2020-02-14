@@ -43055,37 +43055,42 @@ function (_React$Component) {
       if (user || userProfile) {
         return _react.default.createElement(_Container.default, null, _react.default.createElement(_Row.default, null, _react.default.createElement(_Col.default, null, _react.default.createElement("div", {
           className: "user-info-block"
+        }, _react.default.createElement("h1", null, "hi ", user), _react.default.createElement("div", {
+          className: "update-btn"
+        }, _react.default.createElement(_reactRouterDom.Link, {
+          to: "/update-user/:username",
+          className: "btn"
+        }, "Update Your Profile")), _react.default.createElement("div", {
+          className: "delete-user-btn"
+        }, _react.default.createElement(_Button.default, {
+          type: "button",
+          onClick: this.deleteUserProfile.bind(this)
+        }, "Delete Account")))), _react.default.createElement(_Col.default, null, _react.default.createElement("h3", {
+          className: "fav-title"
+        }, "Your Movie Favorites!"), _react.default.createElement("div", {
+          className: "user-fav-block"
         }, _react.default.createElement("div", {
-          className: "user-name"
-        }, _react.default.createElement("span", {
-          className: "value"
-        }, userProfile.Username)), _react.default.createElement("div", {
           className: "user-favorites"
         }, !userProfile.FavoritesMovies && _react.default.createElement("div", null, "no movies"), userProfile.FavoritesMovies && _react.default.createElement("ul", null, favoritesList.map(function (movie) {
           return _react.default.createElement("li", {
             key: movie._id
           }, _react.default.createElement(_reactRouterDom.Link, {
             to: "/movie/".concat(movie._id)
-          }, movie.Title), _react.default.createElement(_Button.default, {
+          }, _react.default.createElement("img", {
+            className: "movie-image",
+            src: movie.ImagePath
+          })), _react.default.createElement(_Button.default, {
             type: "button",
             onClick: function onClick(e) {
               return _this3.deleteFavorites(movie._id);
             }
           }, "X"));
-        }))))), _react.default.createElement(_Col.default, null, _react.default.createElement("div", {
-          className: "updateButton"
-        }, _react.default.createElement(_reactRouterDom.Link, {
-          to: "/update-user/:username",
-          className: "btn"
-        }, "Update Your Profile")), _react.default.createElement(_reactRouterDom.Link, {
+        }))), _react.default.createElement(_reactRouterDom.Link, {
           to: "/"
         }, _react.default.createElement(_Button.default, {
           variant: "link",
           className: "btn back-button"
-        }, "Back"))), _react.default.createElement(_Col.default, null, _react.default.createElement(_Button.default, {
-          type: "button",
-          onClick: this.deleteUserProfile.bind(this)
-        }, "Delete Account"))));
+        }, "Back"))))));
       }
     }
   }]);

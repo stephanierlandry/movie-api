@@ -77,34 +77,38 @@ export class ProfileView extends React.Component {
           <Row>
             <Col>
               <div className="user-info-block">
-                <div className="user-name">
-                  <span className="value">{userProfile.Username}</span>
+                <h1>hi {user}</h1>
+                <div className="update-btn">
+                  <Link to="/update-user/:username" className="btn">Update Your Profile</Link>
                 </div>
+                <div className="delete-user-btn">
+                  <Button type="button" onClick={this.deleteUserProfile.bind(this)}>Delete Account</Button>
+                </div>
+              </div>
+            </Col>
+
+            <Col>
+              <h3 className="fav-title">Your Movie Favorites!</h3>
+              <div className="user-fav-block">
                 <div className="user-favorites">
                   {!userProfile.FavoritesMovies && <div>no movies</div>}
                   {userProfile.FavoritesMovies &&
                     <ul>
                       {favoritesList.map(movie =>
                         <li key={movie._id}>
-                          <Link to={`/movie/${movie._id}`}>{movie.Title}</Link>
+                          <Link to={`/movie/${movie._id}`}>
+                            <img className="movie-image" src={movie.ImagePath} />
+                          </Link>
                           <Button type="button" onClick={e => this.deleteFavorites(movie._id)}>X</Button>
                         </li>
                       )}
                     </ul>}
                 </div>
-              </div>
-            </Col>
-            <Col>
-              <div className="updateButton">
-                <Link to="/update-user/:username" className="btn">Update Your Profile</Link>
-              </div>
-              <Link to={`/`}>
-                <Button variant="link" className="btn back-button">Back</Button>
-              </Link>
 
-            </Col>
-            <Col>
-              <Button type="button" onClick={this.deleteUserProfile.bind(this)}>Delete Account</Button>
+                <Link to={`/`}>
+                  <Button variant="link" className="btn back-button">Back</Button>
+                </Link>
+              </div>
             </Col>
           </Row>
         </Container>
