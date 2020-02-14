@@ -10386,7 +10386,7 @@ body {
 
 .search-form {
   position: absolute;
-  right: 4.2em;
+  right: 7em;
 }
 
 .search {
@@ -10395,6 +10395,11 @@ body {
 
 .container {
   padding-top: 3em;
+}
+
+.userProfile {
+  margin: 2em 2em 2em 1em;
+  color: white;
 }
 
 .card {
