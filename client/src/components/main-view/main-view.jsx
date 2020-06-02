@@ -1,7 +1,11 @@
 import React from 'react';
 import axios from 'axios';
 
+import {connect} from 'react-redux';
+
 import { BrowserRouter, Route, Link} from "react-router-dom";
+
+import {setMovies} from '../../actions/actions';
 
 import { MovieCard } from '../movie-card/movie-card';
 import { MovieView } from '../movie-view/movie-view';
@@ -27,13 +31,12 @@ import './main-view.scss';
 
 export class MainView extends React.Component {
 
-  constructor(props) {
-    super(props);
+  constructor() {
+    super();
     this.state = {
-      movies: [],
-      selectedMovie: null,
-      user: null,
-      userProfile: {}
+      visibilityFilter: string,
+      movies: [{title, description, imagePath}],
+      user: null
     };
   }
 
@@ -69,19 +72,6 @@ export class MainView extends React.Component {
     .catch(function(error){
       console.log(error);
     })
-  }
-
-  // One of the "hooks" available in a React Component
-  componentDidMount() {
-    let accessToken = localStorage.getItem('token');
-    //If there is a token sign the user in and getMovies
-    if (accessToken !== null) {
-      this.setState({
-        user: localStorage.getItem('user')
-      });
-      this.getMovies(accessToken);
-      this.getUserProfile(accessToken);
-    }
   }
 
   //Called in the render()

@@ -43,8 +43,6 @@ let auth = require('./auth')(app);
 
 const { check, validationResult } = require('express-validator');
 
-
-
 //Root Route
 app.get('/', function(req, res){
   res.send('hello world')
