@@ -10266,6 +10266,10 @@ a.text-dark:hover, a.text-dark:focus {
   position: relative;
   left: 90%;
 }
+
+.fav-btn {
+  margin: 2em 2em 0em 1.4em;
+}
 body {
   display: flex;
 }
@@ -10384,15 +10388,6 @@ body {
   left: 2.35em;
 }
 
-.search-form {
-  position: absolute;
-  right: 7em;
-}
-
-.search {
-  width: 1.5em;
-}
-
 .container {
   padding-top: 3em;
 }
@@ -10400,6 +10395,25 @@ body {
 .userProfile {
   margin: 2em 2em 2em 1em;
   color: white;
+}
+
+.username {
+  margin-right: 2.5em;
+  font-size: 2em;
+  text-decoration: none;
+  font-weight: bold;
+  color: white;
+  transition: all 0.3s ease;
+}
+
+.username:hover {
+  text-decoration: none;
+  color: #8E081F;
+}
+
+.form-control {
+  margin-bottom: 2em;
+  width: 75%;
 }
 
 .card {
@@ -10435,6 +10449,7 @@ body {
 .btn {
   background: white;
   color: black;
+  transition: all 0.3s ease;
 }
 
 .btn:hover {

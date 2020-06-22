@@ -5,8 +5,9 @@ import {connect} from 'react-redux';
 
 import { BrowserRouter, Route, Link} from "react-router-dom";
 
-import {setMovies} from '../../actions/actions';
+import {setMovies, setFilter, setProfile, setFavorites} from '../../actions/actions';
 
+import MoviesList from '../movies-list/movies-list';
 import { MovieCard } from '../movie-card/movie-card';
 import { MovieView } from '../movie-view/movie-view';
 import { LoginView } from '../login-view/login-view';
@@ -34,10 +35,20 @@ export class MainView extends React.Component {
   constructor() {
     super();
     this.state = {
-      visibilityFilter: string,
-      movies: [{title, description, imagePath}],
+      userProfile: null,
       user: null
     };
+  }
+
+  componentDidMount() {
+    let accessToken = localStorage.getItem('token');
+    if (accessToken !== null) {
+      this.setState({
+        user: localStorage.getItem('user')
+      });
+      this.getMovies(accessToken);
+      this.getUserProfile(accessToken);
+    }
   }
 
   //Called in componentDidMount
@@ -48,10 +59,7 @@ export class MainView extends React.Component {
     })
     .then(response => {
       // Assign the result to the state
-      // console.log({from: 'mainview', m: 'response'})
-      this.setState({
-        movies: response.data
-      });
+      this.props.setMovies(response.data);
     })
     .catch(function (error) {
       console.log(error);
@@ -63,11 +71,9 @@ export class MainView extends React.Component {
       headers: {Authorization: `Bearer ${token}`}
     })
     .then(response => {
-      // console.log(response)
       this.setState({
         userProfile: response.data
       });
-      // console.log({f:'mainview', m:userProfile})
     })
     .catch(function(error){
       console.log(error);
@@ -107,9 +113,13 @@ export class MainView extends React.Component {
   }
 
   render() {
-    const { movies, selectedMovie, user, userProfile } = this.state;
 
-    if (!movies) return <div className="loading">loading</div>;
+    let { movies } = this.props;
+    let { user, userProfile } = this.state;
+
+    // const { movies, selectedMovie, user, userProfile } = this.state;
+
+    if (!movies || !user) return <div className="loading">loading</div>;
 
     return(
       <BrowserRouter>
@@ -117,20 +127,19 @@ export class MainView extends React.Component {
           <Container>
             <Navbar expand="md" fixed="top">
               <Navbar.Brand href="/">
-                <img src="https://scontent-atl3-1.cdninstagram.com/v/t51.2885-19/s320x320/22157915_286342841858633_7255692800950272000_n.jpg?_nc_ht=scontent-atl3-1.cdninstagram.com&amp;_nc_ohc=kIG5qCpFmHYAX97KJQU&amp;oh=9381e9e2f373a66031f4f936fd9f51ff&amp;oe=5EA94421" alt="Design and a Movie Logo" width="120" height="120" className="design-movie-logo"/>
+                <img src="https://design-and-a-movie-images.s3.us-east-2.amazonaws.com/DM.png" alt="Design and a Movie Logo" width="120" height="120" className="design-movie-logo"/>
               </Navbar.Brand>
 
               <Navbar.Toggle aria-controls="basic-navbar-nav" />
 
               <Navbar.Collapse id="basic-navbar-nav">
-                <Form inline className="search-form">
-                  <FormControl type="text" placeholder="Search" className="mr-sm-2 search" />
-                  <Button className="btn">Search</Button>
-                </Form>
+
               </Navbar.Collapse>
-              <Link to={`/user/${userProfile.Username}`} className="userProfile">
-                <div>{user}</div>
-              </Link>
+
+              <div className="user-name">
+                <Link to={`/user/${user}`} className="username">{ user }</Link>
+              </div>
+
             </Navbar>
           </Container>
 
@@ -162,16 +171,14 @@ export class MainView extends React.Component {
                         }}/>
 
                 <Route exact path="/movies"
-                       render={() => movies.map((m) => {
-
+                       render={() => {
                          return (
-                           <Col md={4}> <MovieCard key={m._id} movie={m}/> </Col>
+                            <MoviesList key={movies._id} movie={movies}/>
                          );
-                       })}/>
+                       }}/>
 
                 <Route exact path="/movie/:movieId"
                        render={({match}) => {
-
                          return (
                            <MovieView movie={movies.find(m =>m._id === match.params.movieId)}
                                       userData={this.state.user}/>
@@ -197,14 +204,14 @@ export class MainView extends React.Component {
                 <Route exact path="/user/:username"
                         render={() => {
                           return (
-                            <ProfileView user={user} userProfile={userProfile} movies={movies}/>
+                            <ProfileView user={user}  movies={movies} userProfile={userProfile} />
                           );
                         }}/>
 
                 <Route exact path="/update-user/:username"
                         render={() => {
                           return (
-                            <ProfileUpdateView user={user} userProfile={userProfile}/>
+                            <ProfileUpdateView user={user} userProfile={userProfile} movie={movies}/>
                           )
                         }}/>
 
@@ -231,5 +238,11 @@ export class MainView extends React.Component {
     )
   }
 }
+
+let mapStateToProps = state => {
+  return {movies: state.movies }
+}
+
+export default connect(mapStateToProps, {setMovies, setProfile, setFavorites} )( MainView);
 
 //key refers to what the may be updated in the DOM

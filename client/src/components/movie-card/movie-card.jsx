@@ -22,27 +22,25 @@ export class MovieCard extends React.Component {
         </Link>
       );
     }
-
-
   }
 }
 
 MovieCard.propTypes = {
   movie: PropTypes.shape({
-    Title: PropTypes.string.isRequired,
-    Description: PropTypes.string.isRequired,
+    Title: PropTypes.string,
+    Description: PropTypes,
     Genre: PropTypes.shape({
-      Name: PropTypes.string.isRequired,
-      Description: PropTypes.string.isRequired
+      Name: PropTypes.string,
+      Description: PropTypes
     }),
     Director: PropTypes.shape({
-      Name: PropTypes.string.isRequired,
-      Bio: PropTypes.string.isRequired,
-      Birth: PropTypes.string.isRequired,
+      Name: PropTypes.string,
+      Bio: PropTypes.string,
+      Birth: PropTypes.string,
       Death: PropTypes.string
     }),
-    ImagePath: PropTypes.string.isRequired,
-    Featured: PropTypes.bool.isRequired,
-    Actors: PropTypes.array.isRequired
-  }).isRequired
+    ImagePath: PropTypes.string,
+    Featured: PropTypes.bool,
+    Actors: PropTypes.array
+  })
 };

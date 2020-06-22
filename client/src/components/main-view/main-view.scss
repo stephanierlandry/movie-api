@@ -3,39 +3,49 @@ body {
 }
 
 //Loading
-.loading{
+.loading {
   color: white;
 }
 
 //Navigation
 
-.navbar{
+.navbar {
   background-color: #060807;
   justify-content: center;
 }
 
-.design-movie-logo{
+.design-movie-logo {
   border: none;
   position: relative;
   left: 2.35em;
 }
 
-.search-form{
-  position: absolute;
-  right: 7em;
-}
-
-.search{
-  width: 1.5em;
-}
-
-.container{
+.container {
   padding-top: 3em;
 }
 
-.userProfile{
+.userProfile {
   margin: 2em 2em 2em 1em ;
   color: white;
+}
+
+.username {
+  margin-right: 2.5em;
+  font-size: 2em;
+  text-decoration: none;
+  font-weight: bold;
+  color:white;
+  transition:all 0.3s ease;
+}
+
+.username:hover{
+  text-decoration: none;
+  color:#8E081F;
+}
+
+.form-control {
+  margin-bottom: 2em;
+  width: 75%;
 }
 
 
@@ -72,9 +82,10 @@ body {
 
 //Buttons
 
-.btn{
+.btn {
   background: white;
   color: black;
+  transition:all 0.3s ease;
 }
 
 .btn:hover {
@@ -85,7 +96,7 @@ body {
 
 //loading screen
 
-.loading{
+.loading {
   color: white;
   font-size: 3em;
 }
@@ -93,11 +104,11 @@ body {
 
 //footer
 
-.footer-link{
+.footer-link {
   color:white;
   transition:all 0.3s ease;
 }
 
-.footer-link:hover{
+.footer-link:hover {
   color:#8E081F;
 }

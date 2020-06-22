@@ -26,11 +26,10 @@ export class ProfileView extends React.Component {
           document.location.reload(true);
         })
         .then(res => {
-          console.log('res')
-          alert('Movie successfully deleted from favorites');
+          alert(`${movies.Title} successfully deleted from favorites`);
         })
         .catch(e => {
-          alert( `${ movieId } could not be deleted from favorites ` + e)
+          alert( `${movie.Title } could not be deleted from favorites ` + e)
         });
     }
 
@@ -66,6 +65,8 @@ export class ProfileView extends React.Component {
 
     const { user, userProfile, movies } = this.props;
     const favoritesList = movies.filter(movie => userProfile.FavoritesMovies.includes(movie._id));
+
+    console.log(userProfile)
 
     if(!user || !userProfile){
       return <div className="loading">loading</div>
