@@ -129,17 +129,12 @@ export class MainView extends React.Component {
               <Navbar.Brand href="/">
                 <img src="https://design-and-a-movie-images.s3.us-east-2.amazonaws.com/DM.png" alt="Design and a Movie Logo" width="120" height="120" className="design-movie-logo"/>
               </Navbar.Brand>
-
               <Navbar.Toggle aria-controls="basic-navbar-nav" />
-
               <Navbar.Collapse id="basic-navbar-nav">
-
               </Navbar.Collapse>
-
               <div className="user-name">
                 <Link to={`/user/${user}`} className="username">{ user }</Link>
               </div>
-
             </Navbar>
           </Container>
 

@@ -42251,7 +42251,7 @@ function VisibilityFilterInput(props) {
       return props.setFilter(e.target.value);
     },
     value: props.visibilityFilter,
-    placeholder: "filter"
+    placeholder: "search"
   });
 }
 
@@ -42765,14 +42765,14 @@ function MoviesList(props) {
   });
   return _react.default.createElement(_react.default.Fragment, null, _react.default.createElement(_visibilityFilterInput.default, {
     visibilityFilter: visibilityFilter
-  }), _react.default.createElement(_Col.default, {
-    md: 4
-  }, filteredMovies.map(function (m) {
-    return _react.default.createElement(_movieCard.MovieCard, {
+  }), filteredMovies.map(function (m) {
+    return _react.default.createElement(_Col.default, {
+      md: 4
+    }, _react.default.createElement(_movieCard.MovieCard, {
       key: m._id,
       movie: m
-    });
-  })));
+    }));
+  }));
 }
 
 var _default = (0, _reactRedux.connect)(mapStateToProps)(MoviesList);
