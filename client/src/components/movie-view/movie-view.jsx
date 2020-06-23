@@ -49,7 +49,7 @@ export class MovieView extends React.Component {
     if (movie && userData) {
 
       return (
-        <Container fluid="lg">
+
           <Row>
             <Col lg ={4}>
               <div className="movie-view">
@@ -87,7 +87,7 @@ export class MovieView extends React.Component {
               </div>
             </Col>
           </Row>
-        </Container>
+        
       );
     }
   }

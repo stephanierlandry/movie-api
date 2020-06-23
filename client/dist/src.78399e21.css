@@ -10367,6 +10367,7 @@ ul {
 }
 body {
   background: #060807;
+  padding-top: 10em;
 }
 
 .container-fluid {
@@ -10381,13 +10382,15 @@ body {
 
 .navbar {
   background-color: #060807;
-  justify-content: center;
+}
+
+.nav-container {
+  justify-content: space-between;
 }
 
 .design-movie-logo {
   border: none;
   position: relative;
-  left: 2.35em;
 }
 
 .container {
@@ -10405,12 +10408,12 @@ body {
 }
 
 .username {
-  margin-right: 2.5em;
   font-size: 2em;
   text-decoration: none;
   font-weight: bold;
   color: white;
   transition: all 0.3s ease;
+  position: relative;
 }
 
 .username:hover {
@@ -10468,6 +10471,10 @@ body {
 .loading {
   color: white;
   font-size: 3em;
+}
+
+.footer-container {
+  justify-content: center;
 }
 
 .footer-link {

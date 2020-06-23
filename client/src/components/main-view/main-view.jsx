@@ -123,112 +123,105 @@ export class MainView extends React.Component {
 
     return(
       <BrowserRouter>
-        <div>
-          <Container fluid>
-            <Navbar fixed="top">
-              <Navbar.Brand href="/">
-                <img src="https://design-and-a-movie-images.s3.us-east-2.amazonaws.com/DM.png" alt="Design and a Movie Logo" width="120" height="120" className="design-movie-logo"/>
-              </Navbar.Brand>
-              <Navbar.Toggle aria-controls="basic-navbar-nav" />
-              <Navbar.Collapse id="basic-navbar-nav">
-              </Navbar.Collapse>
-              <div className="user-name">
-                <Link to={`/user/${user}`} className="username">{ user }</Link>
-              </div>
-            </Navbar>
+          <Container fluid="lg">
+            <Row>
+              <Navbar fixed="top" expand="lg" className="nav-container">
+                <Navbar.Brand href="/" className="logo-container">
+                  <img src="https://design-and-a-movie-images.s3.us-east-2.amazonaws.com/DM.png" alt="Design and a Movie Logo" width="120" height="120" className="design-movie-logo"/>
+                </Navbar.Brand>
+                <div className="user-name">
+                  <Link to={`/user/${user}`} className="username">{ user }</Link>
+                </div>
+              </Navbar>
+            </Row>
+
+            <Row className="main-container">
+              <Route exact path="/"
+                      render={() => {
+                        if (!user) {
+                          window.location="http://localhost:1234/login"
+                        } else {
+                          window.location="/movies"
+                        }
+                      }}/>
+
+              <Route path="/login"
+                      render={() => {
+                        return (
+                          <LoginView onLoggedIn={user => this.onLoggedIn(user)}
+                                     userData={this.state.user} />
+                        )
+                      }}/>
+
+              <Route path="/register"
+                      render={() => {
+                        return (
+                          <RegistrationView onLoggedIn={user => this.onLoggedIn(user)} />
+                        );
+                      }}/>
+
+              <Route exact path="/movies"
+                     render={() => {
+                       return (
+                          <MoviesList key={movies._id} movie={movies}/>
+                       );
+                     }}/>
+
+              <Route exact path="/movie/:movieId"
+                     render={({match}) => {
+                       return (
+                         <MovieView movie={movies.find(m =>m._id === match.params.movieId)}
+                                    userData={this.state.user}/>
+                       );
+                     }}/>
+
+              <Route exact path="/directors/:name"
+                      render={({match}) => {
+                        // if (!movies) return <div className="main-view"/>;)
+                        return (
+                          <DirectorView director={movies.find(m => m.Director.Name === match.params.name).Director}/>
+                        );
+                      }}/>
+
+              <Route exact path="/genres/:name"
+                      render={({match}) => {
+                        if (!movies) return <div className="main-view"/>;
+                        return (
+                          <GenreView genre={movies.find(m => m.Genre.Name === match.params.name).Genre}/>
+                        );
+                      }}/>
+
+              <Route exact path="/user/:username"
+                      render={() => {
+                        return (
+                          <ProfileView user={user}  movies={movies} userProfile={userProfile} />
+                        );
+                      }}/>
+
+              <Route exact path="/update-user/:username"
+                      render={() => {
+                        return (
+                          <ProfileUpdateView user={user} userProfile={userProfile} movie={movies}/>
+                        )
+                      }}/>
+            </Row>
+
+            <Row>
+              <Navbar expand="md" fixed="bottom" className="footer-container">
+                <Nav.Link href="https://www.facebook.com/designandamovie/" className="footer-link">
+                  <FeatherIcon icon="facebook" />
+                </Nav.Link>
+                <Nav.Link href="https://www.instagram.com/designandamovie/" className="footer-link">
+                  <FeatherIcon icon="instagram" />
+                </Nav.Link>
+                <Nav.Link href="https://granthurlbert.bigcartel.com/" className="footer-link">
+                  <FeatherIcon icon="shopping-bag" />
+                </Nav.Link>
+                <button className="btn btn-primary" type="button" value="button" onClick={this.onLoggedOut.bind(this)}>logout</button>
+              </Navbar>
+            </Row>
           </Container>
 
-
-            <Container fluid="sm">
-              <Row className="main-container">
-                <Route exact path="/"
-                        render={() => {
-                          if (!user) {
-                            window.location="http://localhost:1234/login"
-                          } else {
-                            window.location="/movies"
-                          }
-                        }}/>
-
-                <Route path="/login"
-                        render={() => {
-                          return (
-                            <LoginView onLoggedIn={user => this.onLoggedIn(user)}
-                                       userData={this.state.user} />
-                          )
-                        }}/>
-
-                <Route path="/register"
-                        render={() => {
-                          return (
-                            <RegistrationView onLoggedIn={user => this.onLoggedIn(user)} />
-                          );
-                        }}/>
-
-                <Route exact path="/movies"
-                       render={() => {
-                         return (
-                            <MoviesList key={movies._id} movie={movies}/>
-                         );
-                       }}/>
-
-                <Route exact path="/movie/:movieId"
-                       render={({match}) => {
-                         return (
-                           <MovieView movie={movies.find(m =>m._id === match.params.movieId)}
-                                      userData={this.state.user}/>
-                         );
-                       }}/>
-
-                <Route exact path="/directors/:name"
-                        render={({match}) => {
-                          // if (!movies) return <div className="main-view"/>;)
-                          return (
-                            <DirectorView director={movies.find(m => m.Director.Name === match.params.name).Director}/>
-                          );
-                        }}/>
-
-                <Route exact path="/genres/:name"
-                        render={({match}) => {
-                          if (!movies) return <div className="main-view"/>;
-                          return (
-                            <GenreView genre={movies.find(m => m.Genre.Name === match.params.name).Genre}/>
-                          );
-                        }}/>
-
-                <Route exact path="/user/:username"
-                        render={() => {
-                          return (
-                            <ProfileView user={user}  movies={movies} userProfile={userProfile} />
-                          );
-                        }}/>
-
-                <Route exact path="/update-user/:username"
-                        render={() => {
-                          return (
-                            <ProfileUpdateView user={user} userProfile={userProfile} movie={movies}/>
-                          )
-                        }}/>
-
-              </Row>
-            </Container>
-
-
-          <Container>
-            <Navbar expand="md" fixed="bottom">
-              <Nav.Link href="https://www.facebook.com/designandamovie/" className="footer-link">
-                <FeatherIcon icon="facebook" />
-              </Nav.Link>
-              <Nav.Link href="https://www.instagram.com/designandamovie/" className="footer-link">
-                <FeatherIcon icon="instagram" />
-              </Nav.Link>
-              <Nav.Link href="https://granthurlbert.bigcartel.com/" className="footer-link">
-                <FeatherIcon icon="shopping-bag" />
-              </Nav.Link>
-              <button className="btn btn-primary" type="button" value="button" onClick={this.onLoggedOut.bind(this)}>logout</button>
-            </Navbar>
-          </Container>
-        </div>
       </BrowserRouter>
     )
   }

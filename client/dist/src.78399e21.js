@@ -42968,9 +42968,7 @@ function (_React$Component) {
       }
 
       if (movie && userData) {
-        return _react.default.createElement(_Container.default, {
-          fluid: "lg"
-        }, _react.default.createElement(_Row.default, null, _react.default.createElement(_Col.default, {
+        return _react.default.createElement(_Row.default, null, _react.default.createElement(_Col.default, {
           lg: 4
         }, _react.default.createElement("div", {
           className: "movie-view"
@@ -43012,7 +43010,7 @@ function (_React$Component) {
           variant: "link",
           className: "btn back-button",
           onClick: this.goBack.bind(this)
-        }, "Back")))));
+        }, "Back"))));
       }
     }
   }]);
@@ -47020,30 +47018,27 @@ function (_React$Component) {
       if (!movies || !user) return _react.default.createElement("div", {
         className: "loading"
       }, "loading");
-      return _react.default.createElement(_reactRouterDom.BrowserRouter, null, _react.default.createElement("div", null, _react.default.createElement(_Container.default, {
-        fluid: true
-      }, _react.default.createElement(_Navbar.default, {
-        fixed: "top"
+      return _react.default.createElement(_reactRouterDom.BrowserRouter, null, _react.default.createElement(_Container.default, {
+        fluid: "lg"
+      }, _react.default.createElement(_Row.default, null, _react.default.createElement(_Navbar.default, {
+        fixed: "top",
+        expand: "lg",
+        className: "nav-container"
       }, _react.default.createElement(_Navbar.default.Brand, {
-        href: "/"
+        href: "/",
+        className: "logo-container"
       }, _react.default.createElement("img", {
         src: "https://design-and-a-movie-images.s3.us-east-2.amazonaws.com/DM.png",
         alt: "Design and a Movie Logo",
         width: "120",
         height: "120",
         className: "design-movie-logo"
-      })), _react.default.createElement(_Navbar.default.Toggle, {
-        "aria-controls": "basic-navbar-nav"
-      }), _react.default.createElement(_Navbar.default.Collapse, {
-        id: "basic-navbar-nav"
-      }), _react.default.createElement("div", {
+      })), _react.default.createElement("div", {
         className: "user-name"
       }, _react.default.createElement(_reactRouterDom.Link, {
         to: "/user/".concat(user),
         className: "username"
-      }, user)))), _react.default.createElement(_Container.default, {
-        fluid: "sm"
-      }, _react.default.createElement(_Row.default, {
+      }, user)))), _react.default.createElement(_Row.default, {
         className: "main-container"
       }, _react.default.createElement(_reactRouterDom.Route, {
         exact: true,
@@ -47141,9 +47136,10 @@ function (_React$Component) {
             movie: movies
           });
         }
-      }))), _react.default.createElement(_Container.default, null, _react.default.createElement(_Navbar.default, {
+      })), _react.default.createElement(_Row.default, null, _react.default.createElement(_Navbar.default, {
         expand: "md",
-        fixed: "bottom"
+        fixed: "bottom",
+        className: "footer-container"
       }, _react.default.createElement(_Nav.default.Link, {
         href: "https://www.facebook.com/designandamovie/",
         className: "footer-link"
