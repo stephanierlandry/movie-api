@@ -10226,8 +10226,12 @@ a.text-dark:hover, a.text-dark:focus {
   color: white;
 }
 
+.movie-view-container {
+  justify-content: space-around;
+}
+
 .movie-poster {
-  width: 75%;
+  width: 100%;
   height: auto;
 }
 

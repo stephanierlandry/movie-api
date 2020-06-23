@@ -42968,7 +42968,9 @@ function (_React$Component) {
       }
 
       if (movie && userData) {
-        return _react.default.createElement(_Row.default, null, _react.default.createElement(_Col.default, {
+        return _react.default.createElement(_Row.default, {
+          className: "movie-view-container"
+        }, _react.default.createElement(_Col.default, {
           lg: 4
         }, _react.default.createElement("div", {
           className: "movie-view"

@@ -50,7 +50,7 @@ export class MovieView extends React.Component {
 
       return (
 
-          <Row>
+          <Row className="movie-view-container">
             <Col lg ={4}>
               <div className="movie-view">
                 <img className="movie-poster" src={movie.ImagePath} />
@@ -87,7 +87,7 @@ export class MovieView extends React.Component {
               </div>
             </Col>
           </Row>
-        
+
       );
     }
   }

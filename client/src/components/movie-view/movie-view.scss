@@ -12,9 +12,13 @@
 // .main-view{
 //   margin: 5em;
 // }
+.movie-view-container {
+  justify-content: space-around;
+
+}
 
 .movie-poster{
-  width:75%;
+  width:100%;
   height: auto;
 }
 
