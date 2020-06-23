@@ -10226,10 +10226,6 @@ a.text-dark:hover, a.text-dark:focus {
   color: white;
 }
 
-.main-view {
-  margin: 5em;
-}
-
 .movie-poster {
   width: 75%;
   height: auto;
@@ -10268,7 +10264,7 @@ a.text-dark:hover, a.text-dark:focus {
 }
 
 .fav-btn {
-  margin: 2em 2em 0em 1.4em;
+  margin: 2em 2em 2em 1.4em;
 }
 body {
   display: flex;
@@ -10373,6 +10369,12 @@ body {
   background: #060807;
 }
 
+.container-fluid {
+  width: auto;
+  margin-left: 15px;
+  margin-right: 15px;
+}
+
 .loading {
   color: white;
 }
@@ -10390,6 +10392,11 @@ body {
 
 .container {
   padding-top: 3em;
+  display: flex;
+}
+
+.main-container {
+  justify-content: center;
 }
 
 .userProfile {

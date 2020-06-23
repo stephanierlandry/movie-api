@@ -2,6 +2,12 @@ body {
   background: #060807;
 }
 
+.container-fluid {
+  width: auto;
+  margin-left: 15px;
+  margin-right: 15px;
+}
+
 //Loading
 .loading {
   color: white;
@@ -22,6 +28,11 @@ body {
 
 .container {
   padding-top: 3em;
+  display: flex;
+}
+
+.main-container{
+  justify-content: center;
 }
 
 .userProfile {

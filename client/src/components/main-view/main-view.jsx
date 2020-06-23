@@ -124,8 +124,8 @@ export class MainView extends React.Component {
     return(
       <BrowserRouter>
         <div>
-          <Container>
-            <Navbar expand="md" fixed="top">
+          <Container fluid>
+            <Navbar fixed="top">
               <Navbar.Brand href="/">
                 <img src="https://design-and-a-movie-images.s3.us-east-2.amazonaws.com/DM.png" alt="Design and a Movie Logo" width="120" height="120" className="design-movie-logo"/>
               </Navbar.Brand>
@@ -138,9 +138,9 @@ export class MainView extends React.Component {
             </Navbar>
           </Container>
 
-          <div className="main-view">
-            <Container>
-              <Row>
+
+            <Container fluid="sm">
+              <Row className="main-container">
                 <Route exact path="/"
                         render={() => {
                           if (!user) {
@@ -212,7 +212,7 @@ export class MainView extends React.Component {
 
               </Row>
             </Container>
-          </div>
+
 
           <Container>
             <Navbar expand="md" fixed="bottom">

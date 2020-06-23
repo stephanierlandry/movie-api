@@ -49,9 +49,9 @@ export class MovieView extends React.Component {
     if (movie && userData) {
 
       return (
-        <Container>
+        <Container fluid="lg">
           <Row>
-            <Col>
+            <Col lg ={4}>
               <div className="movie-view">
                 <img className="movie-poster" src={movie.ImagePath} />
               </div>
@@ -59,7 +59,7 @@ export class MovieView extends React.Component {
                 <Button className="btn fav-btn" onClick={this.addUserFavorites.bind(this)}>Add Movie to Favorites!</Button>
               </div>
             </Col>
-            <Col>
+            <Col lg ={4}>
               <div className="movie-block">
                   <div className="movie-title">
                     <span className="value">{movie.Title}</span>

@@ -42690,7 +42690,8 @@ function (_React$Component) {
         return _react.default.createElement(_reactRouterDom.Link, {
           to: "/movie/".concat(movie._id)
         }, _react.default.createElement(_Card.default, {
-          variant: "link"
+          variant: "link",
+          key: movie._id
         }, _react.default.createElement(_Card.default.Img, {
           variant: "top",
           src: movie.ImagePath
@@ -42967,7 +42968,11 @@ function (_React$Component) {
       }
 
       if (movie && userData) {
-        return _react.default.createElement(_Container.default, null, _react.default.createElement(_Row.default, null, _react.default.createElement(_Col.default, null, _react.default.createElement("div", {
+        return _react.default.createElement(_Container.default, {
+          fluid: "lg"
+        }, _react.default.createElement(_Row.default, null, _react.default.createElement(_Col.default, {
+          lg: 4
+        }, _react.default.createElement("div", {
           className: "movie-view"
         }, _react.default.createElement("img", {
           className: "movie-poster",
@@ -42975,7 +42980,9 @@ function (_React$Component) {
         })), _react.default.createElement("div", null, _react.default.createElement(_Button.default, {
           className: "btn fav-btn",
           onClick: this.addUserFavorites.bind(this)
-        }, "Add Movie to Favorites!"))), _react.default.createElement(_Col.default, null, _react.default.createElement("div", {
+        }, "Add Movie to Favorites!"))), _react.default.createElement(_Col.default, {
+          lg: 4
+        }, _react.default.createElement("div", {
           className: "movie-block"
         }, _react.default.createElement("div", {
           className: "movie-title"
@@ -47013,8 +47020,9 @@ function (_React$Component) {
       if (!movies || !user) return _react.default.createElement("div", {
         className: "loading"
       }, "loading");
-      return _react.default.createElement(_reactRouterDom.BrowserRouter, null, _react.default.createElement("div", null, _react.default.createElement(_Container.default, null, _react.default.createElement(_Navbar.default, {
-        expand: "md",
+      return _react.default.createElement(_reactRouterDom.BrowserRouter, null, _react.default.createElement("div", null, _react.default.createElement(_Container.default, {
+        fluid: true
+      }, _react.default.createElement(_Navbar.default, {
         fixed: "top"
       }, _react.default.createElement(_Navbar.default.Brand, {
         href: "/"
@@ -47033,9 +47041,11 @@ function (_React$Component) {
       }, _react.default.createElement(_reactRouterDom.Link, {
         to: "/user/".concat(user),
         className: "username"
-      }, user)))), _react.default.createElement("div", {
-        className: "main-view"
-      }, _react.default.createElement(_Container.default, null, _react.default.createElement(_Row.default, null, _react.default.createElement(_reactRouterDom.Route, {
+      }, user)))), _react.default.createElement(_Container.default, {
+        fluid: "sm"
+      }, _react.default.createElement(_Row.default, {
+        className: "main-container"
+      }, _react.default.createElement(_reactRouterDom.Route, {
         exact: true,
         path: "/",
         render: function render() {
@@ -47131,7 +47141,7 @@ function (_React$Component) {
             movie: movies
           });
         }
-      })))), _react.default.createElement(_Container.default, null, _react.default.createElement(_Navbar.default, {
+      }))), _react.default.createElement(_Container.default, null, _react.default.createElement(_Navbar.default, {
         expand: "md",
         fixed: "bottom"
       }, _react.default.createElement(_Nav.default.Link, {

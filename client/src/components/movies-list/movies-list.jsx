@@ -26,7 +26,7 @@ function MoviesList(props) {
   return (
     <React.Fragment>
       <VisibilityFilterInput visibilityFilter={visibilityFilter} />
-      {filteredMovies.map(m => <Col md={4}><MovieCard key={m._id} movie={m}/></Col>)}
+        {filteredMovies.map(m => <Col md={4}><MovieCard key={m._id} movie={m}/></Col>)}
     </React.Fragment>
   )
 }
