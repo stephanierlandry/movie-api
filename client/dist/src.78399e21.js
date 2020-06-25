@@ -46319,6 +46319,10 @@ function ProfileUpdateView(props) {
     });
   };
 
+  var goBack = function goBack() {
+    history.back();
+  };
+
   return _react.default.createElement(_Form.default, null, _react.default.createElement(_Form.default.Group, {
     controlId: "formBasicUsername"
   }, _react.default.createElement(_Form.default.Label, null, "Username"), _react.default.createElement(_Form.default.Control, {
@@ -46362,7 +46366,11 @@ function ProfileUpdateView(props) {
     variant: "primary",
     type: "submit",
     onClick: handleUpdate
-  }, "Update")));
+  }, "Update"), _react.default.createElement(_Button.default, {
+    variant: "link",
+    className: "btn",
+    onClick: goBack
+  }, "Back")));
 }
 },{"react":"../../node_modules/react/index.js","axios":"../node_modules/axios/index.js","react-router-dom":"../../node_modules/react-router-dom/esm/react-router-dom.js","./profile-update-view.scss":"components/profile-view/profile-update-view.scss","react-bootstrap/Form":"../node_modules/react-bootstrap/esm/Form.js","react-bootstrap/Button":"../node_modules/react-bootstrap/esm/Button.js","react-bootstrap/Navbar":"../node_modules/react-bootstrap/esm/Navbar.js","react-bootstrap/Container":"../node_modules/react-bootstrap/esm/Container.js","react-bootstrap/Row":"../node_modules/react-bootstrap/esm/Row.js","react-bootstrap/Col":"../node_modules/react-bootstrap/esm/Col.js"}],"../node_modules/dom-helpers/esm/querySelectorAll.js":[function(require,module,exports) {
 "use strict";

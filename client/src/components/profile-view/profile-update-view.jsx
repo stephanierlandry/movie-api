@@ -18,6 +18,7 @@ export function ProfileUpdateView(props){
   const [email, updateEmail] = useState('');
   const [birthday, updateBirthday] = useState('');
 
+
   const handleUpdate = (e) => {
     //prevents the default behavior of submitting the form so authentication can happen
     e.preventDefault();
@@ -39,6 +40,10 @@ export function ProfileUpdateView(props){
     .catch(error => {
       alert('Error updating profile');
     })
+  }
+
+  const goBack = () => {
+    history.back();
   }
 
   return (
@@ -65,6 +70,7 @@ export function ProfileUpdateView(props){
       </Form.Group>
       <div className="button-group">
         <Button variant="primary" type="submit" onClick={handleUpdate}>Update</Button>
+        <Button variant="link" className="btn" onClick={goBack}>Back</Button>
       </div>
     </Form>
 
