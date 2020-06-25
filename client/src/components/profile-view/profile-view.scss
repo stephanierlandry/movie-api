@@ -1,3 +1,7 @@
+.relative{
+  position: relative;
+}
+
 .loading{
   color:white;
 }
@@ -42,6 +46,16 @@
 
 //Favorites
 
+ul {
+  list-style: none;
+  padding: 0;
+}
+
+// ul li a {
+//   display: flex;
+//   justify-content: center;
+// }
+
 .user-fav-block {
   color: white;
   line-height: 1.65em;
@@ -50,8 +64,6 @@
 
 .fav-title{
   color:white;
-  display: flex;
-  justify-content: center;
 }
 
 .movie-image{
@@ -65,12 +77,18 @@
   cursor: pointer;
 }
 
-ul {
-  list-style: none;
-  padding: 0;
+.delete-btn{
+  position: absolute;
+  top: 2em;
+  left:1em;
+  background: none;
+  color: white;
+  transition:all 0.3s ease;
+  font-weight: bold;
+  font-size: 1.5em;
+
 }
 
-ul li a {
-  display: flex;
-  justify-content: center;
+.delete-btn:hover{
+  color:#8E081F !important;
 }

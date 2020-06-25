@@ -46187,15 +46187,16 @@ function (_React$Component) {
           className: "user-favorites"
         }, !userProfile.FavoritesMovies && _react.default.createElement("div", null, "no movies"), userProfile.FavoritesMovies && _react.default.createElement("ul", null, favoritesList.map(function (movie) {
           return _react.default.createElement("li", {
-            key: movie._id
+            key: movie._id,
+            className: "relative"
           }, _react.default.createElement(_reactRouterDom.Link, {
             className: "img-block",
             to: "/movie/".concat(movie._id)
           }, _react.default.createElement("img", {
             className: "movie-image",
             src: movie.ImagePath
-          })), _react.default.createElement(_Button.default, {
-            type: "button",
+          })), _react.default.createElement("a", {
+            className: "delete-btn",
             onClick: function onClick(e) {
               return _this3.deleteFavorites(movie._id);
             }

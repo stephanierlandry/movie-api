@@ -90,11 +90,11 @@ export class ProfileView extends React.Component {
                     {userProfile.FavoritesMovies &&
                       <ul>
                         {favoritesList.map(movie =>
-                          <li key={movie._id}>
+                          <li key={movie._id} className="relative">
                             <Link className="img-block" to={`/movie/${movie._id}`}>
                               <img className="movie-image" src={movie.ImagePath} />
                             </Link>
-                            <Button type="button" onClick={e => this.deleteFavorites(movie._id)}>X</Button>
+                            <a className="delete-btn" onClick={e => this.deleteFavorites(movie._id)}>X</a>
                           </li>
                         )}
                       </ul>}
