@@ -81,8 +81,6 @@ export class MovieView extends React.Component {
                       <span className="value link">{movie.Director.Name}</span>
                     </Link>
                   </div>
-
-
                   <Button variant="link" className="btn back-button" onClick={this.goBack.bind(this)}>Back</Button>
               </div>
             </Col>

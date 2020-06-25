@@ -74,40 +74,45 @@ export class ProfileView extends React.Component {
 
     if(user || userProfile) {
       return(
-        <Container>
-          <Row>
+        <Container fluid>
+          <Row className="hi-container">
             <Col>
+              <h1 className="greeting">hi {user}</h1>
+            </Col>
+          </Row>
+          <Row className="profile-view-container">
+            <Col lg={8}>
               <div className="user-info-block">
-                <h1>hi {user}</h1>
+                <h3 className="fav-title">Your Movie Favorites!</h3>
+                <div className="user-fav-block">
+                  <div className="user-favorites">
+                    {!userProfile.FavoritesMovies && <div>no movies</div>}
+                    {userProfile.FavoritesMovies &&
+                      <ul>
+                        {favoritesList.map(movie =>
+                          <li key={movie._id}>
+                            <Link className="img-block" to={`/movie/${movie._id}`}>
+                              <img className="movie-image" src={movie.ImagePath} />
+                            </Link>
+                            <Button type="button" onClick={e => this.deleteFavorites(movie._id)}>X</Button>
+                          </li>
+                        )}
+                      </ul>}
+                  </div>
+                </div>
+              </div>
+            </Col>
+
+            <Col lg={4}>
+              <div className="btn-group">
                 <div className="update-btn">
                   <Link to="/update-user/:username" className="btn">Update Your Profile</Link>
                 </div>
                 <div className="delete-user-btn">
                   <Button type="button" onClick={this.deleteUserProfile.bind(this)}>Delete Account</Button>
                 </div>
-              </div>
-            </Col>
-
-            <Col>
-              <h3 className="fav-title">Your Movie Favorites!</h3>
-              <div className="user-fav-block">
-                <div className="user-favorites">
-                  {!userProfile.FavoritesMovies && <div>no movies</div>}
-                  {userProfile.FavoritesMovies &&
-                    <ul>
-                      {favoritesList.map(movie =>
-                        <li key={movie._id}>
-                          <Link to={`/movie/${movie._id}`}>
-                            <img className="movie-image" src={movie.ImagePath} />
-                          </Link>
-                          <Button type="button" onClick={e => this.deleteFavorites(movie._id)}>X</Button>
-                        </li>
-                      )}
-                    </ul>}
-                </div>
-
                 <Link to={`/`}>
-                  <Button variant="link" className="btn back-button">Back</Button>
+                  <Button variant="link" className="btn back-btn">Back</Button>
                 </Link>
               </div>
             </Col>

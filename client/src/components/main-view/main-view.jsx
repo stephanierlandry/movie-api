@@ -71,6 +71,7 @@ export class MainView extends React.Component {
       headers: {Authorization: `Bearer ${token}`}
     })
     .then(response => {
+      console.log(response)
       this.setState({
         userProfile: response.data
       });
@@ -124,7 +125,7 @@ export class MainView extends React.Component {
 
     return(
       <BrowserRouter>
-          <Container fluid="lg">
+          <Container fluid>
             <Row>
               <Navbar fixed="top" expand="lg" className="nav-container">
                 <Navbar.Brand href="/" className="logo-container">
