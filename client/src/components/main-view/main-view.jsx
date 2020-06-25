@@ -119,7 +119,8 @@ export class MainView extends React.Component {
 
     // const { movies, selectedMovie, user, userProfile } = this.state;
 
-    if (!movies || !user) return <div className="loading">loading</div>;
+    if (!movies) {
+      return <div className="loading">loading</div>;}
 
     return(
       <BrowserRouter>
