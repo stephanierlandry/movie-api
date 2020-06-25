@@ -10368,6 +10368,7 @@ body {
 
 .btn-primary {
   border: none;
+  margin: 0em 0.5em 0em 0em;
 }
 
 .new-registration-button {
@@ -10464,6 +10465,11 @@ ul {
 .delete-btn:hover {
   color: #8E081F !important;
 }
+
+.logout-btn {
+  border-radius: 0.25em;
+  margin: 0em 1em;
+}
 body {
   background: #060807;
   padding-top: 10em;
@@ -10471,7 +10477,7 @@ body {
 }
 
 .container-fluid {
-  width: auto;
+  width: 100%;
   margin-left: 15px;
   margin-right: 15px;
 }
@@ -10521,7 +10527,7 @@ body {
   color: #8E081F;
 }
 
-.form-control {
+.search {
   margin-bottom: 2em;
   width: 75%;
 }
@@ -10580,6 +10586,7 @@ body {
 .footer-link {
   color: white;
   transition: all 0.3s ease;
+  padding: 1em;
 }
 
 .footer-link:hover {

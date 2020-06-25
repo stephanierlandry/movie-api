@@ -47,18 +47,12 @@ export function LoginView(props) {
   return (
 
       <div className="login-body">
-        <Container>
-          <Navbar expand="md" fixed="top">
-            <Navbar.Brand>
-              <img src='https://design-and-a-movie-images.s3.us-east-2.amazonaws.com/DM.png' alt="Design and a Movie Logo" width="120" height="120" className="design-movie-logo"/>
-            </Navbar.Brand>
-          </Navbar>
-        </Container>
 
-        <Container>
+
+
           <Row>
             <Col></Col>
-            <Col>
+            <Col xs="auto">
               <Form>
                 <Form.Group controlId="formBasicUsername">
                   <Form.Label>Username</Form.Label>
@@ -72,13 +66,13 @@ export function LoginView(props) {
 
                 <div className="button-group">
                   <Button variant="primary" type="submit" onClick={handleSubmit}>Submit</Button>
-                  <Link to="/register" className="btn">Register</Link>
+                  <Link to="/register" className="btn">Register Here</Link>
                 </div>
               </Form>
             </Col>
             <Col></Col>
           </Row>
-        </Container>
+
       </div>
   );
 }

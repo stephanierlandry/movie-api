@@ -42635,6 +42635,7 @@ function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { de
 
 function VisibilityFilterInput(props) {
   return _react.default.createElement(_Form.default.Control, {
+    className: "search",
     onChange: function onChange(e) {
       return props.setFilter(e.target.value);
     },
@@ -45803,16 +45804,9 @@ function LoginView(props) {
 
   return _react.default.createElement("div", {
     className: "login-body"
-  }, _react.default.createElement(_Container.default, null, _react.default.createElement(_Navbar.default, {
-    expand: "md",
-    fixed: "top"
-  }, _react.default.createElement(_Navbar.default.Brand, null, _react.default.createElement("img", {
-    src: "https://design-and-a-movie-images.s3.us-east-2.amazonaws.com/DM.png",
-    alt: "Design and a Movie Logo",
-    width: "120",
-    height: "120",
-    className: "design-movie-logo"
-  })))), _react.default.createElement(_Container.default, null, _react.default.createElement(_Row.default, null, _react.default.createElement(_Col.default, null), _react.default.createElement(_Col.default, null, _react.default.createElement(_Form.default, null, _react.default.createElement(_Form.default.Group, {
+  }, _react.default.createElement(_Row.default, null, _react.default.createElement(_Col.default, null), _react.default.createElement(_Col.default, {
+    xs: "auto"
+  }, _react.default.createElement(_Form.default, null, _react.default.createElement(_Form.default.Group, {
     controlId: "formBasicUsername"
   }, _react.default.createElement(_Form.default.Label, null, "Username"), _react.default.createElement(_Form.default.Control, {
     type: "text",
@@ -45840,7 +45834,7 @@ function LoginView(props) {
   }, "Submit"), _react.default.createElement(_reactRouterDom.Link, {
     to: "/register",
     className: "btn"
-  }, "Register")))), _react.default.createElement(_Col.default, null))));
+  }, "Register Here")))), _react.default.createElement(_Col.default, null)));
 }
 },{"react":"../../node_modules/react/index.js","axios":"../node_modules/axios/index.js","react-router-dom":"../../node_modules/react-router-dom/esm/react-router-dom.js","../registration-view/registration-view":"components/registration-view/registration-view.jsx","./login-view.scss":"components/login-view/login-view.scss","react-bootstrap/Form":"../node_modules/react-bootstrap/esm/Form.js","react-bootstrap/Button":"../node_modules/react-bootstrap/esm/Button.js","react-bootstrap/Navbar":"../node_modules/react-bootstrap/esm/Navbar.js","react-bootstrap/Container":"../node_modules/react-bootstrap/esm/Container.js","react-bootstrap/Row":"../node_modules/react-bootstrap/esm/Row.js","react-bootstrap/Col":"../node_modules/react-bootstrap/esm/Col.js"}],"components/director-view/director-view.scss":[function(require,module,exports) {
 var reloadCSS = require('_css_loader');
@@ -46140,6 +46134,17 @@ function (_React$Component) {
       }).catch(function (error) {
         alert('There was an error. Your account could not be deleted. ' + error);
       });
+    } //Called in the render()
+
+  }, {
+    key: "onLoggedOut",
+    value: function onLoggedOut(user) {
+      localStorage.removeItem('token');
+      localStorage.removeItem('user');
+      this.setState({
+        user: null
+      });
+      window.open('/', '_self');
     }
   }, {
     key: "goBack",
@@ -46215,12 +46220,13 @@ function (_React$Component) {
         }, _react.default.createElement(_Button.default, {
           type: "button",
           onClick: this.deleteUserProfile.bind(this)
-        }, "Delete Account")), _react.default.createElement(_reactRouterDom.Link, {
-          to: "/"
+        }, "Delete Account")), _react.default.createElement("div", {
+          className: "logout-btn"
         }, _react.default.createElement(_Button.default, {
-          variant: "link",
-          className: "btn back-btn"
-        }, "Back"))))));
+          type: "button",
+          value: "button",
+          onClick: this.onLoggedOut.bind(this)
+        }, "Logout"))))));
       }
     }
   }]);
@@ -47518,21 +47524,10 @@ function (_React$Component) {
       localStorage.setItem('user', authData.user.Username);
       this.getMovies(authData.token);
       this.getUserProfile(authData.token);
-    } //Called in the render()
+    } //called in the render()
 
   }, {
-    key: "onLoggedOut",
-    value: function onLoggedOut(user) {
-      localStorage.removeItem('token');
-      localStorage.removeItem('user');
-      this.setState({
-        user: null
-      });
-      window.open('/', '_self');
-    }
-  }, {
     key: "onMovieClick",
-    //called in the render()
     value: function onMovieClick(movie) {
       this.setState({
         selectedMovie: movie
@@ -47691,12 +47686,7 @@ function (_React$Component) {
         className: "footer-link"
       }, _react.default.createElement(_featherIconsReact.default, {
         icon: "shopping-bag"
-      })), _react.default.createElement("button", {
-        className: "btn btn-primary",
-        type: "button",
-        value: "button",
-        onClick: this.onLoggedOut.bind(this)
-      }, "logout")))));
+      }))))));
     }
   }]);
 

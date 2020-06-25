@@ -57,6 +57,17 @@ export class ProfileView extends React.Component {
         })
     }
 
+    //Called in the render()
+    onLoggedOut(user) {
+      localStorage.removeItem('token');
+      localStorage.removeItem('user');
+
+      this.setState({
+       user: null
+     })
+      window.open('/', '_self');
+    };
+
   goBack() {
     history.back();
   }
@@ -111,9 +122,9 @@ export class ProfileView extends React.Component {
                 <div className="delete-user-btn">
                   <Button type="button" onClick={this.deleteUserProfile.bind(this)}>Delete Account</Button>
                 </div>
-                <Link to={`/`}>
-                  <Button variant="link" className="btn back-btn">Back</Button>
-                </Link>
+                <div className="logout-btn">
+                  <Button type="button" value="button" onClick={this.onLoggedOut.bind(this)}>Logout</Button>
+                </div>
               </div>
             </Col>
           </Row>
