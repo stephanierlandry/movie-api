@@ -45660,16 +45660,9 @@ function RegistrationView(props) {
 
   return _react.default.createElement("div", {
     className: "login-body"
-  }, _react.default.createElement(_Container.default, null, _react.default.createElement(_Navbar.default, {
-    expand: "md",
-    fixed: "top"
-  }, _react.default.createElement(_Navbar.default.Brand, null, _react.default.createElement("img", {
-    src: "https://design-and-a-movie-images.s3.us-east-2.amazonaws.com/DM.png",
-    alt: "Design and a Movie Logo",
-    width: "120",
-    height: "120",
-    className: "design-movie-logo"
-  })))), _react.default.createElement(_Container.default, null, _react.default.createElement(_Row.default, null, _react.default.createElement(_Col.default, null), _react.default.createElement(_Col.default, null, _react.default.createElement(_Form.default, null, _react.default.createElement(_Form.default.Group, {
+  }, _react.default.createElement(_Row.default, null, _react.default.createElement(_Col.default, null), _react.default.createElement(_Col.default, {
+    xs: "auto"
+  }, _react.default.createElement(_Form.default, null, _react.default.createElement(_Form.default.Group, {
     controlId: "formBasicUsername"
   }, _react.default.createElement(_Form.default.Label, null, "Username"), _react.default.createElement(_Form.default.Control, {
     type: "text",
@@ -45715,7 +45708,7 @@ function RegistrationView(props) {
   }, "Register"), _react.default.createElement(_reactRouterDom.Link, {
     to: "/login",
     className: "btn"
-  }, "Already a User? Login Here")))), _react.default.createElement(_Col.default, null))));
+  }, "Already a User? Login Here")))), _react.default.createElement(_Col.default, null)));
 }
 },{"react":"../../node_modules/react/index.js","axios":"../node_modules/axios/index.js","react-router-dom":"../../node_modules/react-router-dom/esm/react-router-dom.js","./registration-view.scss":"components/registration-view/registration-view.scss","react-bootstrap/Form":"../node_modules/react-bootstrap/esm/Form.js","react-bootstrap/Button":"../node_modules/react-bootstrap/esm/Button.js","react-bootstrap/Navbar":"../node_modules/react-bootstrap/esm/Navbar.js","react-bootstrap/Container":"../node_modules/react-bootstrap/esm/Container.js","react-bootstrap/Row":"../node_modules/react-bootstrap/esm/Row.js","react-bootstrap/Col":"../node_modules/react-bootstrap/esm/Col.js"}],"components/login-view/login-view.scss":[function(require,module,exports) {
 var reloadCSS = require('_css_loader');
