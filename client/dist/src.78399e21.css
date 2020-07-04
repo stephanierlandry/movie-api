@@ -10323,6 +10323,10 @@ a.text-dark:hover, a.text-dark:focus {
   left: 90%;
 }
 
+.back-button:hover {
+  text-decoration: none;
+}
+
 .fav-btn {
   margin: 2em 2em 2em 1.4em;
 }
@@ -10473,6 +10477,9 @@ ul {
 .logout-btn {
   border-radius: 0.25em;
   margin: 0em 1em;
+}
+.btn:hover {
+  text-decoration: none;
 }
 body {
   background: #060807;
