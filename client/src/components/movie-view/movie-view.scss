@@ -1,17 +1,13 @@
 
+
+
 //Loading
 .loading{
   color:white;
 }
 
 //Movie Details
-// .container{
-//   margin:1em;
-// }
-//
-// .main-view{
-//   margin: 5em;
-// }
+
 .movie-view-container {
   justify-content: space-around;
   margin-left: 15px;
@@ -61,4 +57,8 @@
 
 .fav-btn {
   margin: 2em 2em 2em 1.4em;
+}
+
+.fav-btn:hover{
+  color: white !important;
 }

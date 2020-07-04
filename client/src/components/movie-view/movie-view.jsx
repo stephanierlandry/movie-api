@@ -56,7 +56,7 @@ export class MovieView extends React.Component {
                 <img className="movie-poster" src={movie.ImagePath} />
               </div>
               <div>
-                <Button className="btn fav-btn" onClick={this.addUserFavorites.bind(this)}>Add Movie to Favorites!</Button>
+                <a className="btn fav-btn" onClick={this.addUserFavorites.bind(this)}>Add Movie to Favorites!</a>
               </div>
             </Col>
             <Col lg ={4}>

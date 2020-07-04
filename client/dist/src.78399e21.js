@@ -43412,7 +43412,7 @@ function (_React$Component) {
         }, _react.default.createElement("img", {
           className: "movie-poster",
           src: movie.ImagePath
-        })), _react.default.createElement("div", null, _react.default.createElement(_Button.default, {
+        })), _react.default.createElement("div", null, _react.default.createElement("a", {
           className: "btn fav-btn",
           onClick: this.addUserFavorites.bind(this)
         }, "Add Movie to Favorites!"))), _react.default.createElement(_Col.default, {
@@ -47715,7 +47715,8 @@ exports.MainView = MainView;
 
 var mapStateToProps = function mapStateToProps(state) {
   return {
-    movies: state.movies
+    movies: state.movies,
+    user: state.user
   };
 };
 

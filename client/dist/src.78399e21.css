@@ -10326,6 +10326,10 @@ a.text-dark:hover, a.text-dark:focus {
 .fav-btn {
   margin: 2em 2em 2em 1.4em;
 }
+
+.fav-btn:hover {
+  color: white !important;
+}
 body {
   display: flex;
 }
