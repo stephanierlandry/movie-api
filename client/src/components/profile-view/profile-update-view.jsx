@@ -2,6 +2,8 @@ import React, { useState } from 'react';
 import axios from 'axios';
 import { BrowserRouter, Link } from "react-router-dom";
 
+import PropTypes from 'prop-types';
+
 import './profile-update-view.scss';
 
 import Form from 'react-bootstrap/Form';
@@ -12,6 +14,8 @@ import Row from 'react-bootstrap/Row';
 import Col from 'react-bootstrap/Col';
 
 export function ProfileUpdateView(props){
+
+  console.log(props)
 
   const [username, updateUsername] = useState('');
   const [password, updatePassword] = useState('');
@@ -75,4 +79,8 @@ export function ProfileUpdateView(props){
     </Form>
 
   )
+}
+
+ProfileUpdateView.proptypes{
+  user
 }

@@ -3,6 +3,8 @@ import axios from 'axios';
 
 import './movie-view.scss';
 
+import PropTypes from 'prop-types';
+
 import Container from 'react-bootstrap/Container';
 import Row from 'react-bootstrap/Row';
 import Col from 'react-bootstrap/Col';
@@ -90,3 +92,23 @@ export class MovieView extends React.Component {
     }
   }
 }
+
+MainView.propTypes = {
+  movie: PropTypes.shape({
+    Title: PropTypes.string,
+    Description: PropTypes,
+    Genre: PropTypes.shape({
+      Name: PropTypes.string,
+      Description: PropTypes
+    }),
+    Director: PropTypes.shape({
+      Name: PropTypes.string,
+      Bio: PropTypes.string,
+      Birth: PropTypes.string,
+      Death: PropTypes.string
+    }),
+    ImagePath: PropTypes.string,
+    Featured: PropTypes.bool,
+    Actors: PropTypes.array
+  })
+};
