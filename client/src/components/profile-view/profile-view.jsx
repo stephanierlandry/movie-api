@@ -83,7 +83,7 @@ export class ProfileView extends React.Component {
       return <div className="loading">loading</div>
     }
 
-    if(user || userProfile) {
+    if(user ) {
       return(
         <Container fluid>
           <Row className="hi-container">

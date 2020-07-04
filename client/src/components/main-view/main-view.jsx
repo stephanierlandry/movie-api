@@ -95,6 +95,17 @@ export class MainView extends React.Component {
     this.getUserProfile(authData.token);
   }
 
+  //Called in the render()
+  onLoggedOut(user) {
+    localStorage.removeItem('token');
+    localStorage.removeItem('user');
+
+    this.setState({
+     user: null
+   })
+    window.open('/', '_self');
+  };
+
   //called in the render()
   onMovieClick(movie) {
     this.setState({
@@ -208,6 +219,9 @@ export class MainView extends React.Component {
                 <Nav.Link href="https://granthurlbert.bigcartel.com/" className="footer-link">
                   <FeatherIcon icon="shopping-bag" />
                 </Nav.Link>
+                <div className="logout-btn">
+                  <Button type="button" value="button" onClick={this.onLoggedOut.bind(this)}>Logout</Button>
+                </div>
               </Navbar>
             </Row>
           </Container>

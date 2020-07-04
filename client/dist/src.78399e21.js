@@ -46164,7 +46164,7 @@ function (_React$Component) {
         }, "loading");
       }
 
-      if (user || userProfile) {
+      if (user) {
         return _react.default.createElement(_Container.default, {
           fluid: true
         }, _react.default.createElement(_Row.default, {
@@ -47525,10 +47525,21 @@ function (_React$Component) {
       localStorage.setItem('user', authData.user.Username);
       this.getMovies(authData.token);
       this.getUserProfile(authData.token);
-    } //called in the render()
+    } //Called in the render()
 
   }, {
+    key: "onLoggedOut",
+    value: function onLoggedOut(user) {
+      localStorage.removeItem('token');
+      localStorage.removeItem('user');
+      this.setState({
+        user: null
+      });
+      window.open('/', '_self');
+    }
+  }, {
     key: "onMovieClick",
+    //called in the render()
     value: function onMovieClick(movie) {
       this.setState({
         selectedMovie: movie
@@ -47687,7 +47698,13 @@ function (_React$Component) {
         className: "footer-link"
       }, _react.default.createElement(_featherIconsReact.default, {
         icon: "shopping-bag"
-      }))))));
+      })), _react.default.createElement("div", {
+        className: "logout-btn"
+      }, _react.default.createElement(_Button.default, {
+        type: "button",
+        value: "button",
+        onClick: this.onLoggedOut.bind(this)
+      }, "Logout"))))));
     }
   }]);
 
@@ -47883,7 +47900,7 @@ var parent = module.bundle.parent;
 if ((!parent || !parent.isParcelRequire) && typeof WebSocket !== 'undefined') {
   var hostname = "" || location.hostname;
   var protocol = location.protocol === 'https:' ? 'wss' : 'ws';
-  var ws = new WebSocket(protocol + '://' + hostname + ':' + "54281" + '/');
+  var ws = new WebSocket(protocol + '://' + hostname + ':' + "64313" + '/');
 
   ws.onmessage = function (event) {
     checkedAssets = {};
