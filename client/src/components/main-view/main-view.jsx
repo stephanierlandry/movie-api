@@ -3,6 +3,8 @@ import axios from 'axios';
 
 import {connect} from 'react-redux';
 
+import PropTypes from 'prop-types';
+
 import { BrowserRouter, Route, Link} from "react-router-dom";
 
 import {setMovies, setFilter, setProfile, setFavorites} from '../../actions/actions';
@@ -240,3 +242,23 @@ let mapStateToProps = state => {
 export default connect(mapStateToProps, {setMovies, setProfile, setFavorites} )( MainView);
 
 //key refers to what the may be updated in the DOM
+
+MainView.propTypes = {
+  movie: PropTypes.shape({
+    Title: PropTypes.string,
+    Description: PropTypes,
+    Genre: PropTypes.shape({
+      Name: PropTypes.string,
+      Description: PropTypes
+    }),
+    Director: PropTypes.shape({
+      Name: PropTypes.string,
+      Bio: PropTypes.string,
+      Birth: PropTypes.string,
+      Death: PropTypes.string
+    }),
+    ImagePath: PropTypes.string,
+    Featured: PropTypes.bool,
+    Actors: PropTypes.array
+  })
+};
