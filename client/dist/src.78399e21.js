@@ -43319,6 +43319,8 @@ var _axios = _interopRequireDefault(require("axios"));
 
 require("./movie-view.scss");
 
+var _propTypes = _interopRequireDefault(require("prop-types"));
+
 var _Container = _interopRequireDefault(require("react-bootstrap/Container"));
 
 var _Row = _interopRequireDefault(require("react-bootstrap/Row"));
@@ -43368,6 +43370,7 @@ function (_React$Component) {
     key: "goBack",
     value: function goBack() {
       history.back();
+      window.scroll(0, 0);
     }
   }, {
     key: "addUserFavorites",
@@ -43456,7 +43459,26 @@ function (_React$Component) {
 }(_react.default.Component);
 
 exports.MovieView = MovieView;
-},{"react":"../../node_modules/react/index.js","axios":"../node_modules/axios/index.js","./movie-view.scss":"components/movie-view/movie-view.scss","react-bootstrap/Container":"../node_modules/react-bootstrap/esm/Container.js","react-bootstrap/Row":"../node_modules/react-bootstrap/esm/Row.js","react-bootstrap/Col":"../node_modules/react-bootstrap/esm/Col.js","react-bootstrap/Button":"../node_modules/react-bootstrap/esm/Button.js","react-router-dom":"../../node_modules/react-router-dom/esm/react-router-dom.js"}],"components/registration-view/registration-view.scss":[function(require,module,exports) {
+MovieView.propTypes = {
+  movie: _propTypes.default.shape({
+    Title: _propTypes.default.string,
+    Description: _propTypes.default,
+    Genre: _propTypes.default.shape({
+      Name: _propTypes.default.string,
+      Description: _propTypes.default
+    }),
+    Director: _propTypes.default.shape({
+      Name: _propTypes.default.string,
+      Bio: _propTypes.default.string,
+      Birth: _propTypes.default.string,
+      Death: _propTypes.default.string
+    }),
+    ImagePath: _propTypes.default.string,
+    Featured: _propTypes.default.bool,
+    Actors: _propTypes.default.array
+  })
+};
+},{"react":"../../node_modules/react/index.js","axios":"../node_modules/axios/index.js","./movie-view.scss":"components/movie-view/movie-view.scss","prop-types":"../node_modules/prop-types/index.js","react-bootstrap/Container":"../node_modules/react-bootstrap/esm/Container.js","react-bootstrap/Row":"../node_modules/react-bootstrap/esm/Row.js","react-bootstrap/Col":"../node_modules/react-bootstrap/esm/Col.js","react-bootstrap/Button":"../node_modules/react-bootstrap/esm/Button.js","react-router-dom":"../../node_modules/react-router-dom/esm/react-router-dom.js"}],"components/registration-view/registration-view.scss":[function(require,module,exports) {
 var reloadCSS = require('_css_loader');
 
 module.hot.dispose(reloadCSS);
@@ -46143,6 +46165,7 @@ function (_React$Component) {
     key: "goBack",
     value: function goBack() {
       history.back();
+      window.scroll(0, 0);
     }
   }, {
     key: "render",
@@ -46247,6 +46270,8 @@ var _axios = _interopRequireDefault(require("axios"));
 
 var _reactRouterDom = require("react-router-dom");
 
+var _propTypes = _interopRequireDefault(require("prop-types"));
+
 require("./profile-update-view.scss");
 
 var _Form = _interopRequireDefault(require("react-bootstrap/Form"));
@@ -46276,6 +46301,8 @@ function _iterableToArrayLimit(arr, i) { if (!(Symbol.iterator in Object(arr) ||
 function _arrayWithHoles(arr) { if (Array.isArray(arr)) return arr; }
 
 function ProfileUpdateView(props) {
+  console.log(props);
+
   var _useState = (0, _react.useState)(''),
       _useState2 = _slicedToArray(_useState, 2),
       username = _useState2[0],
@@ -46372,7 +46399,7 @@ function ProfileUpdateView(props) {
     onClick: goBack
   }, "Back")));
 }
-},{"react":"../../node_modules/react/index.js","axios":"../node_modules/axios/index.js","react-router-dom":"../../node_modules/react-router-dom/esm/react-router-dom.js","./profile-update-view.scss":"components/profile-view/profile-update-view.scss","react-bootstrap/Form":"../node_modules/react-bootstrap/esm/Form.js","react-bootstrap/Button":"../node_modules/react-bootstrap/esm/Button.js","react-bootstrap/Navbar":"../node_modules/react-bootstrap/esm/Navbar.js","react-bootstrap/Container":"../node_modules/react-bootstrap/esm/Container.js","react-bootstrap/Row":"../node_modules/react-bootstrap/esm/Row.js","react-bootstrap/Col":"../node_modules/react-bootstrap/esm/Col.js"}],"../node_modules/dom-helpers/esm/querySelectorAll.js":[function(require,module,exports) {
+},{"react":"../../node_modules/react/index.js","axios":"../node_modules/axios/index.js","react-router-dom":"../../node_modules/react-router-dom/esm/react-router-dom.js","prop-types":"../node_modules/prop-types/index.js","./profile-update-view.scss":"components/profile-view/profile-update-view.scss","react-bootstrap/Form":"../node_modules/react-bootstrap/esm/Form.js","react-bootstrap/Button":"../node_modules/react-bootstrap/esm/Button.js","react-bootstrap/Navbar":"../node_modules/react-bootstrap/esm/Navbar.js","react-bootstrap/Container":"../node_modules/react-bootstrap/esm/Container.js","react-bootstrap/Row":"../node_modules/react-bootstrap/esm/Row.js","react-bootstrap/Col":"../node_modules/react-bootstrap/esm/Col.js"}],"../node_modules/dom-helpers/esm/querySelectorAll.js":[function(require,module,exports) {
 "use strict";
 
 Object.defineProperty(exports, "__esModule", {

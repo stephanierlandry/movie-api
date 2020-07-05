@@ -70,6 +70,7 @@ export class ProfileView extends React.Component {
 
   goBack() {
     history.back();
+    window.scroll(0,0);
   }
 
   render(){

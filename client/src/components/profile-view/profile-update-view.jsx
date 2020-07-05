@@ -80,7 +80,3 @@ export function ProfileUpdateView(props){
 
   )
 }
-
-ProfileUpdateView.proptypes{
-  user
-}

@@ -20,6 +20,7 @@ export class MovieView extends React.Component {
 
   goBack() {
     history.back();
+    window.scroll(0,0);
   }
 
   addUserFavorites(e){
@@ -93,7 +94,7 @@ export class MovieView extends React.Component {
   }
 }
 
-MainView.propTypes = {
+MovieView.propTypes = {
   movie: PropTypes.shape({
     Title: PropTypes.string,
     Description: PropTypes,
