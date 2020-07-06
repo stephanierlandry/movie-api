@@ -43172,9 +43172,12 @@ function MoviesList(props) {
     });
   }
 
-  if (!movie) return _react.default.createElement("div", {
-    className: "main-view"
-  });
+  if (!filteredMovies) {
+    return _react.default.createElement("div", {
+      className: "loading"
+    }, "loading");
+  }
+
   return _react.default.createElement(_react.default.Fragment, null, _react.default.createElement(_visibilityFilterInput.default, {
     visibilityFilter: visibilityFilter
   }), filteredMovies.map(function (m) {
@@ -43367,6 +43370,11 @@ function (_React$Component) {
   }
 
   _createClass(MovieView, [{
+    key: "componentDidMount",
+    value: function componentDidMount() {
+      window.scrollTo(0, 0);
+    }
+  }, {
     key: "goBack",
     value: function goBack() {
       history.back();

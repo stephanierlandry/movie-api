@@ -18,6 +18,10 @@ export class MovieView extends React.Component {
     this.state = {};
   }
 
+  componentDidMount(){
+    window.scrollTo(0,0);
+  }
+
   goBack() {
     history.back();
     window.scroll(0,0);

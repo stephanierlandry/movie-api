@@ -21,7 +21,8 @@ function MoviesList(props) {
       m.Title.toLowerCase().includes(visibilityFilter.toLowerCase()));
   }
 
-  if (!movie) return <div className="main-view"/>;
+  if (!filteredMovies) {
+    return <div className="loading">loading</div>;}
 
   return (
     <React.Fragment>
