@@ -45197,6 +45197,7 @@ function RegistrationView(props) {
       alert('You have successfully registered. Please login now!');
       window.open('/client', '_self'); // the second argument '_self' is necessary so that the page will open in the current tab
     }).catch(function (e) {
+      alert('There is an error. Please try again.');
       console.log(e, 'error registering the user');
     });
   };

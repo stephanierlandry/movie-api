@@ -33,6 +33,7 @@ export function RegistrationView(props) {
     window.open('/client', '_self'); // the second argument '_self' is necessary so that the page will open in the current tab
   })
   .catch(e => {
+    alert('There is an error. Please try again.')
     console.log(e,'error registering the user')
   });
 };
