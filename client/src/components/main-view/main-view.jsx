@@ -43,7 +43,7 @@ export class MainView extends React.Component {
   }
 
   componentDidMount() {
-    
+
     let accessToken = localStorage.getItem('token');
     if (accessToken !== null) {
       this.setState({
@@ -127,7 +127,7 @@ export class MainView extends React.Component {
       return <div className="loading">loading</div>;}
 
     return(
-      <BrowserRouter>
+      <BrowserRouter basename="/client">
           <Container fluid>
             <Row>
               <Navbar fixed="top" expand="lg" className="nav-container">
