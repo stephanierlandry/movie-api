@@ -144,7 +144,7 @@ export class MainView extends React.Component {
               <Route exact path="/"
                       render={() => {
                         if (!user) {
-                          window.location="https://design-and-a-movie.herokuapp.com/client/login"
+                          window.location="https://design-and-a-movie.herokuapp.com/login"
                         } else {
                           window.location="/movies"
                         }
@@ -228,6 +228,7 @@ export class MainView extends React.Component {
               </Navbar>
             </Row>
           </Container>
+
       </Router>
     )
   }
