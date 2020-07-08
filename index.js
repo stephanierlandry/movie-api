@@ -25,7 +25,7 @@ app.get("/client/*", (req, res) => {
   res.sendFile(path.join(__dirname, "client", "dist", "index.html"));
 });
 
-app.use(express.static('/assets'));
+// app.use(express.static('/assets'));
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({extended: true}));
 app.use(passport.initialize());
@@ -36,8 +36,8 @@ app.use(cors());
 
 let auth = require('./auth')(app);
 
-let allowedOrigins = ['http://localhost:1234', 'http://localhost:3000', 'http://testsite.com', 'https://design-and-a-movie.herokuapp.com/'];
-// 
+let allowedOrigins = ['http://localhost:1234', 'http://localhost:3000', 'http://testsite.com'];
+//
 // app.use(cors({
 //   origin: function(origin, callback){
 //     if(!origin) return callback(null, true);
