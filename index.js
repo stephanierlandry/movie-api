@@ -4,6 +4,8 @@ const Models = require('./models.js');
 const Movies = Models.Movie;
 const Users = Models.User;
 
+const path = require("path");
+
 // mongoose.connect('mongodb://localhost:27017/test', {useNewUrlParser: true, useCreateIndex: true, useUnifiedTopology: true, useFindAndModify: false});
 mongoose.connect('mongodb+srv://DesignMovieDBAdmin:Huckabees549@cluster0-mrrrr.mongodb.net/test?retryWrites=true&w=majority', {useNewUrlParser: true, useCreateIndex: true, useUnifiedTopology: true, useFindAndModify: false});
 
@@ -17,6 +19,7 @@ const passport = require('passport');
 
 const app = express();
 app.use(express.static('public'));
+app.use("/client", express.static(path.join(__dirname, "client", "dist")));
 app.use(express.static('/assets'));
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({extended: true}));
@@ -49,6 +52,10 @@ app.get('/', function(req, res){
 });
 
 //    ---MOVIE ENDPOINTS---
+
+app.get("/client/*", (req, res) => {
+  res.sendFile(path.join(__dirname, "client", "dist", "index.html"));
+});
 
 //This endpoint gets all of the movies + data in the API
 app.get("/movies", passport.authenticate('jwt', { session: false }), (req, res) => {
