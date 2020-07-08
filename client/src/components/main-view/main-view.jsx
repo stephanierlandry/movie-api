@@ -131,7 +131,7 @@ export class MainView extends React.Component {
           <Container fluid>
             <Row>
               <Navbar fixed="top" expand="lg" className="nav-container">
-                <Navbar.Brand href="/" className="logo-container">
+                <Navbar.Brand href="/client" className="logo-container">
                   <img src="https://design-and-a-movie-images.s3.us-east-2.amazonaws.com/DM.png" alt="Design and a Movie Logo" width="120" height="120" className="design-movie-logo"/>
                 </Navbar.Brand>
                 <div className="user-name">
