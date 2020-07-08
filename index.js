@@ -20,6 +20,11 @@ const passport = require('passport');
 const app = express();
 app.use(express.static('public'));
 app.use("/client", express.static(path.join(__dirname, "client", "dist")));
+
+app.get("/client/*", (req, res) => {
+  res.sendFile(path.join(__dirname, "client", "dist", "index.html"));
+});
+
 app.use(express.static('/assets'));
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({extended: true}));
@@ -52,11 +57,6 @@ app.get('/', function(req, res){
 });
 
 //    ---MOVIE ENDPOINTS---
-
-app.get("/client/*", (req, res) => {
-  res.sendFile(path.join(__dirname, "client", "dist", "index.html"));
-});
-
 //This endpoint gets all of the movies + data in the API
 app.get("/movies", passport.authenticate('jwt', { session: false }), (req, res) => {
   Movies.find()
