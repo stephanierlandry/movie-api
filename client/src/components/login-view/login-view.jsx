@@ -40,16 +40,13 @@ export function LoginView(props) {
   };
 
   if (props.userData) {
-    window.location="/movies"
+    window.location="/client/movies"
   }
-  // console.log(props)
+
 
   return (
 
       <div className="login-body">
-
-
-
           <Row>
             <Col></Col>
             <Col xs="auto">
@@ -72,7 +69,6 @@ export function LoginView(props) {
             </Col>
             <Col></Col>
           </Row>
-
       </div>
   );
 }
