@@ -36,7 +36,7 @@ app.use(cors());
 
 let auth = require('./auth')(app);
 
-let allowedOrigins = ['http://localhost:1234', 'http://localhost:3000', 'http://testsite.com', 'https://design-and-a-movie.herokuapp.com/client'];
+let allowedOrigins = ['http://localhost:1234', 'http://localhost:3000', 'http://testsite.com', 'https://design-and-a-movie.herokuapp.com/'];
 
 app.use(cors({
   origin: function(origin, callback){
