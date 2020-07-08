@@ -5,7 +5,7 @@ import {connect} from 'react-redux';
 
 import PropTypes from 'prop-types';
 
-import { BrowserRouter, Route, Link} from "react-router-dom";
+import { BrowserRouter as Router, Route, Link} from "react-router-dom";
 
 import {setMovies, setFilter, setProfile, setFavorites} from '../../actions/actions';
 
@@ -144,7 +144,7 @@ export class MainView extends React.Component {
               <Route exact path="/"
                       render={() => {
                         if (!user) {
-                          window.location="http://localhost:1234/login"
+                          window.location="https://design-and-a-movie.herokuapp.com/login"
                         } else {
                           window.location="/movies"
                         }
