@@ -5,7 +5,7 @@ import {connect} from 'react-redux';
 
 import PropTypes from 'prop-types';
 
-import { BrowserRouter, Route, Link} from "react-router-dom";
+import { BrowserRouter as Router, Route, Link} from "react-router-dom";
 
 import {setMovies, setFilter, setProfile, setFavorites} from '../../actions/actions';
 
@@ -127,7 +127,7 @@ export class MainView extends React.Component {
       return <div className="loading">loading</div>;}
 
     return(
-      <BrowserRouter basename="/client">
+      <Router basename="/client">
           <Container fluid>
             <Row>
               <Navbar fixed="top" expand="lg" className="nav-container">
@@ -228,8 +228,7 @@ export class MainView extends React.Component {
               </Navbar>
             </Row>
           </Container>
-
-      </BrowserRouter>
+      </Router>
     )
   }
 }
