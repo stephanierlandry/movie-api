@@ -50,7 +50,7 @@ export class ProfileView extends React.Component {
           this.setState({
            user: null
          })
-          window.open('/', '_self');
+          window.open('/client/login', '_self');
         })
         .catch(error => {
           alert('There was an error. Your account could not be deleted. ' + error);
@@ -65,7 +65,7 @@ export class ProfileView extends React.Component {
       this.setState({
        user: null
      })
-      window.open('/', '_self');
+      window.open('/client/login', '_self');
     };
 
   goBack() {

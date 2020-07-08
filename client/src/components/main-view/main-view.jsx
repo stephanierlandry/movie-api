@@ -106,7 +106,7 @@ export class MainView extends React.Component {
     this.setState({
      user: null
    })
-    window.open('/', '_self');
+    window.open('/client/login', '_self');
   };
 
   //called in the render()
