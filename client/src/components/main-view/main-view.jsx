@@ -5,7 +5,7 @@ import {connect} from 'react-redux';
 
 import PropTypes from 'prop-types';
 
-import { BrowserRouter as Router, Route, Link} from "react-router-dom";
+import { BrowserRouter, Route, Link} from "react-router-dom";
 
 import {setMovies, setFilter, setProfile, setFavorites} from '../../actions/actions';
 
