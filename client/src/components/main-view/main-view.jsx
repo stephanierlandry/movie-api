@@ -144,7 +144,7 @@ export class MainView extends React.Component {
               <Route exact path="/"
                       render={() => {
                         if (!user) {
-                          window.location="https://design-and-a-movie.herokuapp.com/login"
+                          window.location="https://design-and-a-movie.herokuapp.com/client/login"
                         } else {
                           window.location="/movies"
                         }
