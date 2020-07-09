@@ -39,7 +39,7 @@ export function ProfileUpdateView(props){
       const data = response.data;
       alert('Your profile has been updated!');
       localStorage.setItem('user', data.Username);
-      window.open('/user/:username', '_self');
+      window.open('client/user/:username', '_self');
     })
     .catch(error => {
       alert('Error updating profile');
