@@ -17,27 +17,27 @@ export class ProfileView extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
-    
+
     };
   }
 
   deleteFavorites(movieId) {
-      axios.delete(`https://design-and-a-movie.herokuapp.com/update-users/${localStorage.getItem('user')}/favorites/${movieId}`, {
+      axios.delete(`http://localhost:1234/${localStorage.getItem('user')}/favorites/${movieId}`, {
         headers: { Authorization: `Bearer ${localStorage.getItem('token')}` }
       })
-        .then(res => {
-          document.location.reload(true);
-        })
-        .then(res => {
-          alert(`${movies.Title} successfully deleted from favorites`);
-        })
-        .catch(e => {
-          alert( `${movie.Title } could not be deleted from favorites ` + e)
-        });
+      .then(res => {
+        document.location.reload(true);
+      })
+      .then(res => {
+        alert(`${movies.Title} successfully deleted from favorites`);
+      })
+      .catch(e => {
+        alert( `${movie.Title } could not be deleted from favorites ` + e)
+      });
     }
 
     deleteUserProfile() {
-      axios.delete(`https://design-and-a-movie.herokuapp.com/delete-users/${localStorage.getItem('user')}`, {
+      axios.delete(`http://localhost:1234/${localStorage.getItem('user')}`, {
         headers: { Authorization: `Bearer ${localStorage.getItem('token')}` }
       })
         .then(response => {
@@ -79,7 +79,7 @@ export class ProfileView extends React.Component {
   render(){
 
     const { user, userProfile, movies } = this.props;
-    console.log(userProfile)
+    console.log(this.props)
     const favoritesList = movies.filter(movie => userProfile.FavoritesMovies.includes(movie._id));
 
 
