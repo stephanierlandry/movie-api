@@ -45630,16 +45630,14 @@ function (_React$Component) {
     _classCallCheck(this, ProfileView);
 
     _this = _possibleConstructorReturn(this, _getPrototypeOf(ProfileView).call(this, props));
-    _this.state = {
-      userProfile: null
-    };
+    _this.state = {};
     return _this;
   }
 
   _createClass(ProfileView, [{
     key: "deleteFavorites",
     value: function deleteFavorites(movieId) {
-      _axios.default.delete("https://design-and-a-movie.herokuapp.com/update-users/".concat(localStorage.getItem('user'), "/favorites/").concat(movieId), {
+      _axios.default.delete("http://localhost:1234/".concat(localStorage.getItem('user'), "/favorites/").concat(movieId), {
         headers: {
           Authorization: "Bearer ".concat(localStorage.getItem('token'))
         }
@@ -45656,7 +45654,7 @@ function (_React$Component) {
     value: function deleteUserProfile() {
       var _this2 = this;
 
-      _axios.default.delete("https://design-and-a-movie.herokuapp.com/delete-users/".concat(localStorage.getItem('user')), {
+      _axios.default.delete("http://localhost:1234/".concat(localStorage.getItem('user')), {
         headers: {
           Authorization: "Bearer ".concat(localStorage.getItem('token'))
         }
@@ -45703,7 +45701,7 @@ function (_React$Component) {
           user = _this$props.user,
           userProfile = _this$props.userProfile,
           movies = _this$props.movies;
-      console.log(userProfile);
+      console.log(this.props);
       var favoritesList = movies.filter(function (movie) {
         return userProfile.FavoritesMovies.includes(movie._id);
       });
@@ -45866,7 +45864,7 @@ function ProfileUpdateView(props) {
     //prevents the default behavior of submitting the form so authentication can happen
     e.preventDefault(); //Sends an update to the database
 
-    _axios.default.put("https://design-and-a-movie.herokuapp.com/update-users/".concat(localStorage.getItem('user')), {
+    _axios.default.put("http://localhost:1234/update-users/".concat(localStorage.getItem('user')), {
       Username: username,
       Password: password,
       Email: email,
@@ -46998,8 +46996,7 @@ function (_React$Component) {
 
     _this = _possibleConstructorReturn(this, _getPrototypeOf(MainView).call(this));
     _this.state = {
-      userProfile: null,
-      user: null
+      userProfile: null
     };
     return _this;
   }
@@ -47257,7 +47254,8 @@ exports.MainView = MainView;
 
 var mapStateToProps = function mapStateToProps(state) {
   return {
-    movies: state.movies
+    movies: state.movies,
+    userProfile: state.userProfile
   };
 };
 
@@ -47460,7 +47458,7 @@ var parent = module.bundle.parent;
 if ((!parent || !parent.isParcelRequire) && typeof WebSocket !== 'undefined') {
   var hostname = "" || location.hostname;
   var protocol = location.protocol === 'https:' ? 'wss' : 'ws';
-  var ws = new WebSocket(protocol + '://' + hostname + ':' + "65475" + '/');
+  var ws = new WebSocket(protocol + '://' + hostname + ':' + "53313" + '/');
 
   ws.onmessage = function (event) {
     checkedAssets = {};

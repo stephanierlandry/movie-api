@@ -37,8 +37,7 @@ export class MainView extends React.Component {
   constructor() {
     super();
     this.state = {
-      userProfile: null,
-      user: null
+      userProfile:null
     };
   }
 
@@ -233,7 +232,9 @@ export class MainView extends React.Component {
 
 let mapStateToProps = state => {
   return {
-    movies: state.movies }
+    movies: state.movies,
+    userProfile: state.userProfile
+     }
 }
 
 export default connect(mapStateToProps, {setMovies, setProfile} )( MainView);
