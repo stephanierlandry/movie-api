@@ -7,7 +7,7 @@ import PropTypes from 'prop-types';
 
 import { BrowserRouter as Router, Route, Link} from "react-router-dom";
 
-import {setMovies, setFilter, setProfile, setFavorites} from '../../actions/actions';
+import {setMovies, setFilter, setProfile} from '../../actions/actions';
 
 import MoviesList from '../movies-list/movies-list';
 import { MovieCard } from '../movie-card/movie-card';
@@ -74,7 +74,6 @@ export class MainView extends React.Component {
       headers: {Authorization: `Bearer ${token}`}
     })
     .then(response => {
-      console.log(response)
       this.setState({
         userProfile: response.data
       });
@@ -120,8 +119,6 @@ export class MainView extends React.Component {
 
     let { movies } = this.props;
     let { user, userProfile } = this.state;
-
-    // const { movies, selectedMovie, user, userProfile } = this.state;
 
     if (!movies) {
       return <div className="loading">loading</div>;}
@@ -206,7 +203,7 @@ export class MainView extends React.Component {
               <Route exact path="/update-user/:username"
                       render={() => {
                         return (
-                          <ProfileUpdateView user={user} userProfile={userProfile} movie={movies}/>
+                          <ProfileUpdateView user={user} userProfile={userProfile} movies={movies}/>
                         )
                       }}/>
             </Row>
@@ -236,11 +233,10 @@ export class MainView extends React.Component {
 
 let mapStateToProps = state => {
   return {
-    movies: state.movies,
-    user: state.user }
+    movies: state.movies }
 }
 
-export default connect(mapStateToProps, {setMovies, setProfile, setFavorites} )( MainView);
+export default connect(mapStateToProps, {setMovies, setProfile} )( MainView);
 
 //key refers to what the may be updated in the DOM
 

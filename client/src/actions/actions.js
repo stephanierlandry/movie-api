@@ -11,7 +11,7 @@ export function setFilter(value) {
   return { type: SET_FILTER, value };
 }
 
-export function setUser(value) {
+export function setProfile(value) {
   return { type: SET_PROFILE, value};
 }
 

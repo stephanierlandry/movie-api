@@ -41143,7 +41143,7 @@ Object.defineProperty(exports, "__esModule", {
 });
 exports.setMovies = setMovies;
 exports.setFilter = setFilter;
-exports.setUser = setUser;
+exports.setProfile = setProfile;
 exports.setFavorites = setFavorites;
 exports.SET_FAVORITES = exports.SET_PROFILE = exports.SET_FILTER = exports.SET_MOVIES = void 0;
 var SET_MOVIES = 'SET_MOVIES';
@@ -41169,7 +41169,7 @@ function setFilter(value) {
   };
 }
 
-function setUser(value) {
+function setProfile(value) {
   return {
     type: SET_PROFILE,
     value: value
@@ -42969,9 +42969,9 @@ function (_React$Component) {
   }, {
     key: "render",
     value: function render() {
-      var _this$props = this.props,
-          movie = _this$props.movie,
-          userData = _this$props.userData;
+      var movie = this.props.movie;
+      var userProfile = this.props.data.userProfile;
+      console.log(userProfile);
 
       if (!movie) {
         return _react.default.createElement("div", {
@@ -45195,7 +45195,7 @@ function RegistrationView(props) {
     }).then(function (response) {
       var data = response.data;
       alert('You have successfully registered. Please login now!');
-      window.open('/client', '_self'); // the second argument '_self' is necessary so that the page will open in the current tab
+      window.open('/client/login', '_self'); // the second argument '_self' is necessary so that the page will open in the current tab
     }).catch(function (e) {
       alert('There is an error. Please try again.');
       console.log(e, 'error registering the user');
@@ -45335,9 +45335,8 @@ function LoginView(props) {
   };
 
   if (props.userData) {
-    window.location = "/movies";
-  } // console.log(props)
-
+    window.location = "/client/movies";
+  }
 
   return _react.default.createElement("div", {
     className: "login-body"
@@ -45578,13 +45577,17 @@ module.hot.accept(reloadCSS);
 Object.defineProperty(exports, "__esModule", {
   value: true
 });
-exports.ProfileView = void 0;
+exports.default = exports.ProfileView = void 0;
 
 var _react = _interopRequireDefault(require("react"));
 
 var _axios = _interopRequireDefault(require("axios"));
 
+var _reactRedux = require("react-redux");
+
 require("./profile-view.scss");
+
+var _actions = require("../../actions/actions");
 
 var _Container = _interopRequireDefault(require("react-bootstrap/Container"));
 
@@ -45627,7 +45630,9 @@ function (_React$Component) {
     _classCallCheck(this, ProfileView);
 
     _this = _possibleConstructorReturn(this, _getPrototypeOf(ProfileView).call(this, props));
-    _this.state = {};
+    _this.state = {
+      userProfile: null
+    };
     return _this;
   }
 
@@ -45667,7 +45672,7 @@ function (_React$Component) {
           user: null
         });
 
-        window.open('/', '_self');
+        window.open('/client/login', '_self');
       }).catch(function (error) {
         alert('There was an error. Your account could not be deleted. ' + error);
       });
@@ -45681,7 +45686,7 @@ function (_React$Component) {
       this.setState({
         user: null
       });
-      window.open('/', '_self');
+      window.open('/client/login', '_self');
     }
   }, {
     key: "goBack",
@@ -45698,74 +45703,72 @@ function (_React$Component) {
           user = _this$props.user,
           userProfile = _this$props.userProfile,
           movies = _this$props.movies;
+      console.log(userProfile);
       var favoritesList = movies.filter(function (movie) {
         return userProfile.FavoritesMovies.includes(movie._id);
       });
-      console.log(userProfile);
 
-      if (!user || !userProfile) {
+      if (!userProfile) {
         return _react.default.createElement("div", {
           className: "loading"
         }, "loading");
       }
 
-      if (user) {
-        return _react.default.createElement(_Container.default, {
-          fluid: true
-        }, _react.default.createElement(_Row.default, {
-          className: "hi-container"
-        }, _react.default.createElement(_Col.default, null, _react.default.createElement("h1", {
-          className: "greeting"
-        }, "hi ", user))), _react.default.createElement(_Row.default, {
-          className: "profile-view-container"
-        }, _react.default.createElement(_Col.default, {
-          lg: 8
-        }, _react.default.createElement("div", {
-          className: "user-info-block"
-        }, _react.default.createElement("h3", {
-          className: "fav-title"
-        }, "Your Movie Favorites!"), _react.default.createElement("div", {
-          className: "user-fav-block"
-        }, _react.default.createElement("div", {
-          className: "user-favorites"
-        }, !userProfile.FavoritesMovies && _react.default.createElement("div", null, "no movies"), userProfile.FavoritesMovies && _react.default.createElement("ul", null, favoritesList.map(function (movie) {
-          return _react.default.createElement("li", {
-            key: movie._id,
-            className: "relative"
-          }, _react.default.createElement(_reactRouterDom.Link, {
-            className: "img-block",
-            to: "/movie/".concat(movie._id)
-          }, _react.default.createElement("img", {
-            className: "movie-image",
-            src: movie.ImagePath
-          })), _react.default.createElement("a", {
-            className: "delete-btn",
-            onClick: function onClick(e) {
-              return _this3.deleteFavorites(movie._id);
-            }
-          }, "X"));
-        })))))), _react.default.createElement(_Col.default, {
-          lg: 4
-        }, _react.default.createElement("div", {
-          className: "btn-group"
-        }, _react.default.createElement("div", {
-          className: "update-btn"
+      return _react.default.createElement(_Container.default, {
+        fluid: true
+      }, _react.default.createElement(_Row.default, {
+        className: "hi-container"
+      }, _react.default.createElement(_Col.default, null, _react.default.createElement("h1", {
+        className: "greeting"
+      }, "hi ", user))), _react.default.createElement(_Row.default, {
+        className: "profile-view-container"
+      }, _react.default.createElement(_Col.default, {
+        lg: 8
+      }, _react.default.createElement("div", {
+        className: "user-info-block"
+      }, _react.default.createElement("h3", {
+        className: "fav-title"
+      }, "Your Movie Favorites!"), _react.default.createElement("div", {
+        className: "user-fav-block"
+      }, _react.default.createElement("div", {
+        className: "user-favorites"
+      }, userProfile.FavoritesMovies && _react.default.createElement("ul", null, favoritesList.map(function (movie) {
+        return _react.default.createElement("li", {
+          key: movie._id,
+          className: "relative"
         }, _react.default.createElement(_reactRouterDom.Link, {
-          to: "/update-user/:username",
-          className: "btn"
-        }, "Update Your Profile")), _react.default.createElement("div", {
-          className: "delete-user-btn"
-        }, _react.default.createElement(_Button.default, {
-          type: "button",
-          onClick: this.deleteUserProfile.bind(this)
-        }, "Delete Account")), _react.default.createElement("div", {
-          className: "logout-btn"
-        }, _react.default.createElement(_Button.default, {
-          type: "button",
-          value: "button",
-          onClick: this.onLoggedOut.bind(this)
-        }, "Logout"))))));
-      }
+          className: "img-block",
+          to: "/movie/".concat(movie._id)
+        }, _react.default.createElement("img", {
+          className: "movie-image",
+          src: movie.ImagePath
+        })), _react.default.createElement("a", {
+          className: "delete-btn",
+          onClick: function onClick(e) {
+            return _this3.deleteFavorites(movie._id);
+          }
+        }, "X"));
+      })))))), _react.default.createElement(_Col.default, {
+        lg: 4
+      }, _react.default.createElement("div", {
+        className: "btn-group"
+      }, _react.default.createElement("div", {
+        className: "update-btn"
+      }, _react.default.createElement(_reactRouterDom.Link, {
+        to: "/update-user/:username",
+        className: "btn"
+      }, "Update Your Profile")), _react.default.createElement("div", {
+        className: "delete-user-btn"
+      }, _react.default.createElement(_Button.default, {
+        type: "button",
+        onClick: this.deleteUserProfile.bind(this)
+      }, "Delete Account")), _react.default.createElement("div", {
+        className: "logout-btn"
+      }, _react.default.createElement(_Button.default, {
+        type: "button",
+        value: "button",
+        onClick: this.onLoggedOut.bind(this)
+      }, "Logout"))))));
     }
   }]);
 
@@ -45773,7 +45776,19 @@ function (_React$Component) {
 }(_react.default.Component);
 
 exports.ProfileView = ProfileView;
-},{"react":"../../node_modules/react/index.js","axios":"../node_modules/axios/index.js","./profile-view.scss":"components/profile-view/profile-view.scss","react-bootstrap/Container":"../node_modules/react-bootstrap/esm/Container.js","react-bootstrap/Row":"../node_modules/react-bootstrap/esm/Row.js","react-bootstrap/Col":"../node_modules/react-bootstrap/esm/Col.js","react-bootstrap/Button":"../node_modules/react-bootstrap/esm/Button.js","react-router-dom":"../../node_modules/react-router-dom/esm/react-router-dom.js"}],"components/profile-view/profile-update-view.scss":[function(require,module,exports) {
+
+var mapStateToProps = function mapStateToProps(state) {
+  return {
+    userProfile: state.userProfile
+  };
+};
+
+var _default = (0, _reactRedux.connect)(mapStateToProps, {
+  setProfile: _actions.setProfile
+})(ProfileView);
+
+exports.default = _default;
+},{"react":"../../node_modules/react/index.js","axios":"../node_modules/axios/index.js","react-redux":"../node_modules/react-redux/es/index.js","./profile-view.scss":"components/profile-view/profile-view.scss","../../actions/actions":"actions/actions.js","react-bootstrap/Container":"../node_modules/react-bootstrap/esm/Container.js","react-bootstrap/Row":"../node_modules/react-bootstrap/esm/Row.js","react-bootstrap/Col":"../node_modules/react-bootstrap/esm/Col.js","react-bootstrap/Button":"../node_modules/react-bootstrap/esm/Button.js","react-router-dom":"../../node_modules/react-router-dom/esm/react-router-dom.js"}],"components/profile-view/profile-update-view.scss":[function(require,module,exports) {
 var reloadCSS = require('_css_loader');
 
 module.hot.dispose(reloadCSS);
@@ -45823,7 +45838,9 @@ function _iterableToArrayLimit(arr, i) { if (!(Symbol.iterator in Object(arr) ||
 function _arrayWithHoles(arr) { if (Array.isArray(arr)) return arr; }
 
 function ProfileUpdateView(props) {
-  console.log(props);
+  var movies = props.movies,
+      user = props.user,
+      userProfile = props.userProfile;
 
   var _useState = (0, _react.useState)(''),
       _useState2 = _slicedToArray(_useState, 2),
@@ -45862,7 +45879,7 @@ function ProfileUpdateView(props) {
       var data = response.data;
       alert('Your profile has been updated!');
       localStorage.setItem('user', data.Username);
-      window.open('/user/:username', '_self');
+      window.open("/user/".concat(localStorage.getItem('user')), '_self');
     }).catch(function (error) {
       alert('Error updating profile');
     });
@@ -47028,8 +47045,6 @@ function (_React$Component) {
           Authorization: "Bearer ".concat(token)
         }
       }).then(function (response) {
-        console.log(response);
-
         _this3.setState({
           userProfile: response.data
         });
@@ -47060,7 +47075,7 @@ function (_React$Component) {
       this.setState({
         user: null
       });
-      window.open('/', '_self');
+      window.open('/client/login', '_self');
     }
   }, {
     key: "onMovieClick",
@@ -47078,7 +47093,7 @@ function (_React$Component) {
       var movies = this.props.movies;
       var _this$state = this.state,
           user = _this$state.user,
-          userProfile = _this$state.userProfile; // const { movies, selectedMovie, user, userProfile } = this.state;
+          userProfile = _this$state.userProfile;
 
       if (!movies) {
         return _react.default.createElement("div", {
@@ -47095,7 +47110,7 @@ function (_React$Component) {
         expand: "lg",
         className: "nav-container"
       }, _react.default.createElement(_Navbar.default.Brand, {
-        href: "/",
+        href: "/client/movies",
         className: "logo-container"
       }, _react.default.createElement("img", {
         src: "https://design-and-a-movie-images.s3.us-east-2.amazonaws.com/DM.png",
@@ -47112,12 +47127,12 @@ function (_React$Component) {
         className: "main-container"
       }, _react.default.createElement(_reactRouterDom.Route, {
         exact: true,
-        path: "/",
+        path: "/client",
         render: function render() {
           if (!user) {
-            window.location = "http://localhost:1234/login";
+            window.location = "https://design-and-a-movie.herokuapp.com/client/login";
           } else {
-            window.location = "/movies";
+            window.location = "/client/movies";
           }
         }
       }), _react.default.createElement(_reactRouterDom.Route, {
@@ -47203,7 +47218,7 @@ function (_React$Component) {
           return _react.default.createElement(_profileUpdateView.ProfileUpdateView, {
             user: user,
             userProfile: userProfile,
-            movie: movies
+            movies: movies
           });
         }
       })), _react.default.createElement(_Row.default, null, _react.default.createElement(_Navbar.default, {
@@ -47242,15 +47257,13 @@ exports.MainView = MainView;
 
 var mapStateToProps = function mapStateToProps(state) {
   return {
-    movies: state.movies,
-    user: state.user
+    movies: state.movies
   };
 };
 
 var _default = (0, _reactRedux.connect)(mapStateToProps, {
   setMovies: _actions.setMovies,
-  setProfile: _actions.setProfile,
-  setFavorites: _actions.setFavorites
+  setProfile: _actions.setProfile
 })(MainView); //key refers to what the may be updated in the DOM
 
 
@@ -47447,7 +47460,7 @@ var parent = module.bundle.parent;
 if ((!parent || !parent.isParcelRequire) && typeof WebSocket !== 'undefined') {
   var hostname = "" || location.hostname;
   var protocol = location.protocol === 'https:' ? 'wss' : 'ws';
-  var ws = new WebSocket(protocol + '://' + hostname + ':' + "65278" + '/');
+  var ws = new WebSocket(protocol + '://' + hostname + ':' + "65475" + '/');
 
   ws.onmessage = function (event) {
     checkedAssets = {};

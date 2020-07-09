@@ -15,7 +15,7 @@ import Col from 'react-bootstrap/Col';
 
 export function ProfileUpdateView(props){
 
-  console.log(props)
+  const {movies, user, userProfile} = props;
 
   const [username, updateUsername] = useState('');
   const [password, updatePassword] = useState('');
@@ -39,7 +39,7 @@ export function ProfileUpdateView(props){
       const data = response.data;
       alert('Your profile has been updated!');
       localStorage.setItem('user', data.Username);
-      window.open('client/user/:username', '_self');
+      window.open(`/user/${localStorage.getItem('user')}`, '_self');
     })
     .catch(error => {
       alert('Error updating profile');

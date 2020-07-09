@@ -47,7 +47,10 @@ export class MovieView extends React.Component {
   }
 
   render() {
-    const { movie, userData } = this.props;
+    const { movie } = this.props;
+    const {userProfile } = this.props.data;
+
+    console.log(userProfile)
 
     if(!movie){
       return <div className="loading">loading</div>

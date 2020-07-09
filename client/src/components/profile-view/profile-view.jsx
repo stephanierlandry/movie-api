@@ -1,7 +1,10 @@
 import React from 'react';
 import axios from 'axios';
+import {connect} from 'react-redux';
 
 import './profile-view.scss';
+
+import { setProfile } from '../../actions/actions'
 
 import Container from 'react-bootstrap/Container';
 import Row from 'react-bootstrap/Row';
@@ -14,7 +17,7 @@ export class ProfileView extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
-
+      userProfile: null
     };
   }
 
@@ -76,15 +79,15 @@ export class ProfileView extends React.Component {
   render(){
 
     const { user, userProfile, movies } = this.props;
+    console.log(userProfile)
     const favoritesList = movies.filter(movie => userProfile.FavoritesMovies.includes(movie._id));
 
-    console.log(userProfile)
 
-    if(!user || !userProfile){
+    if( !userProfile){
       return <div className="loading">loading</div>
     }
 
-    if(user ) {
+
       return(
         <Container fluid>
           <Row className="hi-container">
@@ -98,7 +101,6 @@ export class ProfileView extends React.Component {
                 <h3 className="fav-title">Your Movie Favorites!</h3>
                 <div className="user-fav-block">
                   <div className="user-favorites">
-                    {!userProfile.FavoritesMovies && <div>no movies</div>}
                     {userProfile.FavoritesMovies &&
                       <ul>
                         {favoritesList.map(movie =>
@@ -133,4 +135,10 @@ export class ProfileView extends React.Component {
       )
     }
   }
-}
+
+  let mapStateToProps = state => {
+    return {
+      userProfile: state.userProfile }
+  }
+
+  export default connect( mapStateToProps, { setProfile } )(ProfileView);
