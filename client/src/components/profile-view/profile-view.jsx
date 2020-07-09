@@ -17,7 +17,7 @@ export class ProfileView extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
-      userProfile: null
+    
     };
   }
 

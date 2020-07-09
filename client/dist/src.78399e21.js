@@ -45630,9 +45630,7 @@ function (_React$Component) {
     _classCallCheck(this, ProfileView);
 
     _this = _possibleConstructorReturn(this, _getPrototypeOf(ProfileView).call(this, props));
-    _this.state = {
-      userProfile: null
-    };
+    _this.state = {};
     return _this;
   }
 
@@ -47460,7 +47458,7 @@ var parent = module.bundle.parent;
 if ((!parent || !parent.isParcelRequire) && typeof WebSocket !== 'undefined') {
   var hostname = "" || location.hostname;
   var protocol = location.protocol === 'https:' ? 'wss' : 'ws';
-  var ws = new WebSocket(protocol + '://' + hostname + ':' + "65475" + '/');
+  var ws = new WebSocket(protocol + '://' + hostname + ':' + "57709" + '/');
 
   ws.onmessage = function (event) {
     checkedAssets = {};
