@@ -42969,9 +42969,10 @@ function (_React$Component) {
   }, {
     key: "render",
     value: function render() {
-      var movie = this.props.movie;
-      var userProfile = this.props.data.userProfile;
-      console.log(userProfile);
+      var _this$props = this.props,
+          movie = _this$props.movie,
+          userData = _this$props.userData;
+      console.log(this.props);
 
       if (!movie) {
         return _react.default.createElement("div", {
@@ -45637,7 +45638,7 @@ function (_React$Component) {
   _createClass(ProfileView, [{
     key: "deleteFavorites",
     value: function deleteFavorites(movieId) {
-      _axios.default.delete("http://localhost:1234/".concat(localStorage.getItem('user'), "/favorites/").concat(movieId), {
+      _axios.default.delete("https://design-and-a-movie.herokuapp.com/update-users/".concat(localStorage.getItem('user'), "/favorites/").concat(movieId), {
         headers: {
           Authorization: "Bearer ".concat(localStorage.getItem('token'))
         }
@@ -45646,7 +45647,7 @@ function (_React$Component) {
       }).then(function (res) {
         alert("".concat(movies.Title, " successfully deleted from favorites"));
       }).catch(function (e) {
-        alert("".concat(movie.Title, " could not be deleted from favorites ") + e);
+        alert("".concat(movies.Title, " could not be deleted from favorites ") + e);
       });
     }
   }, {
@@ -45654,12 +45655,10 @@ function (_React$Component) {
     value: function deleteUserProfile() {
       var _this2 = this;
 
-      _axios.default.delete("http://localhost:1234/".concat(localStorage.getItem('user')), {
+      _axios.default.delete("https://design-and-a-movie.herokuapp.com/delete-users/".concat(localStorage.getItem('user')), {
         headers: {
           Authorization: "Bearer ".concat(localStorage.getItem('token'))
         }
-      }).then(function (response) {
-        alert('Do you really want to delete your account?');
       }).then(function (response) {
         alert('Account was successfully deleted!');
       }).then(function (response) {
@@ -45864,7 +45863,7 @@ function ProfileUpdateView(props) {
     //prevents the default behavior of submitting the form so authentication can happen
     e.preventDefault(); //Sends an update to the database
 
-    _axios.default.put("http://localhost:1234/update-users/".concat(localStorage.getItem('user')), {
+    _axios.default.put("https://design-and-a-movie.herokuapp.com/update-users/".concat(localStorage.getItem('user')), {
       Username: username,
       Password: password,
       Email: email,
@@ -47459,9 +47458,13 @@ if ((!parent || !parent.isParcelRequire) && typeof WebSocket !== 'undefined') {
   var hostname = "" || location.hostname;
   var protocol = location.protocol === 'https:' ? 'wss' : 'ws';
 <<<<<<< ours
+<<<<<<< ours
   var ws = new WebSocket(protocol + '://' + hostname + ':' + "57709" + '/');
 =======
   var ws = new WebSocket(protocol + '://' + hostname + ':' + "53313" + '/');
+>>>>>>> theirs
+=======
+  var ws = new WebSocket(protocol + '://' + hostname + ':' + "57761" + '/');
 >>>>>>> theirs
 
   ws.onmessage = function (event) {

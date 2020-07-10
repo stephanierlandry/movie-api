@@ -27,7 +27,7 @@ export function ProfileUpdateView(props){
     //prevents the default behavior of submitting the form so authentication can happen
     e.preventDefault();
     //Sends an update to the database
-    axios.put(`http://localhost:1234/update-users/${localStorage.getItem('user')}`, {
+    axios.put(`https://design-and-a-movie.herokuapp.com/update-users/${localStorage.getItem('user')}`, {
       Username: username,
       Password: password,
       Email: email,
