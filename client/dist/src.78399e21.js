@@ -45631,16 +45631,14 @@ function (_React$Component) {
     _classCallCheck(this, ProfileView);
 
     _this = _possibleConstructorReturn(this, _getPrototypeOf(ProfileView).call(this, props));
-    _this.state = {
-      movies: []
-    };
+    _this.state = {};
     return _this;
   }
 
   _createClass(ProfileView, [{
     key: "deleteFavorites",
     value: function deleteFavorites(movieId) {
-      _axios.default.delete("https://design-and-a-movie.herokuapp.com/".concat(localStorage.getItem('user'), "/favorites/").concat(movieId), {
+      _axios.default.delete("https://design-and-a-movie.herokuapp.com/update-users/".concat(localStorage.getItem('user'), "/favorites/").concat(movieId), {
         headers: {
           Authorization: "Bearer ".concat(localStorage.getItem('token'))
         }
@@ -45657,7 +45655,7 @@ function (_React$Component) {
     value: function deleteUserProfile() {
       var _this2 = this;
 
-      _axios.default.delete("https://design-and-a-movie.herokuapp.com/".concat(localStorage.getItem('user')), {
+      _axios.default.delete("https://design-and-a-movie.herokuapp.com/delete-users/".concat(localStorage.getItem('user')), {
         headers: {
           Authorization: "Bearer ".concat(localStorage.getItem('token'))
         }
@@ -47461,7 +47459,7 @@ var parent = module.bundle.parent;
 if ((!parent || !parent.isParcelRequire) && typeof WebSocket !== 'undefined') {
   var hostname = "" || location.hostname;
   var protocol = location.protocol === 'https:' ? 'wss' : 'ws';
-  var ws = new WebSocket(protocol + '://' + hostname + ':' + "63148" + '/');
+  var ws = new WebSocket(protocol + '://' + hostname + ':' + "53810" + '/');
 
   ws.onmessage = function (event) {
     checkedAssets = {};
