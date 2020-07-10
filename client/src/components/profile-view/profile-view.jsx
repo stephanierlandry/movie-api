@@ -17,11 +17,12 @@ export class ProfileView extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
+      movies: []
     };
   }
 
   deleteFavorites(movieId) {
-      axios.delete(`http://localhost:1234/${localStorage.getItem('user')}/favorites/${movieId}`, {
+      axios.delete(`https://design-and-a-movie.herokuapp.com/${localStorage.getItem('user')}/favorites/${movieId}`, {
         headers: { Authorization: `Bearer ${localStorage.getItem('token')}` }
       })
       .then(res => {
@@ -31,12 +32,12 @@ export class ProfileView extends React.Component {
         alert(`${movies.Title} successfully deleted from favorites`);
       })
       .catch(e => {
-        alert( `${movie.Title } could not be deleted from favorites ` + e)
+        alert( `${movies.Title } could not be deleted from favorites ` + e)
       });
     }
 
     deleteUserProfile() {
-      axios.delete(`http://localhost:1234/${localStorage.getItem('user')}`, {
+      axios.delete(`https://design-and-a-movie.herokuapp.com/${localStorage.getItem('user')}`, {
         headers: { Authorization: `Bearer ${localStorage.getItem('token')}` }
       })
         .then(response => {
