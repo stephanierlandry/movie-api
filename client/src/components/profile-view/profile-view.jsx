@@ -17,12 +17,11 @@ export class ProfileView extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
-      movies: []
     };
   }
 
   deleteFavorites(movieId) {
-      axios.delete(`https://design-and-a-movie.herokuapp.com/${localStorage.getItem('user')}/favorites/${movieId}`, {
+      axios.delete(`https://design-and-a-movie.herokuapp.com/update-users/${localStorage.getItem('user')}/favorites/${movieId}`, {
         headers: { Authorization: `Bearer ${localStorage.getItem('token')}` }
       })
       .then(res => {
@@ -37,7 +36,7 @@ export class ProfileView extends React.Component {
     }
 
     deleteUserProfile() {
-      axios.delete(`https://design-and-a-movie.herokuapp.com/${localStorage.getItem('user')}`, {
+      axios.delete(`https://design-and-a-movie.herokuapp.com/delete-users/${localStorage.getItem('user')}`, {
         headers: { Authorization: `Bearer ${localStorage.getItem('token')}` }
       })
         .then(response => {
