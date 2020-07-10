@@ -39,6 +39,8 @@ export function ProfileUpdateView(props){
       const data = response.data;
       alert('Your profile has been updated!');
       localStorage.setItem('user', data.Username);
+    })
+    .then(response => {
       goBack();
     })
     .catch(error => {
