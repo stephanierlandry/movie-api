@@ -45876,7 +45876,7 @@ function ProfileUpdateView(props) {
       var data = response.data;
       alert('Your profile has been updated!');
       localStorage.setItem('user', data.Username);
-      window.open("/user/".concat(localStorage.getItem('user')), '_self');
+      goBack();
     }).catch(function (error) {
       alert('Error updating profile');
     });
@@ -47457,7 +47457,7 @@ var parent = module.bundle.parent;
 if ((!parent || !parent.isParcelRequire) && typeof WebSocket !== 'undefined') {
   var hostname = "" || location.hostname;
   var protocol = location.protocol === 'https:' ? 'wss' : 'ws';
-  var ws = new WebSocket(protocol + '://' + hostname + ':' + "56756" + '/');
+  var ws = new WebSocket(protocol + '://' + hostname + ':' + "58994" + '/');
 
   ws.onmessage = function (event) {
     checkedAssets = {};
