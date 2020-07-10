@@ -40,9 +40,6 @@ export class ProfileView extends React.Component {
         headers: { Authorization: `Bearer ${localStorage.getItem('token')}` }
       })
         .then(response => {
-          alert('Do you really want to delete your account?')
-        })
-        .then(response => {
           alert('Account was successfully deleted!')
         })
         .then(response => {
