@@ -1,3 +1,9 @@
+/**
+*@description This component contains the view of the genre's information.
+*@requires React
+*@access private
+*/
+
 import React from 'react';
 
 import './genre-view.scss';
@@ -15,6 +21,10 @@ export class GenreView extends React.Component {
     this.state = {};
   }
 
+  /**
+  * goes back to previous page
+  *@function goBack
+  */
   goBack() {
     history.back();
   }

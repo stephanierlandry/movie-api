@@ -1,3 +1,9 @@
+/**
+*@description This component contains the view of the director's information.
+*@requires React
+*@access private
+*/
+
 import React from 'react';
 import axios from 'axios';
 
@@ -16,11 +22,13 @@ export class DirectorView extends React.Component {
     this.state = {};
   }
 
+  /**
+  * goes back to previous page
+  *@function goBack
+  */
   goBack() {
     history.back();
   }
-
-
 
   render(){
     console.log(this.props)

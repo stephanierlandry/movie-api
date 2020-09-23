@@ -1,3 +1,11 @@
+/**
+*@description This component is where a new user registers to use the app
+*@requires React
+*@requires axios
+*@requires React-Bootstrap
+*@access public
+*/
+
 import React, { useState } from 'react';
 import axios from 'axios';
 import {Link} from 'react-router-dom';
@@ -18,6 +26,14 @@ export function RegistrationView(props) {
   const [ email, setEmail ] = useState('');
   const [ birthday, setBirthday ] = useState('');
 
+  /**
+  * Registers a new user and send their info to the API
+  *@function handleRegister
+  *@param {string} username
+  *@param {string} password
+  *@param {string} email
+  *@param {string} birthday
+  */
   const handleRegister = (e) => {
   e.preventDefault();
 

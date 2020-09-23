@@ -1,3 +1,11 @@
+/**
+*@description This component displays the list of movies 
+*@requires React
+*@requires React-Redux
+*@requires React-Bootstrap
+*@access private
+*/
+
 import React from 'react';
 import { connect } from 'react-redux';
 
@@ -11,6 +19,12 @@ const mapStateToProps = state => {
   return { visibilityFilter };
 };
 
+/**
+* returns the movies based on the search input
+*@function MoviesList
+*@param {string} movie
+*@returns {array} movies
+*/
 function MoviesList(props) {
   const { movie, visibilityFilter} = props;
 

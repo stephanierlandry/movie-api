@@ -1,3 +1,12 @@
+/**
+*@description This component is the login page.
+*@requires React
+*@requires Axios
+*@requires React-Router-Dom
+*@requires React-Bootstrap
+*@access public
+*/
+
 import React, { useState } from 'react';
 import axios from 'axios';
 import { BrowserRouter, Link } from "react-router-dom";
@@ -17,7 +26,14 @@ export function LoginView(props) {
   const [ username, setUsername ] = useState('');
   const [ password, setPassword ] = useState('');
 
-  //called in render()
+
+  /**
+  * Submits username and password to API and logs user in if user's information is correct
+  *@function handleSubmit
+  *@param username
+  *@param password
+  *@returns userData
+  */
   const handleSubmit = (e) => {
     //prevents the default behavior of submitting the form so authentication can happen
     e.preventDefault();
@@ -26,7 +42,6 @@ export function LoginView(props) {
       Username: username,
       Password: password
     })
-    // axios.get('http://localhost:3000/get-users/' + username)
     //response comes in from the database
     .then(response => {
       // console.log({from: 'loginview', m: response});

@@ -1,3 +1,12 @@
+/**
+*@description This component allows the user to update their profile
+*@requires React
+*@requires axios
+*@requires React-Router-Dom
+*@requires React-Bootstrap
+*@access private
+*/
+
 import React, { useState } from 'react';
 import axios from 'axios';
 import { BrowserRouter, Link } from "react-router-dom";
@@ -22,7 +31,14 @@ export function ProfileUpdateView(props){
   const [email, updateEmail] = useState('');
   const [birthday, updateBirthday] = useState('');
 
-
+  /**
+  * sends the users updated info to the API
+  *@function handleUpdate
+  *@param {string} username
+  *@param {string} password
+  *@param {string} email
+  *@param {string} birthday
+  */
   const handleUpdate = (e) => {
     //prevents the default behavior of submitting the form so authentication can happen
     e.preventDefault();
@@ -48,6 +64,10 @@ export function ProfileUpdateView(props){
     })
   }
 
+  /**
+  * goes back to previous page
+  *@function goBack
+  */
   const goBack = () => {
     history.back();
   }

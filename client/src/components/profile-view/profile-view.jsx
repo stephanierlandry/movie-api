@@ -1,3 +1,13 @@
+/**
+*@description This component shows the user their profile
+*@requires React
+*@requires axios
+*@requires React-Redux
+*@requires React-Router-Dom
+*@requires React-Bootstrap
+*@access private
+*/
+
 import React from 'react';
 import axios from 'axios';
 import {connect} from 'react-redux';
@@ -21,6 +31,11 @@ export class ProfileView extends React.Component {
     };
   }
 
+  /**
+  * Deletes an added favorite
+  *@function deleteFavorites
+  *@param {string} movieId
+  */
   deleteFavorites(movieId) {
       axios.delete(`https://design-and-a-movie.herokuapp.com/update-users/${localStorage.getItem('user')}/favorites/${movieId}`, {
         headers: { Authorization: `Bearer ${localStorage.getItem('token')}` }
@@ -36,6 +51,11 @@ export class ProfileView extends React.Component {
       });
     }
 
+    /**
+    * Deletes a users profile
+    *@function deleteUserProfile
+    *@param {string} user
+    */
     deleteUserProfile() {
       axios.delete(`https://design-and-a-movie.herokuapp.com/delete-users/${localStorage.getItem('user')}`, {
         headers: { Authorization: `Bearer ${localStorage.getItem('token')}` }
@@ -58,6 +78,12 @@ export class ProfileView extends React.Component {
     }
 
     //Called in the render()
+    /**
+    * Removes user's name and token in localStorage
+    *@function onLoggedOut
+    *@returns {string} token
+    *@returns {string} user
+    */
     onLoggedOut(user) {
       localStorage.removeItem('token');
       localStorage.removeItem('user');
@@ -68,6 +94,10 @@ export class ProfileView extends React.Component {
       window.open('/client/login', '_self');
     };
 
+  /**
+  * goes back to previous page
+  *@function goBack
+  */
   goBack() {
     history.back();
     window.scroll(0,0);

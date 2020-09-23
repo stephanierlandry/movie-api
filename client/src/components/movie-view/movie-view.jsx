@@ -1,3 +1,13 @@
+/**
+*@description This component shows the individual movie's details.
+*@requires React
+*@requires axios
+*@requires Prop-Types
+*@requires React-Bootstrap
+*@requires React-Router-Dom
+*@access private
+*/
+
 import React from 'react';
 import axios from 'axios';
 
@@ -22,11 +32,21 @@ export class MovieView extends React.Component {
     window.scrollTo(0,0);
   }
 
+  /**
+  * goes back to previous page
+  *@function goBack
+  */
   goBack() {
     history.back();
     window.scroll(0,0);
   }
 
+  /**
+  * Adds a user favorite to their profile
+  *@function addUserFavorites
+  *@param {string} user
+  *@param {string} movieId
+  */
   addUserFavorites(e){
     const {movie} = this.props;
     e.preventDefault();

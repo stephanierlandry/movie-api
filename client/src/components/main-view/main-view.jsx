@@ -1,3 +1,13 @@
+/**
+*@description This component is the home page of the app.
+*@requires React
+*@requires Prop-Types
+*@requires React-Router-Dom
+*@requires React-Bootstrap
+*@requires FeatherIcon
+*@access private
+*/
+
 import React from 'react';
 import axios from 'axios';
 
@@ -54,6 +64,12 @@ export class MainView extends React.Component {
   }
 
   //Called in componentDidMount
+  /**
+  * Gets the movies from the API
+  *@function getMovies
+  *@param {string} token
+  *@returns {array} movies
+  */
   getMovies(token) {
     axios.get('https://design-and-a-movie.herokuapp.com/movies', {
       //this passes the bearer authorization into your header with http requests, making authentication requests to your API possible.
@@ -68,6 +84,13 @@ export class MainView extends React.Component {
     });
   }
 
+
+  /**
+  * Gets the user's profile from the API
+  *@function getUserProfile
+  *@param {string} token
+  *@returns {object} userProfile
+  */
   getUserProfile(token){
     axios.get(`https://design-and-a-movie.herokuapp.com/get-users/${localStorage.getItem('user')}`,{
       headers: {Authorization: `Bearer ${token}`}
@@ -82,7 +105,12 @@ export class MainView extends React.Component {
     })
   }
 
-  //Called in the render()
+  /**
+  * Stores user's name and token in localStorage
+  *@function onLoggedIn
+  *@returns {string} token
+  *@returns {string} user
+  */
   onLoggedIn(authData) {
     //authData refers to the username and the token
     this.setState({
@@ -97,6 +125,12 @@ export class MainView extends React.Component {
   }
 
   //Called in the render()
+  /**
+  * Removes user's name and token in localStorage
+  *@function onLoggedOut
+  *@returns {string} token
+  *@returns {string} user
+  */
   onLoggedOut(user) {
     localStorage.removeItem('token');
     localStorage.removeItem('user');
@@ -108,6 +142,7 @@ export class MainView extends React.Component {
   };
 
   //called in the render()
+
   onMovieClick(movie) {
     this.setState({
       selectedMovie: movie
