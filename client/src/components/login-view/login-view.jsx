@@ -32,7 +32,7 @@ export function LoginView(props) {
   *@function handleSubmit
   *@param username
   *@param password
-  *@returns userData
+  *@returns {string} userData
   */
   const handleSubmit = (e) => {
     //prevents the default behavior of submitting the form so authentication can happen
