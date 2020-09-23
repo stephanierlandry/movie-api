@@ -1,0 +1,222 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <title>JSDoc: Source: profile-view.jsx</title>
+
+    <script src="scripts/prettify/prettify.js"> </script>
+    <script src="scripts/prettify/lang-css.js"> </script>
+    <!--[if lt IE 9]>
+      <script src="//html5shiv.googlecode.com/svn/trunk/html5.js"></script>
+    <![endif]-->
+    <link type="text/css" rel="stylesheet" href="styles/prettify-tomorrow.css">
+    <link type="text/css" rel="stylesheet" href="styles/jsdoc-default.css">
+</head>
+
+<body>
+
+<div id="main">
+
+    <h1 class="page-title">Source: profile-view.jsx</h1>
+
+    
+
+
+
+    
+    <section>
+        <article>
+            <pre class="prettyprint source linenums"><code>/**
+*@description This component shows the user their profile
+*@requires React
+*@requires axios
+*@requires React-Redux
+*@requires React-Router-Dom
+*@requires React-Bootstrap
+*@access private
+*/
+
+import React from 'react';
+import axios from 'axios';
+import {connect} from 'react-redux';
+
+import './profile-view.scss';
+
+import { setProfile } from '../../actions/actions'
+
+import Container from 'react-bootstrap/Container';
+import Row from 'react-bootstrap/Row';
+import Col from 'react-bootstrap/Col';
+import Button from 'react-bootstrap/Button';
+import { Link } from "react-router-dom";
+
+export class ProfileView extends React.Component {
+
+  constructor(props) {
+    super(props);
+    this.state = {
+
+    };
+  }
+
+  /**
+  * Deletes an added favorite
+  *@function deleteFavorites
+  *@param {string} movieId
+  */
+  deleteFavorites(movieId) {
+      axios.delete(`https://design-and-a-movie.herokuapp.com/update-users/${localStorage.getItem('user')}/favorites/${movieId}`, {
+        headers: { Authorization: `Bearer ${localStorage.getItem('token')}` }
+      })
+      .then(res => {
+        document.location.reload(true);
+      })
+      .then(res => {
+        alert(`${movies.Title} successfully deleted from favorites`);
+      })
+      .catch(e => {
+        alert( `${movies.Title } could not be deleted from favorites ` + e)
+      });
+    }
+
+    /**
+    * Deletes a users profile
+    *@function deleteUserProfile
+    *@param {string} user
+    */
+    deleteUserProfile() {
+      axios.delete(`https://design-and-a-movie.herokuapp.com/delete-users/${localStorage.getItem('user')}`, {
+        headers: { Authorization: `Bearer ${localStorage.getItem('token')}` }
+      })
+        .then(response => {
+          alert('Account was successfully deleted!')
+        })
+        .then(response => {
+          localStorage.removeItem('token');
+          localStorage.removeItem('user');
+
+          this.setState({
+           user: null
+         })
+          window.open('/client/login', '_self');
+        })
+        .catch(error => {
+          alert('There was an error. Your account could not be deleted. ' + error);
+        })
+    }
+
+    //Called in the render()
+    /**
+    * Removes user's name and token in localStorage
+    *@function onLoggedOut
+    *@returns {string} token
+    *@returns {string} user
+    */
+    onLoggedOut(user) {
+      localStorage.removeItem('token');
+      localStorage.removeItem('user');
+
+      this.setState({
+       user: null
+     })
+      window.open('/client/login', '_self');
+    };
+
+  /**
+  * goes back to previous page
+  *@function goBack
+  */
+  goBack() {
+    history.back();
+    window.scroll(0,0);
+  }
+
+  render(){
+
+    const { user, userProfile, movies } = this.props;
+    console.log(this.props)
+    const favoritesList = movies.filter(movie => userProfile.FavoritesMovies.includes(movie._id));
+
+
+    if( !userProfile){
+      return &lt;div className="loading">loading&lt;/div>
+    }
+
+
+      return(
+        &lt;Container fluid>
+          &lt;Row className="hi-container">
+            &lt;Col>
+              &lt;h1 className="greeting">hi {user}&lt;/h1>
+            &lt;/Col>
+          &lt;/Row>
+          &lt;Row className="profile-view-container">
+            &lt;Col lg={8}>
+              &lt;div className="user-info-block">
+                &lt;h3 className="fav-title">Your Movie Favorites!&lt;/h3>
+                &lt;div className="user-fav-block">
+                  &lt;div className="user-favorites">
+                    {userProfile.FavoritesMovies &amp;&amp;
+                      &lt;ul>
+                        {favoritesList.map(movie =>
+                          &lt;li key={movie._id} className="relative">
+                            &lt;Link className="img-block" to={`/movie/${movie._id}`}>
+                              &lt;img className="movie-image" src={movie.ImagePath} />
+                            &lt;/Link>
+                            &lt;a className="delete-btn" onClick={e => this.deleteFavorites(movie._id)}>X&lt;/a>
+                          &lt;/li>
+                        )}
+                      &lt;/ul>}
+                  &lt;/div>
+                &lt;/div>
+              &lt;/div>
+            &lt;/Col>
+
+            &lt;Col lg={4}>
+              &lt;div className="btn-group">
+                &lt;div className="update-btn">
+                  &lt;Link to="/update-user/:username" className="btn">Update Your Profile&lt;/Link>
+                &lt;/div>
+                &lt;div className="delete-user-btn">
+                  &lt;Button type="button" onClick={this.deleteUserProfile.bind(this)}>Delete Account&lt;/Button>
+                &lt;/div>
+                &lt;div className="logout-btn">
+                  &lt;Button type="button" value="button" onClick={this.onLoggedOut.bind(this)}>Logout&lt;/Button>
+                &lt;/div>
+              &lt;/div>
+            &lt;/Col>
+          &lt;/Row>
+        &lt;/Container>
+      )
+    }
+  }
+
+  let mapStateToProps = state => {
+    return {
+      userProfile: state.userProfile }
+  }
+
+  export default connect( mapStateToProps, { setProfile } )(ProfileView);
+</code></pre>
+        </article>
+    </section>
+
+
+
+
+</div>
+
+<nav>
+    <h2><a href="index.html">Home</a></h2><h3>Global</h3><ul><li><a href="global.html#deleteFavorites">deleteFavorites</a></li><li><a href="global.html#deleteUserProfile">deleteUserProfile</a></li><li><a href="global.html#goBack">goBack</a></li><li><a href="global.html#handleUpdate">handleUpdate</a></li><li><a href="global.html#onLoggedOut">onLoggedOut</a></li></ul>
+</nav>
+
+<br class="clear">
+
+<footer>
+    Documentation generated by <a href="https://github.com/jsdoc/jsdoc">JSDoc 3.6.6</a> on Wed Sep 23 2020 07:51:11 GMT-0500 (Central Daylight Time)
+</footer>
+
+<script> prettyPrint(); </script>
+<script src="scripts/linenumber.js"> </script>
+</body>
+</html>

@@ -1,0 +1,191 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <title>JSDoc: Source: movie-view.jsx</title>
+
+    <script src="scripts/prettify/prettify.js"> </script>
+    <script src="scripts/prettify/lang-css.js"> </script>
+    <!--[if lt IE 9]>
+      <script src="//html5shiv.googlecode.com/svn/trunk/html5.js"></script>
+    <![endif]-->
+    <link type="text/css" rel="stylesheet" href="styles/prettify-tomorrow.css">
+    <link type="text/css" rel="stylesheet" href="styles/jsdoc-default.css">
+</head>
+
+<body>
+
+<div id="main">
+
+    <h1 class="page-title">Source: movie-view.jsx</h1>
+
+    
+
+
+
+    
+    <section>
+        <article>
+            <pre class="prettyprint source linenums"><code>/**
+*@description This component shows the individual movie's details.
+*@requires React
+*@requires axios
+*@requires Prop-Types
+*@requires React-Bootstrap
+*@requires React-Router-Dom
+*@access private
+*/
+
+import React from 'react';
+import axios from 'axios';
+
+import './movie-view.scss';
+
+import PropTypes from 'prop-types';
+
+import Container from 'react-bootstrap/Container';
+import Row from 'react-bootstrap/Row';
+import Col from 'react-bootstrap/Col';
+import Button from 'react-bootstrap/Button';
+import { Link } from "react-router-dom";
+
+export class MovieView extends React.Component {
+
+  constructor(props) {
+    super(props);
+    this.state = {};
+  }
+
+  componentDidMount(){
+    window.scrollTo(0,0);
+  }
+
+  /**
+  * goes back to previous page
+  *@function goBack
+  */
+  goBack() {
+    history.back();
+    window.scroll(0,0);
+  }
+
+  /**
+  * Adds a user favorite to their profile
+  *@function addUserFavorites
+  *@param {string} user
+  *@param {string} movieId
+  */
+  addUserFavorites(e){
+    const {movie} = this.props;
+    e.preventDefault();
+    axios.post(`https://design-and-a-movie.herokuapp.com/update-users/${localStorage.getItem('user')}/movies/${movie._id}`,
+    {username: localStorage.getItem('user')
+    },
+    {headers: {Authorization: `Bearer ${localStorage.getItem('token')}`}
+    })
+    .then(response => {
+      document.location.reload(true);
+    })
+    .then(resposne => {
+      alert(`${movie.Title} was added to your Favorites List`)
+    })
+    .catch(error => {
+      alert(error + ` ${movie.Title} cannot be added to your Favorites List`)
+    })
+  }
+
+  render() {
+    const { movie, userData} = this.props;
+    console.log(this.props)
+
+    if(!movie){
+      return &lt;div className="loading">loading&lt;/div>
+    }
+
+    if (movie &amp;&amp; userData) {
+
+      return (
+
+          &lt;Row className="movie-view-container">
+            &lt;Col lg ={4}>
+              &lt;div className="movie-view">
+                &lt;img className="movie-poster" src={movie.ImagePath} />
+              &lt;/div>
+              &lt;div>
+                &lt;a className="btn fav-btn" onClick={this.addUserFavorites.bind(this)}>Add Movie to Favorites!&lt;/a>
+              &lt;/div>
+            &lt;/Col>
+            &lt;Col lg ={4}>
+              &lt;div className="movie-block">
+                  &lt;div className="movie-title">
+                    &lt;span className="value">{movie.Title}&lt;/span>
+                  &lt;/div>
+                  &lt;div className="movie-description">
+                    &lt;span className="value">{movie.Description}&lt;/span>
+                  &lt;/div>
+
+                  &lt;div className="movie-genre">
+                    &lt;span className="label">Genre: &lt;/span>
+                    &lt;Link to={`/genres/${movie.Genre.Name}`}>
+                      &lt;span className="value link">{movie.Genre.Name}&lt;/span>
+                    &lt;/Link>
+                  &lt;/div>
+
+                  &lt;div className="movie-director">
+                    &lt;span className="label">Director: &lt;/span>
+                    &lt;Link to={`/directors/${movie.Director.Name}`}>
+                      &lt;span className="value link">{movie.Director.Name}&lt;/span>
+                    &lt;/Link>
+                  &lt;/div>
+                  &lt;Button variant="link" className="btn back-button" onClick={this.goBack.bind(this)}>Back&lt;/Button>
+              &lt;/div>
+            &lt;/Col>
+          &lt;/Row>
+
+      );
+    }
+  }
+}
+
+MovieView.propTypes = {
+  movie: PropTypes.shape({
+    Title: PropTypes.string,
+    Description: PropTypes,
+    Genre: PropTypes.shape({
+      Name: PropTypes.string,
+      Description: PropTypes
+    }),
+    Director: PropTypes.shape({
+      Name: PropTypes.string,
+      Bio: PropTypes.string,
+      Birth: PropTypes.string,
+      Death: PropTypes.string
+    }),
+    ImagePath: PropTypes.string,
+    Featured: PropTypes.bool,
+    Actors: PropTypes.array
+  })
+};
+</code></pre>
+        </article>
+    </section>
+
+
+
+
+</div>
+
+<nav>
+    <h2><a href="index.html">Home</a></h2><h3>Global</h3><ul><li><a href="global.html#addUserFavorites">addUserFavorites</a></li><li><a href="global.html#goBack">goBack</a></li></ul>
+</nav>
+
+<br class="clear">
+
+<footer>
+    Documentation generated by <a href="https://github.com/jsdoc/jsdoc">JSDoc 3.6.6</a> on Wed Sep 23 2020 07:50:35 GMT-0500 (Central Daylight Time)
+</footer>
+
+<script> prettyPrint(); </script>
+<script src="scripts/linenumber.js"> </script>
+</body>
+</html>
